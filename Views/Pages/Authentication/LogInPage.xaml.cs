@@ -21,20 +21,13 @@ namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
     /// </summary>
     public partial class LogInPage : Page
     {
-        private BitmapImage EyeImage = new BitmapImage();
-        private BitmapImage HiddenEyeImage = new BitmapImage();
+        private BitmapImage EyeImage = new BitmapImage(new Uri("pack://application:,,,/Sourse/Icons/EyeIcon.png"));
+        private BitmapImage HiddenEyeImage = new BitmapImage(new Uri("pack://application:,,,/Sourse/Icons/HiddenEyeIcon.png"));
+
+
         public LogInPage()
         {
-            EyeImage.BeginInit();
-            EyeImage.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-            EyeImage.CacheOption = BitmapCacheOption.OnLoad;
-            EyeImage.UriSource = new Uri(@"C:\Users\Ivan\Desktop\Курсач по БД\MyFilmsWPF\MyFilms(.NET Framework)\Sourse\Icons\EyeIcon.png", UriKind.Relative);
-            EyeImage.EndInit();
-            HiddenEyeImage.BeginInit();
-            HiddenEyeImage.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-            HiddenEyeImage.CacheOption = BitmapCacheOption.OnLoad;
-            HiddenEyeImage.UriSource = new Uri(@"C:\Users\Ivan\Desktop\Курсач по БД\MyFilmsWPF\MyFilms(.NET Framework)\Sourse\Icons\HiddenEyeIcon.png", UriKind.Relative);
-            HiddenEyeImage.EndInit();
+            
             InitializeComponent();
         }
 

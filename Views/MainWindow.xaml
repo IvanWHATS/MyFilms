@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MyFilms_.NET_Framework_.Views"
         mc:Ignorable="d"
         Title="MyFilms" Height="450" Width="800"
-        Icon="C:\Users\Ivan\Desktop\Курсач по БД\MyFilmsWPF\MyFilms(.NET Framework)\Sourse\Icons\MyFilmsIcon1.jpg"
+        Icon="\Sourse\Icons\MyFilmsIcon1.jpg"
         >
     <Grid x:Name="MyGrid" x:FieldModifier="public">
         
