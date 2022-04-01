@@ -1,0 +1,35 @@
+﻿<Window x:Class="MyFilms_.NET_Framework_.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyFilms_.NET_Framework_.Views"
+        mc:Ignorable="d"
+        Title="MyFilms" Height="450" Width="800"
+        Icon="C:\Users\Ivan\Desktop\Курсач по БД\MyFilmsWPF\MyFilms(.NET Framework)\Sourse\Icons\MyFilmsIcon1.jpg"
+        >
+    <Grid x:Name="MyGrid" x:FieldModifier="public">
+        
+        <Frame Height="Auto"
+               Width="Auto"
+               Source="/MyFilms(.NET Framework);component/Views/Pages/MainPage/MainPage.xaml"
+               IsEnabled="False" 
+               NavigationUIVisibility="Hidden"
+               x:Name="MainFrame"
+               
+        >
+
+
+        </Frame>
+        <Frame x:Name="LogInFrame"
+               HorizontalAlignment="Center" 
+               Margin="0,0,0,0" 
+               VerticalAlignment="Center" 
+               Height="300" 
+               Width="250" 
+               NavigationUIVisibility="Hidden" 
+               Source="/MyFilms(.NET Framework);component/Views/Pages/Authentication/AuthenticationPage.xaml"
+               x:FieldModifier="public"
+        />
+    </Grid>
+</Window>

@@ -1,0 +1,108 @@
+﻿<Page x:Class="MyFilms_.NET_Framework_.Views.Pages.Authentication.RegistrationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:MyFilms_.NET_Framework_.Views.Pages.Authentication"
+      mc:Ignorable="d" 
+      d:DesignHeight="180" d:DesignWidth="200"
+      Title="RegistrationPage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <ScrollViewer Grid.Row="0">
+            <Grid Height="400">
+                <TextBox 
+                    x:Name="LoginBox"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    materialDesign:HintAssist.Hint="Логин"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource WhiteElementBrush}"
+                    materialDesign:HintAssist.Foreground="{StaticResource WhiteElementBrush}"
+                    CaretBrush="{StaticResource OrangeElementBrush}"
+                    materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
+                    MaxLength="50"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Height="40"
+                    Width="150"
+                    Margin="25,20,0,0"
+                    Foreground="{StaticResource WhiteElementBrush}"
+                    IsEnabled="True" 
+                />
+                <PasswordBox 
+                    x:Name="PasswordBox1"
+                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                    materialDesign:HintAssist.Hint="Пароль"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource WhiteElementBrush}"
+                    materialDesign:HintAssist.Foreground="{StaticResource WhiteElementBrush}"
+                    CaretBrush="{StaticResource OrangeElementBrush}"
+                    materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
+                    MaxLength="50"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Height="40"
+                    Width="150"
+                    Margin="25,120,0,0"
+                    Foreground="{StaticResource WhiteElementBrush}"
+                />
+                <PasswordBox 
+                    x:Name="PasswordBox2"
+                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                    materialDesign:HintAssist.Hint="Повторите пароль"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource WhiteElementBrush}"
+                    materialDesign:HintAssist.Foreground="{StaticResource WhiteElementBrush}"
+                    CaretBrush="{StaticResource OrangeElementBrush}"
+                    materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
+                    MaxLength="50"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Height="40"
+                    Width="150"
+                    Margin="25,170,0,0"
+                    Foreground="{StaticResource WhiteElementBrush}"
+                />
+
+                <TextBox 
+                    x:Name="LoginBox1"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    materialDesign:HintAssist.Hint="Никнейм"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource WhiteElementBrush}"
+                    materialDesign:HintAssist.Foreground="{StaticResource WhiteElementBrush}"
+                    CaretBrush="{StaticResource OrangeElementBrush}"
+                    materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
+                    MaxLength="50"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Height="40"
+                    Width="150"
+                    Margin="25,70,0,0"
+                    Foreground="{StaticResource WhiteElementBrush}"
+                />
+                <TextBlock 
+                    Text="Аватар"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Height="18"
+                    Width="150"
+                    Margin="25,210,0,0"
+                    Foreground="LightGray"
+                />
+                <Button
+                    Style="{StaticResource RoundedButtonTemplate}"
+                    Content="Загрузить"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Height="24"
+                    Width="75"
+                    Margin="105,230,0,0"
+                    Foreground="{StaticResource RedElementBrush}"
+                    Background="LightGray"
+                
+                />
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

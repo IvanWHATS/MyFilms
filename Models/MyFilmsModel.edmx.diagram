@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cf45b11290ca40afaf50245cc6c6e91b" Name="MyFilmsDiagram" ZoomLevel="33">
+        <EntityTypeShape EntityType="MyFilmsModel.Actor" Width="1.5" PointX="12.875" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFilmsModel.Crew" Width="1.5" PointX="5.625" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFilmsModel.Department" Width="1.5" PointX="3.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFilmsModel.Film" Width="1.5" PointX="9.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFilmsModel.FilmsActor" Width="1.5" PointX="12.875" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFilmsModel.FilmsCrew" Width="1.5" PointX="5.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFilmsModel.FilmsRating" Width="1.5" PointX="12" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFilmsModel.FilmStatus" Width="1.5" PointX="9.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFilmsModel.Genre" Width="1.5" PointX="11.875" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFilmsModel.Language" Width="1.5" PointX="7.625" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFilmsModel.ProductionCompany" Width="1.5" PointX="7.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFilmsModel.UserFilmStatus" Width="1.5" PointX="14.875" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFilmsModel.User" Width="1.5" PointX="12.125" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFilmsModel.UsersType" Width="1.5" PointX="9.875" PointY="13" IsExpanded="true" />
+        <AssociationConnector Association="MyFilmsModel.FK__FilmActor__actor__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFilmsModel.FK__FilmsDere__direc__3F466844" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="MyFilmsModel.FK_FilmsCrews_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFilmsModel.FK_Films_FilmStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFilmsModel.FK_FilmsActors_Films" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFilmsModel.FK_FilmsCrews_Films" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFilmsModel.FK_FilmsRatings_Films" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFilmsModel.FK_FilmsRatings_UserFilmStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFilmsModel.FK_FilmsRatings_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFilmsModel.FK__Users__user_type__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFilmsModel.FilmsGenres" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFilmsModel.FilmsLanguages" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="MyFilmsModel.FilmsProductionCompanies" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

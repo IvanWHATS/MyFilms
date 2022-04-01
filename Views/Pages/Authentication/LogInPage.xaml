@@ -1,0 +1,115 @@
+﻿<Page x:Class="MyFilms_.NET_Framework_.Views.Pages.Authentication.LogInPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MyFilms_.NET_Framework_.Views.Pages.Authentication"
+      xmlns:local1="clr-namespace:MyFilms_.NET_Framework_"
+      xmlns:focus="clr-namespace:MyFilms_.NET_Framework_.Infrastructure"
+       xmlns:vm="clr-namespace:MyFilms_.NET_Framework_.ViewModels"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="180" d:DesignWidth="200"
+      Title="LogInPage">
+    <Grid>
+        <TextBox 
+            x:Name="LoginBox"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            materialDesign:HintAssist.Hint="Логин"
+            materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource WhiteElementBrush}"
+            materialDesign:HintAssist.Foreground="{StaticResource WhiteElementBrush}"
+            CaretBrush="{StaticResource OrangeElementBrush}"
+            SelectionBrush="{StaticResource OrangeElementBrush}"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
+            MaxLength="50"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Height="40"
+            Width="150"
+            Margin="25,20,0,0"
+            Foreground="{StaticResource WhiteElementBrush}"
+            IsEnabled="True" 
+            KeyDown="LoginBox_Enter" Cursor="Arrow"
+            
+        />
+        <TextBox
+            x:Name="PasswordText"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource WhiteElementBrush}"
+            CaretBrush="{StaticResource OrangeElementBrush}"
+            materialDesign:HintAssist.Foreground="{StaticResource WhiteElementBrush}"
+            SelectionBrush="{StaticResource OrangeElementBrush}"
+            materialDesign:HintAssist.Hint="Пароль"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
+            VerticalAlignment="Top"
+            MaxLength="50"
+            HorizontalAlignment="Left"
+            Height="40"
+            Width="150"
+            Margin="25,80,0,0"
+            Foreground="{StaticResource WhiteElementBrush}"
+            IsEnabled="True" 
+            Visibility="Hidden"
+            
+        />
+        <CheckBox x:Name="ShowPassword"
+                  Style="{StaticResource CustomMaterialDesignIconButton}"
+                  VerticalAlignment="Top"
+                  
+                  HorizontalAlignment="Left"
+                  Margin="0,95,0,0"
+                  Height="20"
+                  Width="20"
+                  Background="{x:Null}"
+                  Checked="ShowPassword_Checked"
+                  Unchecked="ShowPassword_Unchecked" Cursor="Hand"  
+                  ToolTip="Показать пароль"
+        >
+            <Image x:Name="ShowPasswordIcon" 
+                   Source="/Sourse/Icons/HiddenEyeIcon.png" Stretch="Fill"/>
+
+
+        </CheckBox>
+
+        <PasswordBox 
+            x:Name="PasswordBox"
+            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+            materialDesign:HintAssist.Hint="Пароль"
+            materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource WhiteElementBrush}"
+            materialDesign:HintAssist.Foreground="{StaticResource WhiteElementBrush}"
+            CaretBrush="{StaticResource OrangeElementBrush}"
+            SelectionBrush="{StaticResource OrangeElementBrush}"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
+            MaxLength="50"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Height="40"
+            Width="150"
+            Margin="25,80,0,0"
+            Foreground="{StaticResource WhiteElementBrush}"
+            IsEnabled="True" 
+            PasswordChanged="PasswordBox_PasswordChanged"
+            KeyDown="PasswordBox_Enter"
+        />
+        <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
+                materialDesign:ButtonAssist.CornerRadius="12"
+                x:Name="LogInButton"
+                BorderThickness="0"
+                Content="Войти"
+                Height="30"
+                Width="70"
+                FontSize="12"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Margin="0,0,20,20"
+                BorderBrush="{StaticResource RedElementBrush}"
+                Background="{StaticResource WhiteElementBrush}"
+                Foreground="{StaticResource OrangeElementBrush}" 
+                Click="LogInButton_Click" Cursor="Hand"  
+        >
+            
+        </Button>
+
+
+    </Grid>
+</Page>

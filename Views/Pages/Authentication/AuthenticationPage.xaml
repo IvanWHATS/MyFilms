@@ -1,0 +1,85 @@
+﻿<Page x:Class="MyFilms_.NET_Framework_.Views.Pages.Authentication.AuthenticationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MyFilms_.NET_Framework_.Views.Pages.Authentication" 
+      xmlns:vm="clr-namespace:MyFilms_.NET_Framework_.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="250"
+      Title="AuthenticationPage">
+
+    
+    
+    <Border CornerRadius="10" 
+            Background="{StaticResource BackgroundBrush}"
+                >
+        
+        <Grid>
+            <Label Content="MyFilms"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="0,5,0,0"
+                   Height="45"
+                   Width="100"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center" 
+                   FontFamily="Segoe Print" 
+                   FontSize="20" 
+                   FontWeight="Bold"
+                   Background ="{x:Null}"
+            >
+                <Label.Foreground>
+                    <SolidColorBrush Color="{StaticResource WhiteElementColor}"/>
+                </Label.Foreground>
+            </Label>
+            
+            <Button Style="{DynamicResource TextButtons}"
+                    x:Name="RegistrationButton"
+                    Height="20"
+                    Width="80"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="130,64,40,216"
+                    Content="Регистрация" 
+                    FontSize="12"
+                    BorderBrush="{x:Null}"
+                    Background="{x:Null}" 
+                    ToolTip="Если вы ещё не зарегестрированны, зарегистрируйтесь" 
+                    Click="RegistrationButton_Click"
+            />
+            
+            
+            <Button Style="{StaticResource TextButtons}"
+                    x:Name="LogInButton"
+                    Height="20"
+                    Width="80"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="40,64,130,216"
+                    Content="Вход" 
+                    FontSize="12"
+                    BorderBrush="{x:Null}"
+                    Background="{x:Null}" 
+                    ToolTip="Если вы уже зарегестрированны можете войти" 
+                    Click="LogInButton_Click"
+                  
+            />
+            
+            <Frame x:Name="Authentication"
+                   Height="180"
+                   Width="200"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Margin="0,70,0,0" 
+                   Opacity="1"
+                   NavigationUIVisibility="Hidden"
+               
+            />
+            
+        </Grid>
+
+        
+
+    </Border>
+</Page>
