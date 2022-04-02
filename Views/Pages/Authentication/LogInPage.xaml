@@ -7,88 +7,34 @@
       xmlns:local1="clr-namespace:MyFilms_.NET_Framework_"
       xmlns:focus="clr-namespace:MyFilms_.NET_Framework_.Infrastructure"
        xmlns:vm="clr-namespace:MyFilms_.NET_Framework_.ViewModels"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+      xmlns:components="clr-namespace:MyFilms_.NET_Framework_.Infrastructure.Components"
+
       mc:Ignorable="d" 
       d:DesignHeight="180" d:DesignWidth="200"
       Title="LogInPage">
     <Grid>
         <TextBox 
             x:Name="LoginBox"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Style="{StaticResource CustomMaterialDesignFloatingHintTextBox}"
             materialDesign:HintAssist.Hint="Логин"
-            materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource WhiteElementBrush}"
-            materialDesign:HintAssist.Foreground="{StaticResource WhiteElementBrush}"
-            CaretBrush="{StaticResource OrangeElementBrush}"
-            SelectionBrush="{StaticResource OrangeElementBrush}"
-            materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
-            MaxLength="50"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Height="40"
             Width="150"
             Margin="25,20,0,0"
-            Foreground="{StaticResource WhiteElementBrush}"
-            IsEnabled="True" 
             KeyDown="LoginBox_Enter" Cursor="Arrow"
             
         />
-        <TextBox
-            x:Name="PasswordText"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource WhiteElementBrush}"
-            CaretBrush="{StaticResource OrangeElementBrush}"
-            materialDesign:HintAssist.Foreground="{StaticResource WhiteElementBrush}"
-            SelectionBrush="{StaticResource OrangeElementBrush}"
-            materialDesign:HintAssist.Hint="Пароль"
-            materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
-            VerticalAlignment="Top"
-            MaxLength="50"
-            HorizontalAlignment="Left"
-            Height="40"
-            Width="150"
-            Margin="25,80,0,0"
-            Foreground="{StaticResource WhiteElementBrush}"
-            IsEnabled="True" 
-            Visibility="Hidden"
-            
-        />
-        <CheckBox x:Name="ShowPassword"
-                  Style="{StaticResource CustomMaterialDesignIconButton}"
-                  VerticalAlignment="Top"
-                  
-                  HorizontalAlignment="Left"
-                  Margin="0,95,0,0"
-                  Height="20"
-                  Width="20"
-                  Background="{x:Null}"
-                  Checked="ShowPassword_Checked"
-                  Unchecked="ShowPassword_Unchecked" Cursor="Hand"  
-                  ToolTip="Показать пароль"
-        >
-            <Image x:Name="ShowPasswordIcon" 
-                   Source="/Sourse/Icons/HiddenEyeIcon.png" Stretch="Fill"/>
-
-
-        </CheckBox>
-
-        <PasswordBox 
+        
+        <components:CheckablePasswordBox 
             x:Name="PasswordBox"
-            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
             materialDesign:HintAssist.Hint="Пароль"
-            materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource WhiteElementBrush}"
-            materialDesign:HintAssist.Foreground="{StaticResource WhiteElementBrush}"
-            CaretBrush="{StaticResource OrangeElementBrush}"
-            SelectionBrush="{StaticResource OrangeElementBrush}"
-            materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
-            MaxLength="50"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Height="40"
-            Width="150"
-            Margin="25,80,0,0"
-            Foreground="{StaticResource WhiteElementBrush}"
-            IsEnabled="True" 
-            PasswordChanged="PasswordBox_PasswordChanged"
+            Width="170"
+            Margin="5,80,0,0"
             KeyDown="PasswordBox_Enter"
         />
         <Button Style="{StaticResource CustomMaterialDesignPaperButton}"

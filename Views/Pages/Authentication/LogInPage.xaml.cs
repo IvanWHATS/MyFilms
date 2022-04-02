@@ -41,13 +41,7 @@ namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
         {
             if (e.Key == Key.Enter)
             {
-                if (PasswordBox.Visibility == Visibility.Collapsed)
-                {
-                    PasswordText.Focus();
-                    PasswordText.SelectionStart = PasswordText.Text.Length;
-                }
-                else PasswordBox.Focus();
-                PasswordBox.Focus();
+                PasswordBox.PasswordFocus();
             }
         }
 
@@ -66,7 +60,7 @@ namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
             
         }
 
-        #region ShowPassword
+       /* #region ShowPassword
         private void ShowPassword_Checked(object sender, RoutedEventArgs e)
         {
             PasswordText.Text = PasswordBox.Password;
@@ -90,6 +84,6 @@ namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
         {
             PasswordText.Text = PasswordBox.Password;
         }
-        #endregion
+        #endregion*/
     }
 }

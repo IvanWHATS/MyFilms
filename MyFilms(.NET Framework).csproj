@@ -201,6 +201,9 @@
     </ApplicationDefinition>
     <Compile Include="Infrastructure\Commands\Base\CommandBase.cs" />
     <Compile Include="Infrastructure\Commands\RelayCommand.cs" />
+    <Compile Include="Infrastructure\Components\CheckablePasswordBox.xaml.cs">
+      <DependentUpon>CheckablePasswordBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructure\FocusExtension.cs" />
     <Compile Include="Models\Actor.cs">
       <DependentUpon>MyFilmsModel.tt</DependentUpon>
@@ -264,6 +267,10 @@
     <Compile Include="Models\UsersType.cs">
       <DependentUpon>MyFilmsModel.tt</DependentUpon>
     </Compile>
+    <Page Include="Infrastructure\Components\CheckablePasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -341,7 +348,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Infrastructure\Components\" />
     <Folder Include="Infrastructure\Events\" />
   </ItemGroup>
   <ItemGroup>
