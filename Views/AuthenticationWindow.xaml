@@ -1,18 +1,23 @@
-﻿<Page x:Class="MyFilms_.NET_Framework_.Views.Pages.Authentication.AuthenticationPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="250"
-      Title="AuthenticationPage">
-
-    
-    
+﻿<Window x:Class="MyFilms_.NET_Framework_.Views.AuthenticationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyFilms_.NET_Framework_.Views"
+        xmlns:pages="clr-namespace:MyFilms_.NET_Framework_.Views.Pages.Authentication"
+        mc:Ignorable="d"
+        Title="AuthenticationWindow" Height="300" Width="250"
+        Background="{x:Null}" 
+        AllowsTransparency="True" 
+        WindowStyle="None"
+        ResizeMode="NoResize" 
+        >
+    <!--<Frame Source="/MyFilms(.NET Framework);component/Views/Pages/AuthenticationPage.xaml"
+           NavigationUIVisibility="Hidden"/>-->
     <Border CornerRadius="10" 
             Background="{StaticResource BackgroundBrush}"
                 >
-        
+
         <Grid>
             <Label Content="MyFilms"
                    HorizontalAlignment="Center"
@@ -31,7 +36,7 @@
                     <SolidColorBrush Color="{StaticResource WhiteElementColor}"/>
                 </Label.Foreground>
             </Label>
-            
+
             <Button Style="{DynamicResource TextButtons}"
                     x:Name="RegistrationButton"
                     Height="20"
@@ -46,8 +51,8 @@
                     ToolTip="Если вы ещё не зарегестрированны, зарегистрируйтесь" 
                     Click="RegistrationButton_Click"
             />
-            
-            
+
+
             <Button Style="{StaticResource TextButtons}"
                     x:Name="LogInButton"
                     Height="20"
@@ -63,8 +68,8 @@
                     Click="LogInButton_Click"
                   
             />
-            
-            <Frame x:Name="Authentication"
+
+            <Frame x:Name="AuthenticationFrame"
                    Height="180"
                    Width="200"
                    VerticalAlignment="Center"
@@ -72,12 +77,8 @@
                    Margin="0,70,0,0" 
                    Opacity="1"
                    NavigationUIVisibility="Hidden"
-               
             />
-            
+
         </Grid>
-
-        
-
     </Border>
-</Page>
+</Window>

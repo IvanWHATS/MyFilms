@@ -6,30 +6,31 @@
         xmlns:local="clr-namespace:MyFilms_.NET_Framework_.Views"
         mc:Ignorable="d"
         Title="MyFilms" Height="450" Width="800"
-        Icon="\Sourse\Icons\MyFilmsIcon1.jpg"
+        Icon="\Sourse\Icons\MyFilmsIcon1.jpg" WindowStyle="None"
+        
         >
     <Grid x:Name="MyGrid" x:FieldModifier="public">
-        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
         <Frame Height="Auto"
                Width="Auto"
                Source="/MyFilms(.NET Framework);component/Views/Pages/MainPage/MainPage.xaml"
                IsEnabled="False" 
                NavigationUIVisibility="Hidden"
                x:Name="MainFrame"
+               Grid.Column="1"
+               Grid.Row="1"
                
         >
 
-
         </Frame>
-        <Frame x:Name="LogInFrame"
-               HorizontalAlignment="Center" 
-               Margin="0,0,0,0" 
-               VerticalAlignment="Center" 
-               Height="300" 
-               Width="250" 
-               NavigationUIVisibility="Hidden" 
-               Source="/MyFilms(.NET Framework);component/Views/Pages/Authentication/AuthenticationPage.xaml"
-               x:FieldModifier="public"
-        />
     </Grid>
 </Window>

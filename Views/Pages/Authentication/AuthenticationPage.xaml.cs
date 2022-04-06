@@ -32,26 +32,14 @@ namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
   
         private void LogInButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Authentication.Content is RegistrationPage) 
-            {
-                // RegistrationButton.FontWeight = FontWeights.Regular;
-                // LogInButton.FontWeight = FontWeights.Bold;
-                //LogInButton.Foreground = (Brush)Application.Current.Resources["OrangeElementBrush"];
-                //RegistrationButton.Foreground = (Brush)Application.Current.Resources["WhiteElementBrush"];
-                Authentication.Navigate(LogInPage);
-            }
+            if (Authentication.Content is RegistrationPage) Authentication.Navigate(LogInPage);
+            
         }
 
         private void RegistrationButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Authentication.Content is LogInPage)
-            {
-                //RegistrationButton.FontWeight = FontWeights.Bold;
-                // LogInButton.FontWeight = FontWeights.Regular;
-                //RegistrationButton.Foreground = (Brush)Application.Current.Resources["OrangeElementBrush"];
-                //LogInButton.Foreground = (Brush)Application.Current.Resources["WhiteElementBrush"];
-                Authentication.Navigate(RegistrationPage);
-            }
+            if (Authentication.Content is LogInPage) Authentication.Navigate(RegistrationPage);
+            
         }
     }
 }

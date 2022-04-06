@@ -36,20 +36,16 @@ namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
 
         }
 
-        #region 
+        #region KeyEnter
         private void LoginBox_Enter(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
-            {
-                PasswordBox.PasswordFocus();
-            }
+            if (e.Key == Key.Enter) PasswordBox.PasswordFocus();
+            
         }
 
         private void PasswordBox_Enter(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter) {
-                LogIn();
-            }
+            if (e.Key == Key.Enter) LogIn();
         }
 
         #endregion
@@ -57,33 +53,7 @@ namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
         private void LogInButton_Click(object sender, RoutedEventArgs e)
         {
             LogIn();
-            
-        }
 
-       /* #region ShowPassword
-        private void ShowPassword_Checked(object sender, RoutedEventArgs e)
-        {
-            PasswordText.Text = PasswordBox.Password;
-            PasswordBox.Visibility = Visibility.Collapsed;
-            PasswordText.Visibility = Visibility.Visible;
-            PasswordText.Focus();
-            PasswordText.SelectionStart = PasswordText.Text.Length;
-            ShowPasswordIcon.Source = EyeImage;
         }
-
-        private void ShowPassword_Unchecked(object sender, RoutedEventArgs e)
-        {
-            PasswordBox.Password = PasswordText.Text;
-            PasswordText.Visibility = Visibility.Collapsed;
-            PasswordBox.Visibility = Visibility.Visible;
-            PasswordBox.Focus();
-            ShowPasswordIcon.Source = HiddenEyeImage;
-        }
-
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            PasswordText.Text = PasswordBox.Password;
-        }
-        #endregion*/
     }
 }

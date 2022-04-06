@@ -26,6 +26,18 @@
                     Width="150"
                     Margin="25,20,0,0"
                     IsEnabled="True" Cursor="Arrow" 
+                    KeyDown="LoginBox_KeyDown"
+                />
+                <TextBox 
+                    x:Name="LoginBox1"
+                    Style="{StaticResource CustomMaterialDesignFloatingHintTextBox}"
+                    materialDesign:HintAssist.Hint="Никнейм"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Height="40"
+                    Width="150"
+                    Margin="25,70,0,0"
+                    KeyDown="LoginBox1_KeyDown"
                 />
                 <components:CheckablePasswordBox 
                     x:Name="PasswordBox1"
@@ -35,6 +47,7 @@
                     Height="40"
                     Width="170"
                     Margin="5,120,0,0"
+                    KeyDown="PasswordBox1_KeyDown"
                 />
                 
                 <components:CheckablePasswordBox 
@@ -45,18 +58,9 @@
                     Height="40"
                     Width="170"
                     Margin="5,170,0,0"
+                    KeyDown="PasswordBox2_KeyDown"
                 />
 
-                <TextBox 
-                    x:Name="LoginBox1"
-                    Style="{StaticResource CustomMaterialDesignFloatingHintTextBox}"
-                    materialDesign:HintAssist.Hint="Никнейм"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Left"
-                    Height="40"
-                    Width="150"
-                    Margin="25,70,0,0"
-                />
                 <Button
                     Style="{StaticResource RoundedButtonTemplate}"
                     Content="Загрузить"

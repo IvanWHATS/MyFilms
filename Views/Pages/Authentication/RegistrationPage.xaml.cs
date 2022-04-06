@@ -24,5 +24,32 @@ namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
         {
             InitializeComponent();
         }
+
+        #region KeyEnter
+        private void LoginBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) LoginBox1.Focus();
+        }
+        private void LoginBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) PasswordBox1.PasswordFocus();
+        }
+
+        private void PasswordBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) PasswordBox2.PasswordFocus();
+        }
+
+        private void PasswordBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            Register();
+        }
+
+        #endregion
+
+        private void Register()
+        {
+            
+        }
     }
 }

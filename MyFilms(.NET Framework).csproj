@@ -241,6 +241,9 @@
       <DependentUpon>MyFilmsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
+    <Compile Include="Views\AuthenticationWindow.xaml.cs">
+      <DependentUpon>AuthenticationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="Views\Pages\Authentication\LogInPage.xaml.cs">
@@ -268,6 +271,10 @@
       <DependentUpon>MyFilmsModel.tt</DependentUpon>
     </Compile>
     <Page Include="Infrastructure\Components\CheckablePasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AuthenticationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

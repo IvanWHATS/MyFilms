@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyFilms_.NET_Framework_.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,8 +28,14 @@ namespace MyFilms_.NET_Framework_.Views
             BlurEffect blurEffect = new BlurEffect();
             blurEffect.Radius = 10;
             InitializeComponent();
+            this.Show();
             MainFrame.Effect = blurEffect;
             MainFrame.IsEnabled = false;
+            AuthenticationWindow authenticationWindow = new AuthenticationWindow();
+            authenticationWindow.Owner = this;
+            authenticationWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            authenticationWindow.ShowInTaskbar = false;
+            authenticationWindow.Show();
             //MyGrid.Children.Remove(LogInFrame);
         }
     }
