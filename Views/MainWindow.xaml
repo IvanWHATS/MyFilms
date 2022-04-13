@@ -4,33 +4,138 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyFilms_.NET_Framework_.Views"
+        xmlns:vm="clr-namespace:MyFilms_.NET_Framework_.ViewModels"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         mc:Ignorable="d"
         Title="MyFilms" Height="450" Width="800"
         Icon="\Sourse\Icons\MyFilmsIcon1.jpg" WindowStyle="None"
+        ResizeMode="CanResizeWithGrip" AllowsTransparency="True"
+        MinHeight="600" MinWidth="800"
         
         >
+    <!--
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    -->
     <Grid x:Name="MyGrid" x:FieldModifier="public">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
 
-        <Frame Height="Auto"
-               Width="Auto"
-               Source="/MyFilms(.NET Framework);component/Views/Pages/MainPage/MainPage.xaml"
-               IsEnabled="False" 
-               NavigationUIVisibility="Hidden"
-               x:Name="MainFrame"
-               Grid.Column="1"
-               Grid.Row="1"
-               
+        <Rectangle x:Name="TopBar"
+                   Fill="{StaticResource DarkerBackgroundBrush}"
+                   Grid.Row="0"
+                   MouseLeftButtonDown="Drag" MouseLeftButtonUp="StopDrag"
+        />
+        
+        
+        <StackPanel Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal"
         >
+            <Button x:Name="Minimize"
+                materialDesign:ButtonAssist.CornerRadius="12"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Width="60"
+                Height="Auto"
+                Background="{x:Null}"
+                BorderThickness="0"
+                Click="MinimizeClick"
+                ClickMode="Release"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center" Cursor="Hand"
+            >
+                <Image Name="MinimizeIcon"
+                   Source="/Sourse/Icons/MinimizeIcon.png"
+                   Stretch="Uniform"
+                />
+            </Button>
+            
+            
+            <Button x:Name="ChangeSize"
+                materialDesign:ButtonAssist.CornerRadius="12"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Width="60"
+                Height="Auto"
+                Background="{x:Null}"
+                BorderThickness="0"
+                Click="Resize"
+                ClickMode="Release"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center" Cursor="Hand"
+            >
+                <Image Name="ResizeIcon"
+                   Source="/Sourse/Icons/ExpandIcon.png"
+                   Stretch="Uniform"
+                />
+            </Button>
+            
+            
+            <Button x:Name="Exit"
+                materialDesign:ButtonAssist.CornerRadius="12"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Width="60"
+                Height="Auto"
+                Background="{x:Null}"
+                BorderThickness="0"
+                Click="Close"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                ClickMode="Release"
+                Cursor="Hand"
+            >
 
-        </Frame>
+                <Image Source="/Sourse/Icons/CloseIcon.png"
+                   Stretch="UniformToFill"
+                />
+            </Button>
+
+            
+        </StackPanel>
+
+        
+        <Grid Grid.Row="1" Name="WorkGrid" IsEnabled="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" MaxWidth="250" MinWidth="80"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            
+            
+            <Frame Height="Auto"
+                   Width="Auto"
+                   Grid.Column="1"
+                   Source="/MyFilms(.NET Framework);component/Views/Pages/MainPage/MainPage.xaml"
+                   NavigationUIVisibility="Hidden"
+                   x:Name="MainFrame"
+            >
+            </Frame>
+            <Border Grid.Column="0" Background="{StaticResource BackgroundBrush}"/>
+            <GridSplitter Grid.Column="0" 
+                          Grid.RowSpan="2" 
+                          Width="5" 
+                          HorizontalAlignment="Right" 
+                          Background="{StaticResource RedElementBrush}"/>
+
+        </Grid>
+        
+        <Frame x:Name="Authentication"
+                   Focusable="False"
+                   Height="300"
+                   Grid.RowSpan="2"
+                   Width="250"
+                   Grid.ColumnSpan="2"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   NavigationUIVisibility="Hidden"
+                   Visibility="Visible"
+                   Source="/MyFilms(.NET Framework);component/Views/Pages/Authentication/AuthenticationPage.xaml"
+        />
     </Grid>
 </Window>

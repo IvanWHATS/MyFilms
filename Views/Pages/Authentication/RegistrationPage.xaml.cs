@@ -51,5 +51,10 @@ namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
         {
             
         }
+
+        private void Registration_Click(object sender, RoutedEventArgs e)
+        {
+            Register();
+        }
     }
 }

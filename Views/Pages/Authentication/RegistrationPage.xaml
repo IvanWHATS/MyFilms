@@ -15,28 +15,30 @@
         </Grid.RowDefinitions>
         
         <ScrollViewer Grid.Row="0">
-            <Grid Height="400">
+            <Grid Height="300">
                 <TextBox 
                     x:Name="LoginBox"
+                    SelectionBrush="{StaticResource RedElementBrush}"
                     Style="{StaticResource CustomMaterialDesignFloatingHintTextBox}"
                     materialDesign:HintAssist.Hint="Логин"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
                     Height="40"
                     Width="150"
-                    Margin="25,20,0,0"
+                    Margin="25,0,0,0"
                     IsEnabled="True" Cursor="Arrow" 
                     KeyDown="LoginBox_KeyDown"
                 />
                 <TextBox 
                     x:Name="LoginBox1"
+                    SelectionBrush="{StaticResource RedElementBrush}"
                     Style="{StaticResource CustomMaterialDesignFloatingHintTextBox}"
                     materialDesign:HintAssist.Hint="Никнейм"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
                     Height="40"
                     Width="150"
-                    Margin="25,70,0,0"
+                    Margin="25,60,0,0"
                     KeyDown="LoginBox1_KeyDown"
                 />
                 <components:CheckablePasswordBox 
@@ -57,22 +59,30 @@
                     HorizontalAlignment="Left"
                     Height="40"
                     Width="170"
-                    Margin="5,170,0,0"
+                    Margin="5,180,0,0"
                     KeyDown="PasswordBox2_KeyDown"
                 />
 
-                <Button
-                    Style="{StaticResource RoundedButtonTemplate}"
-                    Content="Загрузить"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Left"
-                    Height="24"
-                    Width="75"
-                    Margin="105,230,0,0"
-                    Foreground="{StaticResource RedElementBrush}"
-                    Background="LightGray"
-                
-                />
+      
+                <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
+                        x:Name="RegistrationButton"
+                        materialDesign:ButtonAssist.CornerRadius="12"
+                        BorderThickness="0"
+                        Content="Зарегистрироваться"
+                        Height="30"
+                        Width="150"
+                        FontSize="12"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,10,20"
+                        BorderBrush="{StaticResource RedElementBrush}"
+                        Background="{StaticResource WhiteElementBrush}"
+                        Foreground="{StaticResource OrangeElementBrush}" 
+                        Click="Registration_Click" Cursor="Hand"  
+                >
+
+                </Button>
+
             </Grid>
         </ScrollViewer>
     </Grid>

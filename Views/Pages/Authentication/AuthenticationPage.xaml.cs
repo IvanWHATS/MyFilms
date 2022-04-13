@@ -24,22 +24,26 @@ namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
         RegistrationPage RegistrationPage = new RegistrationPage();
         public AuthenticationPage()
         {
-           
+
             InitializeComponent();
             Authentication.Navigate(LogInPage);
             LogInButton.Focus();
         }
-  
+
         private void LogInButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Authentication.Content is RegistrationPage) Authentication.Navigate(LogInPage);
-            
+            LogInButton.IsEnabled = false;
+            RegistrationButton.IsEnabled = true;
+            Authentication.Navigate(LogInPage);
+
         }
 
         private void RegistrationButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Authentication.Content is LogInPage) Authentication.Navigate(RegistrationPage);
-            
+            RegistrationButton.IsEnabled = false;
+            LogInButton.IsEnabled = true;
+            Authentication.Navigate(RegistrationPage);
+
         }
     }
 }

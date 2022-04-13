@@ -13,6 +13,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MyFilms_.NET_Framework_.Infrastructure;
 
 namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
 {
@@ -21,19 +22,11 @@ namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
     /// </summary>
     public partial class LogInPage : Page
     {
-        private BitmapImage EyeImage = new BitmapImage(new Uri("pack://application:,,,/Sourse/Icons/EyeIcon.png"));
-        private BitmapImage HiddenEyeImage = new BitmapImage(new Uri("pack://application:,,,/Sourse/Icons/HiddenEyeIcon.png"));
-
 
         public LogInPage()
         {
             
             InitializeComponent();
-        }
-
-        private void LogIn() 
-        {
-
         }
 
         #region KeyEnter
@@ -48,12 +41,17 @@ namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
             if (e.Key == Key.Enter) LogIn();
         }
 
+
         #endregion
+        private void LogIn()
+        {
+            var auth = Authorization.getInstance();
+            auth.LogIn(LoginBox.Text, PasswordBox.Password);
+        }
 
         private void LogInButton_Click(object sender, RoutedEventArgs e)
         {
             LogIn();
-
         }
     }
 }

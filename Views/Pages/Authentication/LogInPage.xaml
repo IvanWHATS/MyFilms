@@ -6,35 +6,41 @@
       xmlns:local="clr-namespace:MyFilms_.NET_Framework_.Views.Pages.Authentication"
       xmlns:local1="clr-namespace:MyFilms_.NET_Framework_"
       xmlns:focus="clr-namespace:MyFilms_.NET_Framework_.Infrastructure"
-       xmlns:vm="clr-namespace:MyFilms_.NET_Framework_.ViewModels"
+      xmlns:vm="clr-namespace:MyFilms_.NET_Framework_.ViewModels"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       xmlns:components="clr-namespace:MyFilms_.NET_Framework_.Infrastructure.Components"
 
       mc:Ignorable="d" 
       d:DesignHeight="180" d:DesignWidth="200"
       Title="LogInPage">
+    <!--
+    <Page.DataContext>
+        <vm:LogInViewModel/>
+    </Page.DataContext>
+    -->
     <Grid>
         <TextBox 
             x:Name="LoginBox"
+            SelectionBrush="{StaticResource RedElementBrush}"
             Style="{StaticResource CustomMaterialDesignFloatingHintTextBox}"
             materialDesign:HintAssist.Hint="Логин"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Height="40"
             Width="150"
-            Margin="25,20,0,0"
+            Margin="25,0,0,0"
             KeyDown="LoginBox_Enter" Cursor="Arrow"
             
         />
         
-        <components:CheckablePasswordBox 
+        <components:CheckablePasswordBox
             x:Name="PasswordBox"
             materialDesign:HintAssist.Hint="Пароль"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Height="40"
             Width="170"
-            Margin="5,80,0,0"
+            Margin="5,60,0,0"
             KeyDown="PasswordBox_Enter"
         />
         <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
@@ -51,7 +57,9 @@
                 BorderBrush="{StaticResource RedElementBrush}"
                 Background="{StaticResource WhiteElementBrush}"
                 Foreground="{StaticResource OrangeElementBrush}" 
-                Click="LogInButton_Click" Cursor="Hand"  
+                Cursor="Hand"  
+                Click="LogInButton_Click"
+                
         >
             
         </Button>

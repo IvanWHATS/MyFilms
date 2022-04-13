@@ -199,6 +199,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Infrastructure\Authorization.cs" />
     <Compile Include="Infrastructure\Commands\Base\CommandBase.cs" />
     <Compile Include="Infrastructure\Commands\RelayCommand.cs" />
     <Compile Include="Infrastructure\Components\CheckablePasswordBox.xaml.cs">
@@ -241,11 +242,10 @@
       <DependentUpon>MyFilmsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
-    <Compile Include="Views\AuthenticationWindow.xaml.cs">
-      <DependentUpon>AuthenticationWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="Views\Pages\Authentication\LogInPage.xaml.cs">
       <DependentUpon>LogInPage.xaml</DependentUpon>
     </Compile>
@@ -271,10 +271,6 @@
       <DependentUpon>MyFilmsModel.tt</DependentUpon>
     </Compile>
     <Page Include="Infrastructure\Components\CheckablePasswordBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\AuthenticationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -368,6 +364,10 @@
       <DependentUpon>MyFilmsModel.edmx</DependentUpon>
       <LastGenOutput>MyFilmsModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Sourse\Icons\MinimizeIcon.png" />
+    <Resource Include="Sourse\Icons\ExpandIcon.png" />
+    <Resource Include="Sourse\Icons\CollapseIcon.png" />
+    <Resource Include="Sourse\Icons\CloseIcon.png" />
     <Resource Include="Sourse\Icons\EyeIcon.png" />
     <Resource Include="Sourse\Icons\HiddenEyeIcon.png" />
     <Resource Include="Sourse\Icons\MyFilmsIcon.jpg" />

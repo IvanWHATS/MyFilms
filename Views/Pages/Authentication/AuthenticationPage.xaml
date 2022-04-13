@@ -3,12 +3,16 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:vm="clr-namespace:MyFilms_.NET_Framework_.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="250"
       Title="AuthenticationPage">
 
-    
-    
+    <!--
+    <Page.DataContext>
+        <vm:AuthenticationViewModel/>
+    </Page.DataContext>
+    -->
     <Border CornerRadius="10" 
             Background="{StaticResource BackgroundBrush}"
                 >
@@ -31,9 +35,28 @@
                     <SolidColorBrush Color="{StaticResource WhiteElementColor}"/>
                 </Label.Foreground>
             </Label>
-            
-            <Button Style="{DynamicResource TextButtons}"
-                    x:Name="RegistrationButton"
+
+            <Button x:Name="LogInButton"
+                    Style="{StaticResource TextButtons}"
+                    Cursor="Hand"   
+                    Height="20"
+                    Width="80"
+                    IsEnabled="False"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="40,64,130,216"
+                    Content="Вход" 
+                    FontSize="12"
+                    BorderBrush="{x:Null}"
+                    Background="{x:Null}" 
+                    ToolTip="Если вы уже зарегестрированны можете войти" 
+                    Click="LogInButton_Click"
+                  
+            />
+
+            <Button x:Name="RegistrationButton"
+                    Style="{DynamicResource TextButtons}"
+                    Cursor="Hand"
                     Height="20"
                     Width="80"
                     VerticalAlignment="Center"
@@ -46,24 +69,7 @@
                     ToolTip="Если вы ещё не зарегестрированны, зарегистрируйтесь" 
                     Click="RegistrationButton_Click"
             />
-            
-            
-            <Button Style="{StaticResource TextButtons}"
-                    x:Name="LogInButton"
-                    Height="20"
-                    Width="80"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Margin="40,64,130,216"
-                    Content="Вход" 
-                    FontSize="12"
-                    BorderBrush="{x:Null}"
-                    Background="{x:Null}" 
-                    ToolTip="Если вы уже зарегестрированны можете войти" 
-                    Click="LogInButton_Click"
-                  
-            />
-            
+
             <Frame x:Name="Authentication"
                    Height="180"
                    Width="200"
@@ -71,8 +77,9 @@
                    HorizontalAlignment="Center"
                    Margin="0,70,0,0" 
                    Opacity="1"
+                   Content="/MyFilms(.NET Framework);component/Views/Pages/Authentication/LogInPage.xaml"
                    NavigationUIVisibility="Hidden"
-               
+                   Focusable="False"
             />
             
         </Grid>
