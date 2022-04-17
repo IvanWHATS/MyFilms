@@ -14,6 +14,9 @@ namespace MyFilms_.NET_Framework_.Infrastructure
         private static Authorization _instance;
         public static Authorization getInstance() => _instance ?? (_instance = new Authorization());
 
+        private Authorization()
+        {
+        }
 
         private User _user = null;
         public User User
@@ -37,17 +40,49 @@ namespace MyFilms_.NET_Framework_.Infrastructure
             }
         }
 
-        public void LogIn(string login, string password)
+        public bool LogIn(string login, string password)
         {
-            var db = new MyFilmsEntities();
-            Models.User user = new User();
-            user = db.Users.Where(login == user.login)
-            this.User = 
-            IsAuthorized = true;
+            using (var db = new MyFilmsEntities())
+            {
+                var user = new Models.User();
+                if ((user = db.Users.Find(login)) != null)
+                    if (user.password == password)
+                    {
+                        this.User = user;
+                        IsAuthorized = true;
+                        return true;
+                    }
+            }
+            return false;
+        }
+
+        public bool Register(string login, string password, string nickname)
+        {
+            using (var db = new MyFilmsEntities())
+            {
+                if (db.Users.Find(login) == null)
+                {
+                    User = new User
+                    {
+                        login = login,
+                        password = password,
+                        nickname = nickname,
+                        picture = null,
+                        user_type_id = 0
+                    };
+                    db.Users.Add(User);
+                    db.SaveChanges();
+                    IsAuthorized = true;
+                    return true;
+                }
+
+            }
+            return false;
         }
 
         public void LogOut()
         {
+            this.User = null;
             IsAuthorized = false;
         }
     }

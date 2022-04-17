@@ -30,7 +30,7 @@
                     KeyDown="LoginBox_KeyDown"
                 />
                 <TextBox 
-                    x:Name="LoginBox1"
+                    x:Name="NicknameBox"
                     SelectionBrush="{StaticResource RedElementBrush}"
                     Style="{StaticResource CustomMaterialDesignFloatingHintTextBox}"
                     materialDesign:HintAssist.Hint="Никнейм"
@@ -63,7 +63,13 @@
                     KeyDown="PasswordBox2_KeyDown"
                 />
 
-      
+                <TextBlock x:Name="ErrorText"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           Visibility="Collapsed"
+                           Margin="0,230,0,0"
+                           Foreground="{StaticResource OrangeElementBrush}"/>
+
                 <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
                         x:Name="RegistrationButton"
                         materialDesign:ButtonAssist.CornerRadius="12"

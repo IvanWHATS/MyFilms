@@ -26,7 +26,7 @@
                    Width="100"
                    HorizontalContentAlignment="Center"
                    VerticalContentAlignment="Center" 
-                   FontFamily="Segoe Print" 
+                   FontFamily="Segoe Script" 
                    FontSize="20" 
                    FontWeight="Bold"
                    Background ="{x:Null}"

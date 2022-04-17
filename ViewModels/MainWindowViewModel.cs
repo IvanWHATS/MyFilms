@@ -19,7 +19,7 @@ namespace MyFilms_.NET_Framework_.ViewModels
             set => SetProperty(ref authenticationVisability, value);
         }
 
-        Authorization auth = new Authorization();
+        Authorization auth = Authorization.getInstance();
 
         public MainWindowViewModel()
         {

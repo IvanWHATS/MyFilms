@@ -116,8 +116,25 @@
                    x:Name="MainFrame"
             >
             </Frame>
-            <Border Grid.Column="0" Background="{StaticResource BackgroundBrush}"/>
-            <GridSplitter Grid.Column="0" 
+
+            <Grid Background="{StaticResource BackgroundBrush}">
+                
+                <StackPanel>
+                    <Border>
+                        <TextBlock FontFamily="Segoe Script" 
+                               FontSize="30"
+                               Height="50" 
+                           Foreground="{StaticResource WhiteElementBrush}"
+                           TextAlignment="Center"
+                       >MyFilms</TextBlock>
+                    </Border>
+                    
+                    <Button Margin="10,15,15,10"></Button>
+                </StackPanel>
+                
+            </Grid>
+
+                <GridSplitter Grid.Column="0" 
                           Grid.RowSpan="2" 
                           Width="5" 
                           HorizontalAlignment="Right" 

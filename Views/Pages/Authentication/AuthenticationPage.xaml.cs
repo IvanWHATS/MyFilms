@@ -24,7 +24,6 @@ namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
         RegistrationPage RegistrationPage = new RegistrationPage();
         public AuthenticationPage()
         {
-
             InitializeComponent();
             Authentication.Navigate(LogInPage);
             LogInButton.Focus();

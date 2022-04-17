@@ -22,7 +22,7 @@ namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
     /// </summary>
     public partial class LogInPage : Page
     {
-
+        Authorization auth = Authorization.getInstance();
         public LogInPage()
         {
             
@@ -45,8 +45,19 @@ namespace MyFilms_.NET_Framework_.Views.Pages.Authentication
         #endregion
         private void LogIn()
         {
-            var auth = Authorization.getInstance();
-            auth.LogIn(LoginBox.Text, PasswordBox.Password);
+            if (string.IsNullOrWhiteSpace(LoginBox.Text) && string.IsNullOrWhiteSpace(PasswordBox.Password))
+            {
+                ErrorText.Text = "Логин и пароль должны быть заполненны!";
+                ErrorText.Visibility = Visibility.Visible;
+            }
+
+            else
+            if (!auth.LogIn(LoginBox.Text, PasswordBox.Password))
+            {
+                ErrorText.Text = "Неверные логин или пароль!";
+                ErrorText.Visibility = Visibility.Visible;
+            }
+
         }
 
         private void LogInButton_Click(object sender, RoutedEventArgs e)

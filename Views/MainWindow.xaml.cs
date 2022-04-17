@@ -32,18 +32,30 @@ namespace MyFilms_.NET_Framework_.Views
 
         private double top;
         private double left;
+
+        BlurEffect blurEffect = new BlurEffect() { Radius = 10 };
+
+        Authorization auth = Authorization.getInstance();
         public MainWindow()
         {
-            
-            BlurEffect blurEffect = new BlurEffect();
-            blurEffect.Radius = 10;
             InitializeComponent();
             this.Show();
             top = Top;
             left = Left;
             WorkGrid.Effect = blurEffect;
-            var auth = Authorization.getInstance();
             auth.AuthorizationChanged += LogIn;
+            auth.AuthorizationChanged += LogOut;
+        }
+
+        private void LogOut(bool obj)
+        {
+            if (!obj)
+            {
+                Authentication.IsEnabled = true;
+                Authentication.Visibility = Visibility.Visible;
+                WorkGrid.IsEnabled = false;
+                WorkGrid.Effect = blurEffect;
+            }
         }
 
         private void LogIn(bool obj)
@@ -56,6 +68,7 @@ namespace MyFilms_.NET_Framework_.Views
                 WorkGrid.Effect = null;
             }
         }
+
 
         #region WindowControls
         private void Drag(object sender, MouseButtonEventArgs e)
@@ -100,5 +113,10 @@ namespace MyFilms_.NET_Framework_.Views
             WindowState = WindowState.Minimized;
         }
         #endregion
+
+        private void logOut_Click(object sender, RoutedEventArgs e)
+        {
+            auth.LogOut();
+        }
     }
 }

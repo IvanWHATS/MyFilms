@@ -39,7 +39,7 @@ namespace MyFilms_.NET_Framework_.ViewModels
         private void OnLogInCommandExecute(object p)
         {
             Authorization auth = Authorization.getInstance();
-            auth.LogIn();
+
 
         }
 
