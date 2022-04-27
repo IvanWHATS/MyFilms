@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyFilms_.NET_Framework_.Infrastructure    
+namespace MyFilms_.NET_Framework_.Infrastructure
 {
     internal class Authorization
     {

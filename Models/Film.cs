@@ -34,7 +34,7 @@ namespace MyFilms_.NET_Framework_.Models
         public Nullable<decimal> revenue { get; set; }
         public Nullable<int> status { get; set; }
         public string tagline { get; set; }
-        public string poster { get; set; }
+        public byte[] poster { get; set; }
     
         public virtual FilmStatus FilmStatus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

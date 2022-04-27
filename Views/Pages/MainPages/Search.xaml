@@ -1,0 +1,114 @@
+﻿<Page x:Class="MyFilms_.NET_Framework_.Views.Pages.MainPages.Search"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:MyFilms_.NET_Framework_.Views.Pages.MainPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Search">
+
+    <Grid Background="{StaticResource WhiteElementBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Text="Фильмы" 
+                   Margin="20,0,0,0"
+                   FontSize="22"
+                   Foreground="{StaticResource BackgroundBrush}"
+                   FontWeight="DemiBold"
+                   Width="100"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"/>
+        
+        <Border HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Grid.Row="0"
+                CornerRadius="12"
+                Background="{StaticResource BackgroundBrush}">
+            <TextBox Name="SearchBox"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     Style="{StaticResource CustomMaterialDesignFloatingHintTextBox}"
+                     Width="400"
+                     Height="40"
+                     MaxLength="100"
+                      materialDesign:HintAssist.Hint="Поиск"
+                     Margin="10,2,10,5">
+                
+            </TextBox>
+        </Border>
+        <Button HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Name="SearchButton"
+                Width="110"
+                Style="{StaticResource CustomMaterialDesignPaperButton}"
+                BorderBrush="{StaticResource RedElementBrush}"
+                 Background="{StaticResource OrangeElementBrush}"
+                materialDesign:ButtonAssist.CornerRadius="12"
+                Foreground="{StaticResource WhiteElementBrush}" 
+                Height="40"
+                 Content="ПОИСК"
+                Margin="0,0,40,0" Click="SearchButton_Click"/>
+        <ScrollViewer Grid.Row="1" Grid.Column="0">
+            <StackPanel Margin="0,0,0,0">
+                <ItemsControl Name="FilmsItemControl"> 
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Click="OpenFilm" Background="Transparent"
+                                    BorderThickness="0"
+                                    Margin="40,10,0,0"
+                                    materialDesign:ButtonAssist.CornerRadius="12"
+                                    Height="auto"
+                                    Width="auto"
+                                    Style="{StaticResource CustomMaterialDesignPaperButton}">
+                            <Border Height="255" Width="180" Grid.Row="1" 
+                                        Background="{StaticResource BackgroundBrush}"
+                                        CornerRadius="10"
+                                        Margin="-10,0,-10,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top">
+                                <StackPanel  Margin="10">
+                                    <Image Width="160" Height="180"
+                                               Margin="0,0,0,0"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Source="\Sourse\NoImage.png"
+                                               Stretch="Fill"
+                                               />
+                                    <TextBlock Text="{Binding title}"
+                                                   FontSize="16"
+                                               ToolTip="{Binding title}"
+                                                   Foreground="{StaticResource WhiteElementBrush}"
+                                                   VerticalAlignment="Bottom"
+                                                   HorizontalAlignment="Left"
+                                                   Margin="0,5,0,0"
+                                                   Width="160"/>
+                                       <StackPanel Margin="0,5,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                           <Image Source="\Sourse\Icons\StarImage.png"
+                                               Height="25" Margin="0,0,0,0"/>
+                                         <TextBlock VerticalAlignment="Center" Text="{Binding avg_rating}"
+                                                    Margin="5,0,0,0" Foreground="{StaticResource OrangeElementBrush}"
+                                                 FontSize="16" FontWeight="Bold"/>
+                                     </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

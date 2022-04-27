@@ -7,10 +7,10 @@
         xmlns:vm="clr-namespace:MyFilms_.NET_Framework_.ViewModels"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         mc:Ignorable="d"
-        Title="MyFilms" Height="450" Width="800"
+        Title="MyFilms" Height="600" Width="1000"
         Icon="\Sourse\Icons\MyFilmsIcon1.jpg" WindowStyle="None"
         ResizeMode="CanResizeWithGrip" AllowsTransparency="True"
-        MinHeight="600" MinWidth="800"
+        MinHeight="600" MinWidth="1000"
         
         >
     <!--
@@ -100,9 +100,9 @@
         </StackPanel>
 
         
-        <Grid Grid.Row="1" Name="WorkGrid" IsEnabled="False">
+        <Grid Grid.Row="1" Name="WorkGrid" IsEnabled="False" Background="{StaticResource WhiteElementBrush}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" MaxWidth="250" MinWidth="80"/>
+                <ColumnDefinition Width="150"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             
@@ -111,13 +111,13 @@
             <Frame Height="Auto"
                    Width="Auto"
                    Grid.Column="1"
-                   Source="/MyFilms(.NET Framework);component/Views/Pages/MainPage/MainPage.xaml"
+                  
                    NavigationUIVisibility="Hidden"
                    x:Name="MainFrame"
             >
             </Frame>
 
-            <Grid Background="{StaticResource BackgroundBrush}">
+            <Grid Grid.Column="0" Background="{StaticResource DarkerBackgroundBrush}">
                 
                 <StackPanel>
                     <Border>
@@ -128,31 +128,26 @@
                            TextAlignment="Center"
                        >MyFilms</TextBlock>
                     </Border>
-                    
-                    <Button Margin="10,15,15,10"></Button>
+
                 </StackPanel>
                 
             </Grid>
 
-                <GridSplitter Grid.Column="0" 
-                          Grid.RowSpan="2" 
-                          Width="5" 
-                          HorizontalAlignment="Right" 
-                          Background="{StaticResource RedElementBrush}"/>
-
+               
         </Grid>
         
         <Frame x:Name="Authentication"
-                   Focusable="False"
-                   Height="300"
-                   Grid.RowSpan="2"
-                   Width="250"
-                   Grid.ColumnSpan="2"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   NavigationUIVisibility="Hidden"
-                   Visibility="Visible"
-                   Source="/MyFilms(.NET Framework);component/Views/Pages/Authentication/AuthenticationPage.xaml"
+               Focusable="False"
+               Height="300"
+
+               Grid.RowSpan="2"
+               Width="250"
+               Grid.ColumnSpan="2"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               NavigationUIVisibility="Hidden"
+               Visibility="Visible"
+               Source="/MyFilms(.NET Framework);component/Views/Pages/Authentication/AuthenticationPage.xaml"
         />
     </Grid>
 </Window>

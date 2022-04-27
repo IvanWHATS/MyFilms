@@ -25,7 +25,7 @@ namespace MyFilms_.NET_Framework_.Models
         public Nullable<System.DateTime> date_of_birth { get; set; }
         public int gender { get; set; }
         public string country { get; set; }
-        public string photo { get; set; }
+        public byte[] photo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FilmsCrew> FilmsCrews { get; set; }

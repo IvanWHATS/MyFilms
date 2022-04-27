@@ -221,10 +221,16 @@
     <Compile Include="Models\FilmsActor.cs">
       <DependentUpon>MyFilmsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FilmsAVGRating.cs">
+      <DependentUpon>MyFilmsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FilmsCrew.cs">
       <DependentUpon>MyFilmsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FilmsRating.cs">
+      <DependentUpon>MyFilmsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FilmsRatingsCount.cs">
       <DependentUpon>MyFilmsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FilmStatus.cs">
@@ -236,9 +242,34 @@
     <Compile Include="Models\Language.cs">
       <DependentUpon>MyFilmsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MyFilmsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyFilmsModel.Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MyFilmsModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>MyFilmsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MyFilmsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyFilmsModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductionCompany.cs">
+      <DependentUpon>MyFilmsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Top100Films.cs">
+      <DependentUpon>MyFilmsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>MyFilmsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserFilmStatus.cs">
+      <DependentUpon>MyFilmsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsersType.cs">
       <DependentUpon>MyFilmsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
@@ -255,20 +286,11 @@
     <Compile Include="Views\Pages\Authentication\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\MainPage\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Views\Pages\MainPages\FilmInfoPage.xaml.cs">
+      <DependentUpon>FilmInfoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductionCompany.cs">
-      <DependentUpon>MyFilmsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>MyFilmsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserFilmStatus.cs">
-      <DependentUpon>MyFilmsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UsersType.cs">
-      <DependentUpon>MyFilmsModel.tt</DependentUpon>
+    <Compile Include="Views\Pages\MainPages\Search.xaml.cs">
+      <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
     <Page Include="Infrastructure\Components\CheckablePasswordBox.xaml">
       <SubType>Designer</SubType>
@@ -298,22 +320,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\MainPage\MainPage.xaml">
+    <Page Include="Views\Pages\MainPages\FilmInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\MainPages\Search.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\MyFilmsModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyFilmsModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MyFilmsModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyFilmsModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -354,16 +370,10 @@
     <Folder Include="Infrastructure\Events\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\MyFilmsModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MyFilmsModel.edmx</DependentUpon>
-      <LastGenOutput>MyFilmsModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\MyFilmsModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MyFilmsModel.edmx</DependentUpon>
-      <LastGenOutput>MyFilmsModel.cs</LastGenOutput>
-    </Content>
+    <Resource Include="Sourse\Icons\EditIcon.png" />
+    <Resource Include="Sourse\Icons\RedLeftArrow.png" />
+    <Resource Include="Sourse\Icons\StarImage.png" />
+    <Resource Include="Sourse\NoImage.png" />
     <Resource Include="Sourse\Icons\MinimizeIcon.png" />
     <Resource Include="Sourse\Icons\ExpandIcon.png" />
     <Resource Include="Sourse\Icons\CollapseIcon.png" />
@@ -384,6 +394,18 @@
     <Analyzer Include="packages\Microsoft.VisualStudio.Threading.Analyzers.16.9.60\analyzers\vb\Microsoft.VisualStudio.Threading.Analyzers.CodeFixes.dll" />
     <Analyzer Include="packages\Microsoft.VisualStudio.Threading.Analyzers.16.9.60\analyzers\vb\Microsoft.VisualStudio.Threading.Analyzers.dll" />
     <Analyzer Include="packages\Microsoft.VisualStudio.Threading.Analyzers.16.9.60\analyzers\vb\Microsoft.VisualStudio.Threading.Analyzers.VisualBasic.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\MyFilmsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MyFilmsModel.Context.cs</LastGenOutput>
+      <DependentUpon>MyFilmsModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\MyFilmsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyFilmsModel.edmx</DependentUpon>
+      <LastGenOutput>MyFilmsModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

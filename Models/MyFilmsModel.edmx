@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище MyFilmsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище MyFilmsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Actors">
           <Key>
             <PropertyRef Name="actor_id" />
@@ -14,7 +14,7 @@
           <Property Name="date_of_birth" Type="date" />
           <Property Name="country" Type="nvarchar" MaxLength="50" />
           <Property Name="gender" Type="int" Nullable="false" />
-          <Property Name="photo" Type="nvarchar" MaxLength="150" />
+          <Property Name="photo" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Crews">
           <Key>
@@ -25,7 +25,7 @@
           <Property Name="date_of_birth" Type="date" />
           <Property Name="gender" Type="int" Nullable="false" />
           <Property Name="country" Type="nvarchar" MaxLength="30" />
-          <Property Name="photo" Type="nvarchar" MaxLength="100" />
+          <Property Name="photo" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Departments">
           <Key>
@@ -47,7 +47,7 @@
           <Property Name="revenue" Type="money" />
           <Property Name="status" Type="int" />
           <Property Name="tagline" Type="nvarchar" MaxLength="300" />
-          <Property Name="poster" Type="nvarchar" MaxLength="150" />
+          <Property Name="poster" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="FilmsActors">
           <Key>
@@ -133,21 +133,6 @@
           <Property Name="production_company_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6013: Первичный ключ в таблице или представлении "MyFilms.dbo.test_FilmsLanguages" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
-        <EntityType Name="test_FilmsLanguages">
-          <Property Name="film_id" Type="int" />
-          <Property Name="language_code" Type="char" MaxLength="2" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6013: Первичный ключ в таблице или представлении "MyFilms.dbo.test_FilmsRatings" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
-        <EntityType Name="test_FilmsRatings">
-          <Property Name="login" Type="varchar" MaxLength="50" />
-          <Property Name="film_id" Type="int" />
-          <Property Name="status_id" Type="int" />
-          <Property Name="rating" Type="decimal" Precision="2" Scale="1" />
-        </EntityType>-->
         <EntityType Name="UserFilmStatuses">
           <Key>
             <PropertyRef Name="status_id" />
@@ -161,16 +146,70 @@
           </Key>
           <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="nickname" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="picture" Type="image" />
+          <Property Name="nickname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="picture" Type="varbinary(max)" />
           <Property Name="user_type_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UsersTypes">
           <Key>
             <PropertyRef Name="user_type_id" />
           </Key>
-          <Property Name="user_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_type_id" Type="int" Nullable="false" />
           <Property Name="user_type_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "MyFilms.dbo.FilmsAVGRating" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="FilmsAVGRating">
+          <Key>
+            <PropertyRef Name="film_id" />
+            <PropertyRef Name="title" />
+            <PropertyRef Name="release_date" />
+          </Key>
+          <Property Name="film_id" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="release_date" Type="date" Nullable="false" />
+          <Property Name="original_language" Type="char" MaxLength="2" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="runtime" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="revenue" Type="money" />
+          <Property Name="status" Type="int" />
+          <Property Name="tagline" Type="nvarchar" MaxLength="300" />
+          <Property Name="poster" Type="varbinary(max)" />
+          <Property Name="avg_rating" Type="decimal" Precision="2" Scale="1" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "MyFilms.dbo.FilmsRatingsCount" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="FilmsRatingsCount">
+          <Key>
+            <PropertyRef Name="film_id" />
+          </Key>
+          <Property Name="film_id" Type="int" Nullable="false" />
+          <Property Name="all_ratings_count" Type="int" />
+          <Property Name="1_ratings_count" Type="int" />
+          <Property Name="2_ratings_count" Type="int" />
+          <Property Name="3_ratings_count" Type="int" />
+          <Property Name="4_ratings_count" Type="int" />
+          <Property Name="5_ratings_count" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "MyFilms.dbo.Top100Films" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Top100Films">
+          <Key>
+            <PropertyRef Name="film_id" />
+            <PropertyRef Name="title" />
+            <PropertyRef Name="release_date" />
+          </Key>
+          <Property Name="film_id" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="release_date" Type="date" Nullable="false" />
+          <Property Name="original_language" Type="char" MaxLength="2" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="runtime" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="revenue" Type="money" />
+          <Property Name="status" Type="int" />
+          <Property Name="tagline" Type="nvarchar" MaxLength="300" />
+          <Property Name="poster" Type="varbinary(max)" />
+          <Property Name="avg_rating" Type="decimal" Precision="2" Scale="1" />
         </EntityType>
         <Association Name="FK__FilmActor__actor__4316F928">
           <End Role="Actors" Type="Self.Actors" Multiplicity="1">
@@ -239,20 +278,6 @@
             </Principal>
             <Dependent Role="FilmsProductionCompanies">
               <PropertyRef Name="production_company_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Users__user_type__267ABA7A">
-          <End Role="UsersTypes" Type="Self.UsersTypes" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UsersTypes">
-              <PropertyRef Name="user_type_id" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="user_type_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -392,6 +417,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Users_UsersTypes">
+          <End Role="UsersTypes" Type="Self.UsersTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTypes">
+              <PropertyRef Name="user_type_id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="user_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище MyFilmsModelContainer">
           <EntitySet Name="Actors" EntityType="Self.Actors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Crews" EntityType="Self.Crews" Schema="dbo" store:Type="Tables" />
@@ -410,6 +449,47 @@
           <EntitySet Name="UserFilmStatuses" EntityType="Self.UserFilmStatuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersTypes" EntityType="Self.UsersTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FilmsAVGRating" EntityType="Self.FilmsAVGRating" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FilmsAVGRating].[film_id] AS [film_id], 
+    [FilmsAVGRating].[title] AS [title], 
+    [FilmsAVGRating].[release_date] AS [release_date], 
+    [FilmsAVGRating].[original_language] AS [original_language], 
+    [FilmsAVGRating].[description] AS [description], 
+    [FilmsAVGRating].[runtime] AS [runtime], 
+    [FilmsAVGRating].[revenue] AS [revenue], 
+    [FilmsAVGRating].[status] AS [status], 
+    [FilmsAVGRating].[tagline] AS [tagline], 
+    [FilmsAVGRating].[poster] AS [poster], 
+    [FilmsAVGRating].[avg_rating] AS [avg_rating]
+    FROM [dbo].[FilmsAVGRating] AS [FilmsAVGRating]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FilmsRatingsCount" EntityType="Self.FilmsRatingsCount" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FilmsRatingsCount].[film_id] AS [film_id], 
+    [FilmsRatingsCount].[all_ratings_count] AS [all_ratings_count], 
+    [FilmsRatingsCount].[1_ratings_count] AS [1_ratings_count], 
+    [FilmsRatingsCount].[2_ratings_count] AS [2_ratings_count], 
+    [FilmsRatingsCount].[3_ratings_count] AS [3_ratings_count], 
+    [FilmsRatingsCount].[4_ratings_count] AS [4_ratings_count], 
+    [FilmsRatingsCount].[5_ratings_count] AS [5_ratings_count]
+    FROM [dbo].[FilmsRatingsCount] AS [FilmsRatingsCount]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Top100Films" EntityType="Self.Top100Films" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Top100Films].[film_id] AS [film_id], 
+    [Top100Films].[title] AS [title], 
+    [Top100Films].[release_date] AS [release_date], 
+    [Top100Films].[original_language] AS [original_language], 
+    [Top100Films].[description] AS [description], 
+    [Top100Films].[runtime] AS [runtime], 
+    [Top100Films].[revenue] AS [revenue], 
+    [Top100Films].[status] AS [status], 
+    [Top100Films].[tagline] AS [tagline], 
+    [Top100Films].[poster] AS [poster], 
+    [Top100Films].[avg_rating] AS [avg_rating]
+    FROM [dbo].[Top100Films] AS [Top100Films]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__FilmActor__actor__4316F928" Association="Self.FK__FilmActor__actor__4316F928">
             <End Role="Actors" EntitySet="Actors" />
             <End Role="FilmsActors" EntitySet="FilmsActors" />
@@ -429,10 +509,6 @@
           <AssociationSet Name="FK__FilmsProd__produ__2CF2ADDF" Association="Self.FK__FilmsProd__produ__2CF2ADDF">
             <End Role="ProductionCompanies" EntitySet="ProductionCompanies" />
             <End Role="FilmsProductionCompanies" EntitySet="FilmsProductionCompanies" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Users__user_type__267ABA7A" Association="Self.FK__Users__user_type__267ABA7A">
-            <End Role="UsersTypes" EntitySet="UsersTypes" />
-            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_Films_FilmStatuses" Association="Self.FK_Films_FilmStatuses">
             <End Role="FilmStatuses" EntitySet="FilmStatuses" />
@@ -474,9 +550,12 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="FilmsRatings" EntitySet="FilmsRatings" />
           </AssociationSet>
+          <AssociationSet Name="FK_Users_UsersTypes" Association="Self.FK_Users_UsersTypes">
+            <End Role="UsersTypes" EntitySet="UsersTypes" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MyFilmsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -489,7 +568,7 @@
           <Property Name="date_of_birth" Type="DateTime" Precision="0" />
           <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="gender" Type="Int32" Nullable="false" />
-          <Property Name="photo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="FilmsActors" Relationship="Self.FK__FilmActor__actor__4316F928" FromRole="Actors" ToRole="FilmsActors" />
         </EntityType>
         <EntityType Name="Crew">
@@ -501,7 +580,7 @@
           <Property Name="date_of_birth" Type="DateTime" Precision="0" />
           <Property Name="gender" Type="Int32" Nullable="false" />
           <Property Name="country" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="FilmsCrews" Relationship="Self.FK__FilmsDere__direc__3F466844" FromRole="Crews" ToRole="FilmsCrews" />
         </EntityType>
         <EntityType Name="Department">
@@ -525,7 +604,7 @@
           <Property Name="revenue" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="status" Type="Int32" />
           <Property Name="tagline" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="poster" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="poster" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="FilmStatus" Relationship="Self.FK_Films_FilmStatuses" FromRole="Films" ToRole="FilmStatuses" />
           <NavigationProperty Name="FilmsActors" Relationship="Self.FK_FilmsActors_Films" FromRole="Films" ToRole="FilmsActors" />
           <NavigationProperty Name="FilmsCrews" Relationship="Self.FK_FilmsCrews_Films" FromRole="Films" ToRole="FilmsCrews" />
@@ -620,19 +699,19 @@
           </Key>
           <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="picture" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="user_type_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="FilmsRatings" Relationship="Self.FK_FilmsRatings_Users" FromRole="Users" ToRole="FilmsRatings" />
-          <NavigationProperty Name="UsersType" Relationship="Self.FK__Users__user_type__267ABA7A" FromRole="Users" ToRole="UsersTypes" />
+          <NavigationProperty Name="UsersType" Relationship="Self.FK_Users_UsersTypes" FromRole="Users" ToRole="UsersTypes" />
         </EntityType>
         <EntityType Name="UsersType">
           <Key>
             <PropertyRef Name="user_type_id" />
           </Key>
-          <Property Name="user_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_type_id" Type="Int32" Nullable="false" />
           <Property Name="user_type_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Users" Relationship="Self.FK__Users__user_type__267ABA7A" FromRole="UsersTypes" ToRole="Users" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_UsersTypes" FromRole="UsersTypes" ToRole="Users" />
         </EntityType>
         <Association Name="FK__FilmActor__actor__4316F928">
           <End Role="Actors" Type="Self.Actor" Multiplicity="1">
@@ -756,7 +835,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Users__user_type__267ABA7A">
+        <Association Name="FK_Users_UsersTypes">
           <End Role="UsersTypes" Type="Self.UsersType" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -833,7 +912,7 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="FilmsRatings" EntitySet="FilmsRatings" />
           </AssociationSet>
-          <AssociationSet Name="FK__Users__user_type__267ABA7A" Association="Self.FK__Users__user_type__267ABA7A">
+          <AssociationSet Name="FK_Users_UsersTypes" Association="Self.FK_Users_UsersTypes">
             <End Role="UsersTypes" EntitySet="UsersTypes" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
@@ -849,8 +928,59 @@
             <End Role="ProductionCompanies" EntitySet="ProductionCompanies" />
             <End Role="Films" EntitySet="Films" />
           </AssociationSet>
-        </EntityContainer>
-      </Schema>
+          <EntitySet Name="FilmsAVGRatings" EntityType="MyFilmsModel.FilmsAVGRating" />
+          <EntitySet Name="FilmsRatingsCounts" EntityType="MyFilmsModel.FilmsRatingsCount" />
+          <EntitySet Name="Top100Films" EntityType="MyFilmsModel.Top100Films" />
+          </EntityContainer>
+        <EntityType Name="FilmsAVGRating">
+          <Key>
+            <PropertyRef Name="film_id" />
+            <PropertyRef Name="title" />
+            <PropertyRef Name="release_date" />
+          </Key>
+          <Property Name="film_id" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="release_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="original_language" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="runtime" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="revenue" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="tagline" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="poster" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="avg_rating" Type="Decimal" Precision="2" Scale="1" />
+        </EntityType>
+        <EntityType Name="FilmsRatingsCount">
+          <Key>
+            <PropertyRef Name="film_id" />
+          </Key>
+          <Property Name="film_id" Type="Int32" Nullable="false" />
+          <Property Name="all_ratings_count" Type="Int32" />
+          <Property Name="C1_ratings_count" Type="Int32" />
+          <Property Name="C2_ratings_count" Type="Int32" />
+          <Property Name="C3_ratings_count" Type="Int32" />
+          <Property Name="C4_ratings_count" Type="Int32" />
+          <Property Name="C5_ratings_count" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Top100Films">
+          <Key>
+            <PropertyRef Name="film_id" />
+            <PropertyRef Name="title" />
+            <PropertyRef Name="release_date" />
+          </Key>
+          <Property Name="film_id" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="release_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="original_language" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="runtime" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="revenue" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="tagline" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="poster" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="avg_rating" Type="Decimal" Precision="2" Scale="1" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1016,7 +1146,54 @@
               <ScalarProperty Name="film_id" ColumnName="film_id" />
             </EndProperty>
           </AssociationSetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="FilmsAVGRatings">
+            <EntityTypeMapping TypeName="MyFilmsModel.FilmsAVGRating">
+              <MappingFragment StoreEntitySet="FilmsAVGRating">
+                <ScalarProperty Name="avg_rating" ColumnName="avg_rating" />
+                <ScalarProperty Name="poster" ColumnName="poster" />
+                <ScalarProperty Name="tagline" ColumnName="tagline" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="revenue" ColumnName="revenue" />
+                <ScalarProperty Name="runtime" ColumnName="runtime" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="original_language" ColumnName="original_language" />
+                <ScalarProperty Name="release_date" ColumnName="release_date" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="film_id" ColumnName="film_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FilmsRatingsCounts">
+            <EntityTypeMapping TypeName="MyFilmsModel.FilmsRatingsCount">
+              <MappingFragment StoreEntitySet="FilmsRatingsCount">
+                <ScalarProperty Name="C5_ratings_count" ColumnName="5_ratings_count" />
+                <ScalarProperty Name="C4_ratings_count" ColumnName="4_ratings_count" />
+                <ScalarProperty Name="C3_ratings_count" ColumnName="3_ratings_count" />
+                <ScalarProperty Name="C2_ratings_count" ColumnName="2_ratings_count" />
+                <ScalarProperty Name="C1_ratings_count" ColumnName="1_ratings_count" />
+                <ScalarProperty Name="all_ratings_count" ColumnName="all_ratings_count" />
+                <ScalarProperty Name="film_id" ColumnName="film_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Top100Films">
+            <EntityTypeMapping TypeName="MyFilmsModel.Top100Films">
+              <MappingFragment StoreEntitySet="Top100Films">
+                <ScalarProperty Name="avg_rating" ColumnName="avg_rating" />
+                <ScalarProperty Name="poster" ColumnName="poster" />
+                <ScalarProperty Name="tagline" ColumnName="tagline" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="revenue" ColumnName="revenue" />
+                <ScalarProperty Name="runtime" ColumnName="runtime" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="original_language" ColumnName="original_language" />
+                <ScalarProperty Name="release_date" ColumnName="release_date" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="film_id" ColumnName="film_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

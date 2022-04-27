@@ -105,6 +105,7 @@
             <Style x:Key="CustomMaterialDesignFloatingHintTextBox"
                    BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}"
                    TargetType="TextBox">
+                <Setter Property="SelectionBrush" Value="{StaticResource RedElementBrush}"/>
                 <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="{StaticResource WhiteElementBrush}"/>
                 <Setter Property="materialDesign:HintAssist.Foreground" Value="{StaticResource WhiteElementBrush}"/>
                 <Setter Property="CaretBrush" Value="{StaticResource OrangeElementBrush}"/>
@@ -117,6 +118,7 @@
             <Style x:Key="CustomMaterialDesignFloatingHintPasswordBox"
                    BasedOn="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                    TargetType="PasswordBox">
+                <Setter Property="SelectionBrush" Value="{StaticResource RedElementBrush}"/>
                 <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="{StaticResource WhiteElementBrush}"/>
                 <Setter Property="materialDesign:HintAssist.Foreground" Value="{StaticResource WhiteElementBrush}"/>
                 <Setter Property="CaretBrush" Value="{StaticResource OrangeElementBrush}"/>

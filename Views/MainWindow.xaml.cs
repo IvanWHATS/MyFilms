@@ -1,5 +1,6 @@
 ﻿using MyFilms_.NET_Framework_.Infrastructure;
 using MyFilms_.NET_Framework_.Views;
+using MyFilms_.NET_Framework_.Views.Pages.MainPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +67,8 @@ namespace MyFilms_.NET_Framework_.Views
                 Authentication.Visibility = Visibility.Collapsed;
                 WorkGrid.IsEnabled = true;
                 WorkGrid.Effect = null;
+                Search search = new Search(MainFrame);
+                MainFrame.Navigate(search);
             }
         }
 
