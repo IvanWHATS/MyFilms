@@ -286,6 +286,9 @@
     <Compile Include="Views\Pages\Authentication\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\MainPages\CrewInfoPage.xaml.cs">
+      <DependentUpon>CrewInfoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\MainPages\FilmInfoPage.xaml.cs">
       <DependentUpon>FilmInfoPage.xaml</DependentUpon>
     </Compile>
@@ -317,6 +320,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\Authentication\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\MainPages\CrewInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

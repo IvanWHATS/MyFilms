@@ -39,8 +39,8 @@ namespace MyFilms_.NET_Framework_.Models
         public virtual DbSet<UserFilmStatus> UserFilmStatuses { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UsersType> UsersTypes { get; set; }
-        public virtual DbSet<FilmsAVGRating> FilmsAVGRatings { get; set; }
         public virtual DbSet<FilmsRatingsCount> FilmsRatingsCounts { get; set; }
         public virtual DbSet<Top100Films> Top100Films { get; set; }
+        public virtual DbSet<FilmsAVGRating> FilmsAVGRatings { get; set; }
     }
 }

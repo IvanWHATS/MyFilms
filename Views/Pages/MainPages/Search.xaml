@@ -56,49 +56,48 @@
                 Height="40"
                  Content="ПОИСК"
                 Margin="0,0,40,0" Click="SearchButton_Click"/>
+
         <ScrollViewer Grid.Row="1" Grid.Column="0">
             <StackPanel Margin="0,0,0,0">
                 <ItemsControl Name="FilmsItemControl"> 
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Button Click="OpenFilm" Background="Transparent"
-                                    BorderThickness="0"
-                                    Margin="40,10,0,0"
+                                    BorderThickness="0" Margin="40,10,0,0"
                                     materialDesign:ButtonAssist.CornerRadius="12"
-                                    Height="auto"
-                                    Width="auto"
+                                    Height="auto" Width="auto"
                                     Style="{StaticResource CustomMaterialDesignPaperButton}">
-                            <Border Height="255" Width="180" Grid.Row="1" 
-                                        Background="{StaticResource BackgroundBrush}"
-                                        CornerRadius="10"
-                                        Margin="-10,0,-10,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top">
-                                <StackPanel  Margin="10">
-                                    <Image Width="160" Height="180"
-                                               Margin="0,0,0,0"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"
-                                               Source="\Sourse\NoImage.png"
-                                               Stretch="Fill"
-                                               />
-                                    <TextBlock Text="{Binding title}"
-                                                   FontSize="16"
-                                               ToolTip="{Binding title}"
-                                                   Foreground="{StaticResource WhiteElementBrush}"
-                                                   VerticalAlignment="Bottom"
-                                                   HorizontalAlignment="Left"
-                                                   Margin="0,5,0,0"
-                                                   Width="160"/>
-                                       <StackPanel Margin="0,5,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                           <Image Source="\Sourse\Icons\StarImage.png"
-                                               Height="25" Margin="0,0,0,0"/>
-                                         <TextBlock VerticalAlignment="Center" Text="{Binding avg_rating}"
-                                                    Margin="5,0,0,0" Foreground="{StaticResource OrangeElementBrush}"
-                                                 FontSize="16" FontWeight="Bold"/>
-                                     </StackPanel>
-                                </StackPanel>
-                            </Border>
+                                <Border Height="255" Width="180" Grid.Row="1" 
+                                            Background="{StaticResource BackgroundBrush}"
+                                            CornerRadius="10"
+                                            Margin="-10,0,-10,0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top">
+                                    <StackPanel  Margin="10">
+                                        <Image Width="160" Height="180"
+                                                   Margin="0,0,0,0"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Source="\Sourse\NoImage.png"
+                                                   Stretch="Fill"
+                                                   />
+                                        <TextBlock Text="{Binding title}"
+                                                       FontSize="16"
+                                                   ToolTip="{Binding title}"
+                                                       Foreground="{StaticResource WhiteElementBrush}"
+                                                       VerticalAlignment="Bottom"
+                                                       HorizontalAlignment="Left"
+                                                       Margin="0,5,0,0"
+                                                       Width="160"/>
+                                        <StackPanel Margin="0,5,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                            <Image Source="\Sourse\Icons\StarImage.png"
+                                                   Height="25" Margin="0,0,0,0"/>
+                                            <TextBlock VerticalAlignment="Center" Text="{Binding avg_rating}"
+                                                        Margin="5,0,0,0" Foreground="{StaticResource OrangeElementBrush}"
+                                                     FontSize="16" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
                             </Button>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

@@ -22,16 +22,13 @@ namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
     public partial class Search : Page
     {
 
-        private Frame ParantFrame;
         private List<FilmsAVGRating> FilmsCollection;
 
-        public Search(Frame parantFrame)
+        public Search()
         {
-            ParantFrame = parantFrame;
             using (var db = new MyFilmsEntities())
             {
-                FilmsCollection = db.FilmsAVGRatings.OrderBy(p => p.film_id).Take(10).ToList();
-                
+                FilmsCollection = db.FilmsAVGRatings.Take(50).ToList();
             }
             
             InitializeComponent();
@@ -44,6 +41,12 @@ namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
         {
             using (var db = new MyFilmsEntities())
             {
+                /*FilmsItemControl.ItemsSource =  db.Films.Select(x => new
+                {
+                    film_id = x.film_id,
+                    poster = x.poster,
+                    avg_rating = Math.Round(Convert.ToDouble(x.FilmsRatings.Average(s => s.rating)),1)
+                }).ToList();*/
                 FilmsCollection = db.FilmsAVGRatings.Where(t => t.title.Contains(SearchBox.Text)).ToList();
             }
             if (FilmsCollection != null)
@@ -54,8 +57,11 @@ namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
         {
             Button btn = sender as Button;
             var dataObject = btn.DataContext as FilmsAVGRating;
-            FilmInfoPage FilmPage = new FilmInfoPage(dataObject);
-            ParantFrame.Navigate(FilmPage);
+            using (var db = new MyFilmsEntities())
+            {
+                FilmInfoPage FilmPage = new FilmInfoPage(db.Films.Find(dataObject.film_id), dataObject.avg_rating);
+                NavigationService.Navigate(FilmPage);
+            }
         }
     }
 }

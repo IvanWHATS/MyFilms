@@ -16,13 +16,6 @@ namespace MyFilms_.NET_Framework_.Models
     {
         public int film_id { get; set; }
         public string title { get; set; }
-        public System.DateTime release_date { get; set; }
-        public string original_language { get; set; }
-        public string description { get; set; }
-        public Nullable<decimal> runtime { get; set; }
-        public Nullable<decimal> revenue { get; set; }
-        public Nullable<int> status { get; set; }
-        public string tagline { get; set; }
         public byte[] poster { get; set; }
         public Nullable<decimal> avg_rating { get; set; }
     }

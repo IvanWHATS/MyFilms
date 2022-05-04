@@ -179,7 +179,7 @@
                                             TargetName="Thumb" Property="Background"/>
                                 </Trigger>
                                 <Trigger SourceName="Thumb" Property="IsDragging" Value="true">
-                                    <Setter Value="Gray" TargetName="Thumb" Property="Background"/>
+                                    <Setter Value="{StaticResource BackgroundBrush}" TargetName="Thumb" Property="Background"/>
                                 </Trigger>
 
                                 <Trigger Property="IsEnabled" Value="false">

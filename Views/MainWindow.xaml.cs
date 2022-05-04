@@ -67,7 +67,7 @@ namespace MyFilms_.NET_Framework_.Views
                 Authentication.Visibility = Visibility.Collapsed;
                 WorkGrid.IsEnabled = true;
                 WorkGrid.Effect = null;
-                Search search = new Search(MainFrame);
+                Search search = new Search();
                 MainFrame.Navigate(search);
             }
         }
@@ -76,7 +76,8 @@ namespace MyFilms_.NET_Framework_.Views
         #region WindowControls
         private void Drag(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            if (!IsWindowFullScreen) DragMove();
+
         }
 
         private void Close(object sender, RoutedEventArgs e)
@@ -97,6 +98,7 @@ namespace MyFilms_.NET_Framework_.Views
             }
             else
             {
+                
                 Height = MinHeight;
                 Width = MinWidth;
                 Top = top;

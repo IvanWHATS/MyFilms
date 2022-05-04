@@ -18,6 +18,7 @@
         <vm:MainWindowViewModel/>
     </Window.DataContext>
     -->
+    
     <Grid x:Name="MyGrid" x:FieldModifier="public">
 
         <Grid.RowDefinitions>
@@ -100,24 +101,26 @@
         </StackPanel>
 
         
-        <Grid Grid.Row="1" Name="WorkGrid" IsEnabled="False" Background="{StaticResource WhiteElementBrush}">
+        <Grid Grid.Row="1" Name="WorkGrid" IsEnabled="False" Background="{StaticResource BackgroundBrush}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            
-            
-            
-            <Frame Height="Auto"
-                   Width="Auto"
-                   Grid.Column="1"
-                  
-                   NavigationUIVisibility="Hidden"
-                   x:Name="MainFrame"
-            >
-            </Frame>
 
-            <Grid Grid.Column="0" Background="{StaticResource DarkerBackgroundBrush}">
+
+            <Border CornerRadius="12" Grid.Column="1" Background="{StaticResource WhiteElementBrush}">
+
+                <Frame Height="Auto"
+                       Width="Auto"
+                       Margin="5"
+                  
+                       NavigationUIVisibility="Hidden"
+                       x:Name="MainFrame"
+                >
+                </Frame>
+            </Border>
+
+            <Grid Grid.Column="0" Background="{StaticResource BackgroundBrush}">
                 
                 <StackPanel>
                     <Border>
@@ -127,9 +130,13 @@
                            Foreground="{StaticResource WhiteElementBrush}"
                            TextAlignment="Center"
                        >MyFilms</TextBlock>
+                        
                     </Border>
 
                 </StackPanel>
+                <Button VerticalAlignment="Bottom" >
+                    
+                </Button>
                 
             </Grid>
 
