@@ -8,7 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         mc:Ignorable="d"
         Title="MyFilms" Height="600" Width="1000"
-        Icon="\Sourse\Icons\MyFilmsIcon1.jpg" WindowStyle="None"
+        Icon="\Source\Icons\MyFilmsIcon1.jpg" WindowStyle="None"
         ResizeMode="CanResizeWithGrip" AllowsTransparency="True"
         MinHeight="600" MinWidth="1000"
         
@@ -51,7 +51,7 @@
                 HorizontalContentAlignment="Center" Cursor="Hand"
             >
                 <Image Name="MinimizeIcon"
-                   Source="/Sourse/Icons/MinimizeIcon.png"
+                   Source="/Source/Icons/MinimizeIcon.png"
                    Stretch="Uniform"
                 />
             </Button>
@@ -71,7 +71,7 @@
                 HorizontalContentAlignment="Center" Cursor="Hand"
             >
                 <Image Name="ResizeIcon"
-                   Source="/Sourse/Icons/ExpandIcon.png"
+                   Source="/Source/Icons/ExpandIcon.png"
                    Stretch="Uniform"
                 />
             </Button>
@@ -92,7 +92,7 @@
                 Cursor="Hand"
             >
 
-                <Image Source="/Sourse/Icons/CloseIcon.png"
+                <Image Source="/Source/Icons/CloseIcon.png"
                    Stretch="UniformToFill"
                 />
             </Button>
@@ -134,8 +134,10 @@
                     </Border>
 
                 </StackPanel>
-                <Button VerticalAlignment="Bottom" >
-                    
+                <Button VerticalAlignment="Bottom" Style="{StaticResource CustomMaterialDesignPaperButton}"
+                        Margin="15" Background="Transparent" materialDesign:ButtonAssist.CornerRadius="12"
+                        Name="AccountButton" Click="AccountButton_Click">
+                    Аккаунт
                 </Button>
                 
             </Grid>

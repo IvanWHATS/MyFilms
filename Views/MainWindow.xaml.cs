@@ -26,15 +26,15 @@ namespace MyFilms_.NET_Framework_.Views
     {
         private bool IsWindowFullScreen => Width == SystemParameters.WorkArea.Width && Height == SystemParameters.WorkArea.Height;
 
-        private BitmapImage ExpandImage = new BitmapImage(new Uri("pack://application:,,,/Sourse/Icons/ExpandIcon.png"));
-        private BitmapImage CollapseImage = new BitmapImage(new Uri("pack://application:,,,/Sourse/Icons/CollapseIcon.png"));
+        private readonly BitmapImage ExpandImage = new BitmapImage(new Uri("pack://application:,,,/Source/Icons/ExpandIcon.png"));
+        private readonly BitmapImage CollapseImage = new BitmapImage(new Uri("pack://application:,,,/Source/Icons/CollapseIcon.png"));
 
         public delegate void LogInDelegate(bool isAuthorized);
 
         private double top;
         private double left;
 
-        BlurEffect blurEffect = new BlurEffect() { Radius = 10 };
+        readonly BlurEffect blurEffect = new BlurEffect() { Radius = 10 };
 
         Authorization auth = Authorization.getInstance();
         public MainWindow()
@@ -119,7 +119,8 @@ namespace MyFilms_.NET_Framework_.Views
         }
         #endregion
 
-        private void logOut_Click(object sender, RoutedEventArgs e)
+
+        private void AccountButton_Click(object sender, RoutedEventArgs e)
         {
             auth.LogOut();
         }

@@ -18,43 +18,43 @@ using System.Windows.Shapes;
 namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
 {
     /// <summary>
-    /// Логика взаимодействия для CrweInfoPage.xaml
+    /// Логика взаимодействия для ActorInfoPage.xaml
     /// </summary>
-    public partial class CrewInfoPage : Page
+    public partial class ActorInfoPage : Page
     {
         bool isEditing = false;
 
-        private Crew Crew;
-        public CrewInfoPage(Crew crew)
+        private Actor Actor;
+        public ActorInfoPage(Actor actor)
         {
             InitializeComponent();
-            Crew = crew;
+            Actor = actor;
             if (Authorization.getInstance().User.user_type_id == 1)
-            {
+            { 
                 EditBtn.Visibility = Visibility.Visible;
                 EditBtn.IsEnabled = true;
             }
-            CrewName.Text = Crew.name;
-            CrewDepartments.ItemsSource =  Crew.FilmsCrews.Select(c => c.Department).Distinct().ToList();
-            CrewDateOfBirth.Text = Crew.date_of_birth.ToString();
-            if (Crew.date_of_birth != null)
-                CrewDateOfBirth.Text = Convert.ToDateTime(Crew.date_of_birth).ToShortDateString();
-            else CrewDateOfBirth.Text = "нет инф.";
-            switch (this.Crew.gender)
+            ActorName.Text = Actor.name;
+            ActorCharacters.ItemsSource = Actor.FilmsActors.Select(c => c.character).Distinct().ToList();
+            ActorDateOfBirth.Text = Actor.date_of_birth.ToString();
+            if (Actor.date_of_birth != null)
+                ActorDateOfBirth.Text = Convert.ToDateTime(Actor.date_of_birth).ToShortDateString();
+            else ActorDateOfBirth.Text = "нет инф.";
+            switch (this.Actor.gender)
             {
-                case 1: { CrewGender.Text = "жен"; break; }
-                case 2: { CrewGender.Text = "муж"; break; }
-                case 0: { CrewGender.Text = "нет инф."; break; }
+                case 1: { ActorGender.Text = "жен"; break; }
+                case 2: { ActorGender.Text = "муж"; break; }
+                case 0: { ActorGender.Text = "нет инф."; break; }
             }
-            if (Crew.country != null)
-                CrewCountry.Text = Crew.country;
-            else CrewCountry.Text = "нет инф.";
+            if (Actor.country != null)
+                ActorCountry.Text = Actor.country;
+            else ActorCountry.Text = "нет инф.";
             using (var db = new MyFilmsEntities())
-                FilmsItemControl.ItemsSource = Crew.FilmsCrews.Select(s => s.Film).Distinct().
+                FilmsItemControl.ItemsSource = Actor.FilmsActors.Select(s => s.Film).Distinct().
                     Join(db.FilmsAVGRatings,
                     f => f.film_id,
                     a => a.film_id,
-                    (f,a) => new FilmsAVGRating
+                    (f, a) => new FilmsAVGRating
                     {
                         film_id = f.film_id,
                         title = f.title,

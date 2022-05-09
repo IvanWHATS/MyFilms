@@ -30,7 +30,7 @@
                 HorizontalContentAlignment="Center"
                 Style="{StaticResource CustomMaterialDesignPaperButton}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Image Source="\Sourse\Icons\RedLeftArrow.png" Width="30" Margin="-5,0,0,0"/>
+                <Image Source="\Source\Icons\RedLeftArrow.png" Width="30" Margin="-5,0,0,0"/>
                 <TextBlock Text="Назад" Margin="5,2,0,0" FontWeight="DemiBold"
                                Foreground="{StaticResource RedElementBrush}"/>
 
@@ -48,7 +48,7 @@
                 HorizontalContentAlignment="Center"
                 Style="{StaticResource CustomMaterialDesignPaperButton}" Cursor="Hand">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Image Source="\Sourse\Icons\EditIcon.png" Width="30" Margin="-5,0,0,0"/>
+                <Image Source="\Source\Icons\EditIcon.png" Width="30" Margin="-5,0,0,0"/>
                 <TextBlock Text="Редактировать" Margin="5,2,0,0" FontWeight="DemiBold"
                            Name="EditBtnText" Foreground="{StaticResource RedElementBrush}"/>
 
@@ -57,21 +57,71 @@
         </Button>
 
         <StackPanel Grid.Column="1" Grid.Row="1">
-
+            <Grid>
+                
             <Border VerticalAlignment="Top" HorizontalAlignment="Center"
                      Margin="0"
                     Height="250" Width="200" Background="{StaticResource BackgroundBrush}"
                     CornerRadius="12" >
-                <Image Margin="12" Name="FilmPoster" />
+                <Image Margin="12" Name="FilmPoster" MouseLeftButtonDown="UploadPoster"/>
             </Border>
-            <StackPanel Margin="30,5,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                <Image Source="\Sourse\Icons\StarImage.png"
-                                               Height="40" Margin="0,0,0,0"/>
+            <StackPanel Margin="30,5,0,0" Orientation="Horizontal" 
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Top">
+                <Image Source="\Source\Icons\StarImage.png"
+                       Height="40" Margin="0,0,0,0"/>
                 <TextBlock Name="FilmRating"
                            VerticalAlignment="Center" Margin="5,0,0,0" 
                            Foreground="{StaticResource OrangeElementBrush}"
                            FontSize="25" FontWeight="Bold"/>
             </StackPanel>
+            </Grid>
+            <Border BorderBrush="{StaticResource BackgroundBrush}" 
+                        BorderThickness="1" CornerRadius="12"
+                        Margin="30,10,20,20" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <StackPanel Margin="8">
+                    <Grid>
+                        <TextBlock Text="Статус" Foreground="{StaticResource RedElementBrush}" FontSize="12" FontWeight="DemiBold"
+                                   Width="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <ComboBox Style="{StaticResource  MaterialDesignDataGridComboBox}"
+                              BorderBrush="{StaticResource BackgroundBrush}"
+                              Margin="60,10,10,0" 
+                              Height="20" Name="UserFilmStatuses" Width="105"
+                              SelectedValue="Нет"
+                              FontWeight="DemiBold" materialDesign:ComboBoxAssist.ShowSelectedItem="True"
+                              Foreground="{StaticResource OrangeElementBrush}">
+                        </ComboBox> 
+                    </Grid>
+                    <Grid>
+                        <TextBlock Text="Оценка" Foreground="{StaticResource RedElementBrush}" FontSize="12" FontWeight="DemiBold"
+                                   Width="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <ComboBox Style="{StaticResource  MaterialDesignDataGridComboBox}"
+                                  BorderBrush="{StaticResource BackgroundBrush}"
+                                  Margin="60,10,10,0" 
+                                  Height="20" Name="UserFilmRating" Width="105"
+                                  SelectedValue="Нет"
+                                  IsTextSearchEnabled="True"
+                                  FontWeight="DemiBold" materialDesign:ComboBoxAssist.ShowSelectedItem="True"
+                                  Foreground="{StaticResource OrangeElementBrush}">
+                            <ComboBoxItem Content="Нет"/>
+                            <ComboBoxItem Content="0.5"/>
+                            <ComboBoxItem Content="1.0"/>
+                            <ComboBoxItem Content="1.5"/>
+                            <ComboBoxItem Content="2.0"/>
+                            <ComboBoxItem Content="2.5"/>
+                            <ComboBoxItem Content="3.0"/>
+                            <ComboBoxItem Content="3.5"/>
+                            <ComboBoxItem Content="4.0"/>
+                            <ComboBoxItem Content="4.5"/>
+                            <ComboBoxItem Content="5.0"/>
+                        </ComboBox>
+                    </Grid>
+                    <Button Style="{StaticResource CustomMaterialDesignPaperButton}" Margin="0,5,0,0"
+                            Background="{StaticResource RedElementBrush}" Content="Сохранить"
+                            materialDesign:ButtonAssist.CornerRadius="8 "
+                            Height="25" Width="120" Click="Button_Click"/>
+                </StackPanel>
+            </Border>
         </StackPanel>
 
         <ScrollViewer Grid.Column="0" Grid.Row="1">
@@ -101,7 +151,7 @@
                              Name="FilmTitleEdit"
                              TextAlignment="Left" TextWrapping="Wrap"
                              Visibility="Collapsed"
-                             IsEnabled="False" Cursor="Arrow"
+                             Cursor="Arrow"
                     />
                 </Grid>
                 <Grid Margin="30,0,30,20">
@@ -119,7 +169,7 @@
                              Foreground="{StaticResource BackgroundBrush}"
                              FontSize="20"
                              TextAlignment="Left" TextWrapping="Wrap"
-                             Visibility="Collapsed" IsEnabled="False"
+                             Visibility="Collapsed"
                     />
 
                 </Grid>
@@ -163,6 +213,11 @@
                                                Foreground="{StaticResource BackgroundBrush}"
                                                
                                     />
+                                    <TextBox x:Name="FilmDateEdit"  FontWeight="DemiBold"
+                                               Foreground="{StaticResource BackgroundBrush}"
+                                               Visibility="Collapsed"
+                                               
+                                    />
                                 </Grid>
                             </StackPanel>
                         </Grid>
@@ -175,13 +230,18 @@
                                            Width="125"
                                 />
                                 <Grid Margin="15,0,0,0">
-                                    <TextBlock x:Name="FilmRutime" FontWeight="DemiBold"
+                                    <TextBlock x:Name="FilmRuntime" FontWeight="DemiBold"
                                                Foreground="{StaticResource BackgroundBrush}"
                                                
+                                    />
+                                    <TextBox x:Name="FilmRuntimeEdit" FontWeight="DemiBold"
+                                               Foreground="{StaticResource BackgroundBrush}"
+                                               Visibility="Collapsed"
                                     />
                                 </Grid>
                             </StackPanel>
                         </Grid>
+                        
                         <!-- Язык -->
                         <Grid Margin="15,0,0,10">
                             <TextBlock Text="Язык" FontSize="12" FontWeight="DemiBold"
@@ -212,6 +272,7 @@
                                         </ItemsControl.ItemsPanel>
                                     </ItemsControl>
                                     <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
+                                            Name="FilmLanguagesEdit"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Background="Transparent" Height="auto" Width="auto"
                                             Visibility="Collapsed"
@@ -255,7 +316,7 @@
                                     <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Background="Transparent" Height="auto" Width="auto"
-                                            Visibility="Collapsed"
+                                            Visibility="Collapsed" Name="FilmGenresEdit"
                                             materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
                                         <TextBlock Text="+" Foreground="{StaticResource RedElementBrush}" Margin="0,-10,0,-3" TextAlignment="Left"
                                                    FontSize="16" FontWeight="Bold"/>
@@ -296,7 +357,7 @@
                                     <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Background="Transparent" Height="auto" Width="auto"
-                                            Visibility="Collapsed"
+                                            Visibility="Collapsed" Name="FilmProductionCompaniesEdit"
                                             materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
                                         <TextBlock Text="+" Foreground="{StaticResource RedElementBrush}" Margin="0,-10,0,-3" TextAlignment="Left"
                                                    FontSize="16" FontWeight="Bold"/>
@@ -316,6 +377,10 @@
                                     <TextBlock x:Name="FilmRevenue" FontWeight="DemiBold"
                                                Foreground="{StaticResource BackgroundBrush}"
                                                
+                                    />
+                                    <TextBox x:Name="FilmRevenueEdit" FontWeight="DemiBold"
+                                               Foreground="{StaticResource BackgroundBrush}"
+                                               Visibility="Collapsed"
                                     />
                                 </Grid>
                             </StackPanel>
@@ -355,7 +420,7 @@
                                         <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Background="Transparent" Height="auto" Width="auto"
-                                            Visibility="Collapsed"
+                                            Visibility="Collapsed" Name="FilmDirectosEdit"
                                             materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
                                             <TextBlock Text="+" Foreground="{StaticResource RedElementBrush}" Margin="0,-10,0,-3" TextAlignment="Left"
                                                    FontSize="16" FontWeight="Bold"/>
@@ -378,7 +443,7 @@
                                             <DataTemplate>
                                                 <Button Background="Transparent"
                                                                 BorderThickness="0"
-                                                                Margin="0,2,2,0"
+                                                                Margin="0,2,2,0" Click="OpenActor"
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                                 Height="auto" Width="auto"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
@@ -406,7 +471,7 @@
                                     <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Background="Transparent" Height="auto" Width="auto"
-                                            Visibility="Collapsed"
+                                            Visibility="Collapsed" Name="FilmActorsEdit"
                                             materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
                                         <TextBlock Text="+" Foreground="{StaticResource RedElementBrush}" Margin="0,-10,0,-3" TextAlignment="Left"
                                                    FontSize="16" FontWeight="Bold"/>
@@ -448,7 +513,7 @@
                                     <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Background="Transparent" Height="auto" Width="auto"
-                                            Visibility="Collapsed"
+                                            Visibility="Collapsed" Name="FilmScenaristsEdit"
                                             materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
                                         <TextBlock Text="+" Foreground="{StaticResource RedElementBrush}" Margin="0,-10,0,-3" TextAlignment="Left"
                                                    FontSize="16" FontWeight="Bold"/>
@@ -489,7 +554,7 @@
                                     <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Background="Transparent" Height="auto" Width="auto"
-                                            Visibility="Collapsed"
+                                            Visibility="Collapsed" Name="FilmCameraMenEdit"
                                             materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
                                         <TextBlock Text="+" Foreground="{StaticResource RedElementBrush}" Margin="0,-10,0,-3" TextAlignment="Left"
                                                    FontSize="16" FontWeight="Bold"/>
@@ -531,7 +596,7 @@
                                     <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Background="Transparent" Height="auto" Width="auto"
-                                            Visibility="Collapsed"
+                                            Visibility="Collapsed" Name="FilmSoundEngineersEdit"
                                             materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
                                         <TextBlock Text="+" Foreground="{StaticResource RedElementBrush}" Margin="0,-10,0,-3" TextAlignment="Left"
                                                    FontSize="16" FontWeight="Bold"/>
@@ -573,7 +638,7 @@
                                     <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Background="Transparent" Height="auto" Width="auto"
-                                            Visibility="Collapsed"
+                                            Visibility="Collapsed" Name="FilmVisualEffectsEdit"
                                             materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
                                         <TextBlock Text="+" Foreground="{StaticResource RedElementBrush}" Margin="0,-10,0,-3" TextAlignment="Left"
                                                    FontSize="16" FontWeight="Bold"/>
@@ -615,7 +680,7 @@
                                     <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Background="Transparent" Height="auto" Width="auto"
-                                            Visibility="Collapsed"
+                                            Visibility="Collapsed" Name="FilmLightingEdit"
                                             materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
                                         <TextBlock Text="+" Foreground="{StaticResource RedElementBrush}" Margin="0,-10,0,-3" TextAlignment="Left"
                                                    FontSize="16" FontWeight="Bold"/>
@@ -657,7 +722,7 @@
                                     <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Background="Transparent" Height="auto" Width="auto"
-                                            Visibility="Collapsed"
+                                            Visibility="Collapsed" Name="FilmCostumesMakeUpEdit"
                                             materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
                                         <TextBlock Text="+" Foreground="{StaticResource RedElementBrush}" Margin="0,-10,0,-3" TextAlignment="Left"
                                                    FontSize="16" FontWeight="Bold"/>
@@ -699,7 +764,7 @@
                                     <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Background="Transparent" Height="auto" Width="auto"
-                                            Visibility="Collapsed"
+                                            Visibility="Collapsed" Name="FilmArtEdit"
                                             materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
                                         <TextBlock Text="+" Foreground="{StaticResource RedElementBrush}" Margin="0,-10,0,-3" TextAlignment="Left"
                                                    FontSize="16" FontWeight="Bold"/>
@@ -741,7 +806,7 @@
                                     <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Background="Transparent" Height="auto" Width="auto"
-                                            Visibility="Collapsed"
+                                            Visibility="Collapsed" Name="FilmEditingEdit"
                                             materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
                                         <TextBlock Text="+" Foreground="{StaticResource RedElementBrush}" Margin="0,-10,0,-3" TextAlignment="Left"
                                                    FontSize="16" FontWeight="Bold"/>
@@ -783,7 +848,7 @@
                                     <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Background="Transparent" Height="auto" Width="auto"
-                                            Visibility="Collapsed"
+                                            Visibility="Collapsed" Name="FilmProductionEdit"
                                             materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
                                         <TextBlock Text="+" Foreground="{StaticResource RedElementBrush}" Margin="0,-10,0,-3" TextAlignment="Left"
                                                    FontSize="16" FontWeight="Bold"/>
@@ -825,7 +890,7 @@
                                     <Button Style="{StaticResource CustomMaterialDesignPaperButton}"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Background="Transparent" Height="auto" Width="auto"
-                                            Visibility="Collapsed"
+                                            Visibility="Collapsed" Name="FilmCrewEdit"
                                             materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
                                         <TextBlock Text="+" Foreground="{StaticResource RedElementBrush}" Margin="0,-10,0,-3" TextAlignment="Left"
                                                    FontSize="16" FontWeight="Bold"/>

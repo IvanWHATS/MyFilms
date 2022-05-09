@@ -1,4 +1,5 @@
-﻿using MyFilms_.NET_Framework_.Models;
+﻿using MyFilms_.NET_Framework_.Infrastructure;
+using MyFilms_.NET_Framework_.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,13 +23,21 @@ namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
     public partial class Search : Page
     {
 
-        private List<FilmsAVGRating> FilmsCollection;
+        private List<FilmsAVGRating> FilmsCollection = null;
 
         public Search()
         {
+
             using (var db = new MyFilmsEntities())
             {
                 FilmsCollection = db.FilmsAVGRatings.Take(50).ToList();
+                /*FilmsItemControl.ItemsSource = db.FilmsAVGRatings.Select(selector => new
+                {
+                    film_id = selector.film_id,
+                    title = selector.title,
+                    avg_rating = selector.avg_rating,
+                    poster = selector.poster == null ? new BitmapImage(new Uri("pack://application:,,,/Sourse/NoImage.png")) : ImageConverter.BytesToImage(selector.poster)
+                }).ToList();*/
             }
             
             InitializeComponent();

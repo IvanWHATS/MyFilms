@@ -205,7 +205,7 @@
     <Compile Include="Infrastructure\Components\CheckablePasswordBox.xaml.cs">
       <DependentUpon>CheckablePasswordBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\FocusExtension.cs" />
+    <Compile Include="Infrastructure\ImageConverter.cs" />
     <Compile Include="Models\Actor.cs">
       <DependentUpon>MyFilmsModel.tt</DependentUpon>
     </Compile>
@@ -286,6 +286,12 @@
     <Compile Include="Views\Pages\Authentication\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\MainPages\AccountPage.xaml.cs">
+      <DependentUpon>AccountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\MainPages\ActorInfoPage.xaml.cs">
+      <DependentUpon>ActorInfoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\MainPages\CrewInfoPage.xaml.cs">
       <DependentUpon>CrewInfoPage.xaml</DependentUpon>
     </Compile>
@@ -320,6 +326,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\Authentication\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\MainPages\AccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\MainPages\ActorInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -377,21 +391,21 @@
     <Folder Include="Infrastructure\Events\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Sourse\Icons\EditIcon.png" />
-    <Resource Include="Sourse\Icons\RedLeftArrow.png" />
-    <Resource Include="Sourse\Icons\StarImage.png" />
-    <Resource Include="Sourse\NoImage.png" />
-    <Resource Include="Sourse\Icons\MinimizeIcon.png" />
-    <Resource Include="Sourse\Icons\ExpandIcon.png" />
-    <Resource Include="Sourse\Icons\CollapseIcon.png" />
-    <Resource Include="Sourse\Icons\CloseIcon.png" />
-    <Resource Include="Sourse\Icons\EyeIcon.png" />
-    <Resource Include="Sourse\Icons\HiddenEyeIcon.png" />
-    <Resource Include="Sourse\Icons\MyFilmsIcon.jpg" />
-    <Resource Include="Sourse\Icons\MyFilmsIcon.png" />
-    <Resource Include="Sourse\Icons\MyFilmsIcon1.jpg" />
-    <Resource Include="Sourse\Icons\MyFilmsIcon1.png" />
-    <Resource Include="Sourse\Icons\MyFilmsIcon3.png" />
+    <Resource Include="Source\Icons\EditIcon.png" />
+    <Resource Include="Source\Icons\RedLeftArrow.png" />
+    <Resource Include="Source\Icons\StarImage.png" />
+    <Resource Include="Source\NoImage.png" />
+    <Resource Include="Source\Icons\MinimizeIcon.png" />
+    <Resource Include="Source\Icons\ExpandIcon.png" />
+    <Resource Include="Source\Icons\CollapseIcon.png" />
+    <Resource Include="Source\Icons\CloseIcon.png" />
+    <Resource Include="Source\Icons\EyeIcon.png" />
+    <Resource Include="Source\Icons\HiddenEyeIcon.png" />
+    <Resource Include="Source\Icons\MyFilmsIcon.jpg" />
+    <Resource Include="Source\Icons\MyFilmsIcon.png" />
+    <Resource Include="Source\Icons\MyFilmsIcon1.jpg" />
+    <Resource Include="Source\Icons\MyFilmsIcon1.png" />
+    <Resource Include="Source\Icons\MyFilmsIcon3.png" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="packages\Microsoft.ServiceHub.Analyzers.3.1.2036\analyzers\Microsoft.ServiceHub.Analyzers.dll" />

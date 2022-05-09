@@ -21,8 +21,8 @@ namespace MyFilms_.NET_Framework_.Infrastructure.Components
     public partial class CheckablePasswordBox : UserControl
     {
         private bool _isPasswordChanging;   
-        private BitmapImage EyeImage = new BitmapImage(new Uri("pack://application:,,,/Sourse/Icons/EyeIcon.png"));
-        private BitmapImage HiddenEyeImage = new BitmapImage(new Uri("pack://application:,,,/Sourse/Icons/HiddenEyeIcon.png"));
+        private readonly BitmapImage EyeImage = new BitmapImage(new Uri("pack://application:,,,/Source/Icons/EyeIcon.png"));
+        private readonly BitmapImage HiddenEyeImage = new BitmapImage(new Uri("pack://application:,,,/Source/Icons/HiddenEyeIcon.png"));
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PasswordProperty =
