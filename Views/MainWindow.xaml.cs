@@ -1,5 +1,7 @@
 ﻿using MyFilms_.NET_Framework_.Infrastructure;
+using MyFilms_.NET_Framework_.Models;
 using MyFilms_.NET_Framework_.Views;
+using MyFilms_.NET_Framework_.Views.Pages.InfoPages;
 using MyFilms_.NET_Framework_.Views.Pages.MainPages;
 using System;
 using System.Collections.Generic;
@@ -31,6 +33,7 @@ namespace MyFilms_.NET_Framework_.Views
 
         public delegate void LogInDelegate(bool isAuthorized);
 
+
         private double top;
         private double left;
 
@@ -46,6 +49,7 @@ namespace MyFilms_.NET_Framework_.Views
             WorkGrid.Effect = blurEffect;
             auth.AuthorizationChanged += LogIn;
             auth.AuthorizationChanged += LogOut;
+            
         }
 
         private void LogOut(bool obj)
@@ -67,8 +71,14 @@ namespace MyFilms_.NET_Framework_.Views
                 Authentication.Visibility = Visibility.Collapsed;
                 WorkGrid.IsEnabled = true;
                 WorkGrid.Effect = null;
-                Search search = new Search();
-                MainFrame.Navigate(search);
+                if (Authorization.getInstance().User.user_type_id == 1)
+                {
+                    AddFilm.Visibility = Visibility.Visible;
+                    AddCrew.Visibility = Visibility.Visible;
+                    AddProductionCompany.Visibility = Visibility.Visible;
+                }
+                if (MainFrame.Content == null)
+                MainFrame.Navigate(new Search());
             }
         }
 
@@ -123,6 +133,33 @@ namespace MyFilms_.NET_Framework_.Views
         private void AccountButton_Click(object sender, RoutedEventArgs e)
         {
             auth.LogOut();
+        }
+
+        private void Top100Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (!(MainFrame.Content is Top100FIlms))
+                MainFrame.Navigate(new Top100FIlms());
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!(MainFrame.Content is Search))
+            MainFrame.Navigate(new Search());
+        }
+
+        private void AddFilm_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new FilmInfoPage(new Film()));
+        }
+
+        private void AddCrew_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddProductionCompany_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

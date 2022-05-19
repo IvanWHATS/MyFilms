@@ -286,20 +286,26 @@
     <Compile Include="Views\Pages\Authentication\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\InfoPages\ProductionCompanyInfoPage.xaml.cs">
+      <DependentUpon>ProductionCompanyInfoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\MainPages\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\MainPages\ActorInfoPage.xaml.cs">
+    <Compile Include="Views\Pages\InfoPages\ActorInfoPage.xaml.cs">
       <DependentUpon>ActorInfoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\MainPages\CrewInfoPage.xaml.cs">
+    <Compile Include="Views\Pages\InfoPages\CrewInfoPage.xaml.cs">
       <DependentUpon>CrewInfoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\MainPages\FilmInfoPage.xaml.cs">
+    <Compile Include="Views\Pages\InfoPages\FilmInfoPage.xaml.cs">
       <DependentUpon>FilmInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\MainPages\Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\MainPages\Top100FIlms.xaml.cs">
+      <DependentUpon>Top100FIlms.xaml</DependentUpon>
     </Compile>
     <Page Include="Infrastructure\Components\CheckablePasswordBox.xaml">
       <SubType>Designer</SubType>
@@ -329,23 +335,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\InfoPages\ProductionCompanyInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\MainPages\AccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\MainPages\ActorInfoPage.xaml">
+    <Page Include="Views\Pages\InfoPages\ActorInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\MainPages\CrewInfoPage.xaml">
+    <Page Include="Views\Pages\InfoPages\CrewInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\MainPages\FilmInfoPage.xaml">
+    <Page Include="Views\Pages\InfoPages\FilmInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\MainPages\Search.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\MainPages\Top100FIlms.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,5 @@
-﻿using MyFilms_.NET_Framework_.Infrastructure;
+﻿using Microsoft.Win32;
+using MyFilms_.NET_Framework_.Infrastructure;
 using MyFilms_.NET_Framework_.Models;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
+namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
 {
     /// <summary>
     /// Логика взаимодействия для ActorInfoPage.xaml
@@ -23,6 +24,8 @@ namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
     public partial class ActorInfoPage : Page
     {
         bool isEditing = false;
+
+        MyFilmsEntities db = new MyFilmsEntities();
 
         private Actor Actor;
         public ActorInfoPage(Actor actor)
@@ -35,7 +38,7 @@ namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
                 EditBtn.IsEnabled = true;
             }
             ActorName.Text = Actor.name;
-            ActorCharacters.ItemsSource = Actor.FilmsActors.Select(c => c.character).Distinct().ToList();
+            ActorCharacters.ItemsSource = Actor.FilmsActors.Distinct().ToList();
             ActorDateOfBirth.Text = Actor.date_of_birth.ToString();
             if (Actor.date_of_birth != null)
                 ActorDateOfBirth.Text = Convert.ToDateTime(Actor.date_of_birth).ToShortDateString();
@@ -49,9 +52,9 @@ namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
             if (Actor.country != null)
                 ActorCountry.Text = Actor.country;
             else ActorCountry.Text = "нет инф.";
-            using (var db = new MyFilmsEntities())
-                FilmsItemControl.ItemsSource = Actor.FilmsActors.Select(s => s.Film).Distinct().
-                    Join(db.FilmsAVGRatings,
+                FilmsItemControl.ItemsSource = Actor.FilmsActors
+                    .Select(s => s.Film).Distinct()
+                    .Join(db.FilmsAVGRatings,
                     f => f.film_id,
                     a => a.film_id,
                     (f, a) => new FilmsAVGRating
@@ -62,17 +65,29 @@ namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
                         avg_rating = a.avg_rating
                     }).ToList();
 
+            if (Actor.photo is null)
+                ActorPhoto.Source = new BitmapImage(new Uri("pack://application:,,,/Source/NoImage.png"));
+            else
+                ActorPhoto.Source = ImageConverter.BytesToImage(Actor.photo);
+
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
 
 
         private void EditBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!isEditing)
+            {
+                isEditing = true;
+                EditBtnText.Text = "Сохранить";
+            }
+            else
+            {
+                isEditing = false;
+                EditBtnText.Text = "Редактировать";
+                db.SaveChanges();
+            }
         }
 
         private void OpenFilm(object sender, RoutedEventArgs e)
@@ -83,6 +98,23 @@ namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
             {
                 FilmInfoPage FilmPage = new FilmInfoPage(db.Films.Find(dataObject.film_id), dataObject.avg_rating);
                 NavigationService.Navigate(FilmPage);
+            }
+        }
+
+        private void UploadActorPhoto(object sender, MouseButtonEventArgs e)
+        {
+            if (isEditing)
+            {
+                OpenFileDialog fileDialog = new OpenFileDialog();
+                fileDialog.Filter = "Images |*.png;*.jpg";
+                var result = fileDialog.ShowDialog();
+                if (result == true)
+                {
+                    Actor.photo = ImageConverter.GetImageBytes(fileDialog.FileName);
+                    db.Actors.Find(Actor.actor_id).photo = Actor.photo;
+                    ActorPhoto.Source = ImageConverter.BytesToImage(Actor.photo);
+                }
+
             }
         }
     }

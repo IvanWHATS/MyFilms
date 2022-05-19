@@ -58,6 +58,16 @@ namespace MyFilms_.NET_Framework_.Infrastructure.Components
             PasswordText.Text = PasswordBx.Password;
             _isPasswordChanging = false;
         }
+        private void PasswordText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!_isPasswordChanging)
+            {
+                _isPasswordChanging = true;
+                Password = PasswordText.Text;
+                PasswordBx.Password = PasswordText.Text;
+                _isPasswordChanging = false;
+            }
+        }
 
         private void UpdatePassword()
         {
@@ -66,7 +76,7 @@ namespace MyFilms_.NET_Framework_.Infrastructure.Components
 
         private void ShowPasswordCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            PasswordText.Text = PasswordBx.Password;
+            //PasswordText.Text = PasswordBx.Password;
             PasswordBx.Visibility = Visibility.Collapsed;
             PasswordText.Visibility = Visibility.Visible;
             PasswordText.Focus();
@@ -76,7 +86,7 @@ namespace MyFilms_.NET_Framework_.Infrastructure.Components
 
         private void ShowPasswordCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            PasswordBx.Password = PasswordText.Text;
+            //PasswordBx.Password = PasswordText.Text;
             PasswordText.Visibility = Visibility.Collapsed;
             PasswordBx.Visibility = Visibility.Visible;
             PasswordBx.Focus();
@@ -93,5 +103,6 @@ namespace MyFilms_.NET_Framework_.Infrastructure.Components
             else PasswordBx.Focus();
             PasswordBx.Focus();
         }
+
     }
 }

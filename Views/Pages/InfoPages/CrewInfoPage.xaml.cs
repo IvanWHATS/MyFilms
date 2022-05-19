@@ -1,4 +1,5 @@
-﻿using MyFilms_.NET_Framework_.Infrastructure;
+﻿using Microsoft.Win32;
+using MyFilms_.NET_Framework_.Infrastructure;
 using MyFilms_.NET_Framework_.Models;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
+namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
 {
     /// <summary>
     /// Логика взаимодействия для CrweInfoPage.xaml
@@ -25,6 +26,8 @@ namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
         bool isEditing = false;
 
         private Crew Crew;
+
+        MyFilmsEntities db = new MyFilmsEntities();
         public CrewInfoPage(Crew crew)
         {
             InitializeComponent();
@@ -49,7 +52,6 @@ namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
             if (Crew.country != null)
                 CrewCountry.Text = Crew.country;
             else CrewCountry.Text = "нет инф.";
-            using (var db = new MyFilmsEntities())
                 FilmsItemControl.ItemsSource = Crew.FilmsCrews.Select(s => s.Film).Distinct().
                     Join(db.FilmsAVGRatings,
                     f => f.film_id,
@@ -62,17 +64,28 @@ namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
                         avg_rating = a.avg_rating
                     }).ToList();
 
+            if (Crew.photo is null)
+                CrewPhoto.Source = new BitmapImage(new Uri("pack://application:,,,/Source/NoImage.png"));
+            else
+                CrewPhoto.Source = ImageConverter.BytesToImage(Crew.photo);
+
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
 
         private void EditBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!isEditing)
+            {
+                isEditing = true;
+                EditBtnText.Text = "Сохранить";
+            }
+            else
+            {
+                isEditing = false;
+                EditBtnText.Text = "Редактировать";
+                db.SaveChanges();
+            }
         }
 
         private void OpenFilm(object sender, RoutedEventArgs e)
@@ -83,6 +96,24 @@ namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
             {
                 FilmInfoPage FilmPage = new FilmInfoPage(db.Films.Find(dataObject.film_id), dataObject.avg_rating);
                 NavigationService.Navigate(FilmPage);
+
+            }
+        }
+
+        private void UploadCrewPhoto(object sender, MouseButtonEventArgs e)
+        {
+            if (isEditing)
+            {
+                OpenFileDialog fileDialog = new OpenFileDialog();
+                fileDialog.Filter = "Images |*.png;*.jpg";
+                var result = fileDialog.ShowDialog();
+                if (result == true)
+                {
+                    Crew.photo = ImageConverter.GetImageBytes(fileDialog.FileName);
+                    db.Crews.Find(Crew.crew_id).photo = Crew.photo;
+                    CrewPhoto.Source = ImageConverter.BytesToImage(Crew.photo);
+                }
+
             }
         }
     }

@@ -189,17 +189,9 @@
           <Key>
             <PropertyRef Name="film_id" />
             <PropertyRef Name="title" />
-            <PropertyRef Name="release_date" />
           </Key>
           <Property Name="film_id" Type="int" Nullable="false" />
           <Property Name="title" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="release_date" Type="date" Nullable="false" />
-          <Property Name="original_language" Type="char" MaxLength="2" />
-          <Property Name="description" Type="nvarchar(max)" />
-          <Property Name="runtime" Type="decimal" Precision="6" Scale="2" />
-          <Property Name="revenue" Type="money" />
-          <Property Name="status" Type="int" />
-          <Property Name="tagline" Type="nvarchar" MaxLength="300" />
           <Property Name="poster" Type="varbinary(max)" />
           <Property Name="avg_rating" Type="decimal" Precision="2" Scale="1" />
         </EntityType>
@@ -464,13 +456,6 @@
             <DefiningQuery>SELECT 
     [Top100Films].[film_id] AS [film_id], 
     [Top100Films].[title] AS [title], 
-    [Top100Films].[release_date] AS [release_date], 
-    [Top100Films].[original_language] AS [original_language], 
-    [Top100Films].[description] AS [description], 
-    [Top100Films].[runtime] AS [runtime], 
-    [Top100Films].[revenue] AS [revenue], 
-    [Top100Films].[status] AS [status], 
-    [Top100Films].[tagline] AS [tagline], 
     [Top100Films].[poster] AS [poster], 
     [Top100Films].[avg_rating] AS [avg_rating]
     FROM [dbo].[Top100Films] AS [Top100Films]</DefiningQuery>
@@ -914,8 +899,8 @@
             <End Role="Films" EntitySet="Films" />
           </AssociationSet>
           <EntitySet Name="FilmsRatingsCounts" EntityType="MyFilmsModel.FilmsRatingsCount" />
-          <EntitySet Name="Top100Films" EntityType="MyFilmsModel.Top100Films" />
           <EntitySet Name="FilmsAVGRatings" EntityType="MyFilmsModel.FilmsAVGRating" />
+          <EntitySet Name="Top100Films" EntityType="MyFilmsModel.Top100Films" />
           </EntityContainer>
         <EntityType Name="FilmsRatingsCount">
           <Key>
@@ -929,25 +914,17 @@
           <Property Name="C4_ratings_count" Type="Int32" />
           <Property Name="C5_ratings_count" Type="Int32" />
         </EntityType>
-        <EntityType Name="Top100Films">
+        <EntityType Name="FilmsAVGRating">
           <Key>
             <PropertyRef Name="film_id" />
             <PropertyRef Name="title" />
-            <PropertyRef Name="release_date" />
           </Key>
           <Property Name="film_id" Type="Int32" Nullable="false" />
           <Property Name="title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="release_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="original_language" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="runtime" Type="Decimal" Precision="6" Scale="2" />
-          <Property Name="revenue" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="status" Type="Int32" />
-          <Property Name="tagline" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="poster" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="avg_rating" Type="Decimal" Precision="2" Scale="1" />
         </EntityType>
-        <EntityType Name="FilmsAVGRating">
+        <EntityType Name="Top100Films">
           <Key>
             <PropertyRef Name="film_id" />
             <PropertyRef Name="title" />
@@ -1136,26 +1113,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Top100Films">
-            <EntityTypeMapping TypeName="MyFilmsModel.Top100Films">
-              <MappingFragment StoreEntitySet="Top100Films">
+          <EntitySetMapping Name="FilmsAVGRatings">
+            <EntityTypeMapping TypeName="MyFilmsModel.FilmsAVGRating">
+              <MappingFragment StoreEntitySet="FilmsAVGRating">
                 <ScalarProperty Name="avg_rating" ColumnName="avg_rating" />
                 <ScalarProperty Name="poster" ColumnName="poster" />
-                <ScalarProperty Name="tagline" ColumnName="tagline" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="revenue" ColumnName="revenue" />
-                <ScalarProperty Name="runtime" ColumnName="runtime" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="original_language" ColumnName="original_language" />
-                <ScalarProperty Name="release_date" ColumnName="release_date" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="film_id" ColumnName="film_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FilmsAVGRatings">
-            <EntityTypeMapping TypeName="MyFilmsModel.FilmsAVGRating">
-              <MappingFragment StoreEntitySet="FilmsAVGRating">
+          <EntitySetMapping Name="Top100Films">
+            <EntityTypeMapping TypeName="MyFilmsModel.Top100Films">
+              <MappingFragment StoreEntitySet="Top100Films">
                 <ScalarProperty Name="avg_rating" ColumnName="avg_rating" />
                 <ScalarProperty Name="poster" ColumnName="poster" />
                 <ScalarProperty Name="title" ColumnName="title" />

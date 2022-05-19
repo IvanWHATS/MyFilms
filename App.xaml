@@ -93,6 +93,23 @@
                 </Style.Resources>
             </Style>
 
+            <Style x:Key="CustomMaterialDesignPaperToggleButton" 
+                   BasedOn="{StaticResource MaterialDesignPaperButton}" 
+                   TargetType="ToggleButton">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{StaticResource RedElementBrush}"/>
+                <Style.Resources>
+                    <Color x:Key="PrimaryHueMidBrushColor">#42313A</Color>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{StaticResource RedElementColor}"/>
+                </Style.Resources>
+                <Style.Triggers>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="Background" Value="{StaticResource RedElementBrush}"/>
+                        <Setter Property="Foreground" Value="{StaticResource WhiteElementBrush}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
             <Style x:Key="CustomMaterialDesignIconButton" 
                    BasedOn="{StaticResource MaterialDesignIconButton}" 
                    TargetType="CheckBox">

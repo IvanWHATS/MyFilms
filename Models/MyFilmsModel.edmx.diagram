@@ -33,8 +33,8 @@
         <AssociationConnector Association="MyFilmsModel.FilmsLanguages" ManuallyRouted="false" />
         <AssociationConnector Association="MyFilmsModel.FilmsProductionCompanies" ManuallyRouted="false" />
         <EntityTypeShape EntityType="MyFilmsModel.FilmsRatingsCount" Width="1.5" PointX="15.875" PointY="1.5" />
-        <EntityTypeShape EntityType="MyFilmsModel.Top100Films" Width="1.5" PointX="20.75" PointY="1.375" />
         <EntityTypeShape EntityType="MyFilmsModel.FilmsAVGRating" Width="1.5" PointX="17.875" PointY="1.625" />
+        <EntityTypeShape EntityType="MyFilmsModel.Top100Films" Width="1.5" PointX="13.875" PointY="1.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

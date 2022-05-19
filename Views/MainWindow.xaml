@@ -122,9 +122,10 @@
 
             <Grid Grid.Column="0" Background="{StaticResource BackgroundBrush}">
                 
-                <StackPanel>
+
                     <Border>
                         <TextBlock FontFamily="Segoe Script" 
+                                   VerticalAlignment="Top"
                                FontSize="30"
                                Height="50" 
                            Foreground="{StaticResource WhiteElementBrush}"
@@ -132,8 +133,51 @@
                        >MyFilms</TextBlock>
                         
                     </Border>
-
+                <StackPanel>
+                    
+                    <Button x:Name="SearchButton" VerticalAlignment="Top" 
+                            Style="{StaticResource CustomMaterialDesignPaperButton}"
+                            materialDesign:ButtonAssist.CornerRadius="12"
+                            Margin="10,80,10,10" BorderBrush="Transparent"
+                            Background="Transparent" Click="SearchButton_Click">
+                        <TextBlock Text="Поиск" Foreground="{StaticResource WhiteElementBrush}" FontSize="18"
+                                   FontWeight="Bold"/>
+                    </Button>
+                    <Button x:Name="Top100Button" VerticalAlignment="Top"
+                            Style="{StaticResource CustomMaterialDesignPaperButton}"
+                            materialDesign:ButtonAssist.CornerRadius="12"
+                            Margin="10,10,10,10" BorderBrush="Transparent"
+                            Background="Transparent" Click="Top100Button_Click">
+                        <TextBlock Text="Топ 100" Foreground="{StaticResource WhiteElementBrush}" FontSize="18"
+                                   FontWeight="Bold"/>
+                    </Button>
+                    <Button x:Name="AddFilm" Width="auto" Height="auto"
+                            Style="{StaticResource CustomMaterialDesignPaperButton}" VerticalAlignment="Top"
+                            materialDesign:ButtonAssist.CornerRadius="12" Visibility="Collapsed"
+                            Margin="10,10,10,10" BorderBrush="Transparent" 
+                            Background="Transparent" Click="AddFilm_Click">
+                        <TextBlock Text="Добавить фильм" Foreground="{StaticResource WhiteElementBrush}" FontSize="18"
+                                   FontWeight="Bold" TextWrapping="Wrap"/>
+                    </Button>
+                    <Button x:Name="AddCrew" VerticalAlignment="Top" Width="auto" Height="auto"
+                            Style="{StaticResource CustomMaterialDesignPaperButton}"
+                            materialDesign:ButtonAssist.CornerRadius="12" Visibility="Collapsed"
+                            Margin="10,10,10,10" BorderBrush="Transparent"
+                            Background="Transparent" Click="AddCrew_Click">
+                        <TextBlock Text="Добавить киноработника" Foreground="{StaticResource WhiteElementBrush}" FontSize="18"
+                                   FontWeight="Bold" TextWrapping="Wrap"/>
+                    </Button>
+                    <Button x:Name="AddProductionCompany" VerticalAlignment="Top" Width="auto" Height="auto"
+                            Style="{StaticResource CustomMaterialDesignPaperButton}"
+                            materialDesign:ButtonAssist.CornerRadius="12" Visibility="Collapsed"
+                            Margin="10,10,10,10" BorderBrush="Transparent"
+                            Background="Transparent" Click="AddProductionCompany_Click">
+                        <TextBlock Text="Добавить киностудию" Foreground="{StaticResource WhiteElementBrush}" FontSize="18"
+                                   FontWeight="Bold" TextWrapping="Wrap"/>
+                    </Button>
                 </StackPanel>
+
+
                 <Button VerticalAlignment="Bottom" Style="{StaticResource CustomMaterialDesignPaperButton}"
                         Margin="15" Background="Transparent" materialDesign:ButtonAssist.CornerRadius="12"
                         Name="AccountButton" Click="AccountButton_Click">
