@@ -67,27 +67,73 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
 
 
             FilmDate.Text = Film.release_date.ToShortDateString();
+            FilmStatus.Text = Film.FilmStatus.name;
+            FilmStatus.Text = Film.FilmStatus.name;
             FilmGenres.ItemsSource = Film.Genres.ToList();
             FilmRevenue.Text = Film.revenue.ToString();
             FilmLanguages.ItemsSource = Film.Languages;
             FilmProductionCompanies.ItemsSource = Film.ProductionCompanies.ToList();
             UserFilmStatuses.ItemsSource = db.UserFilmStatuses.ToList();
-            FilmDirectors.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 2).Select(c => c.Crew).ToList();
+            FilmDirectors.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 2).Select(selected => new FilmsCrew 
+            {
+                Crew = selected.Crew,
+                job = selected.job
+            }).ToList();
             FilmActors.ItemsSource = Film.FilmsActors.Select(selected => new FilmsActor 
             {
                 character = selected.character,
                 Actor = selected.Actor 
             }).ToList();
-            FilmScenarists.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 1).Select(c => c.Crew).ToList();
-            FilmCameraMen.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 10).Select(c => c.Crew).ToList();
-            FilmSoundEngineers.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 4).Select(c => c.Crew).ToList();
-            FilmVisualEffects.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 7).Select(c => c.Crew).ToList();
-            FilmLighting.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 11).Select(c => c.Crew).ToList();
-            FilmCostumesMakeUp.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 6).Select(c => c.Crew).ToList();
-            FilmArt.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 3).Select(c => c.Crew).ToList();
-            FilmEditing.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 12).Select(c => c.Crew).ToList();
-            FilmProduction.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 8).Select(c => c.Crew).ToList();
-            FilmCrew.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 5).Select(c => c.Crew).ToList();
+            FilmScenarists.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 1).Select(selected => new FilmsCrew
+            {
+                Crew = selected.Crew,
+                job = selected.job
+            }).ToList();
+            FilmCameraMen.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 10).Select(selected => new FilmsCrew
+            {
+                Crew = selected.Crew,
+                job = selected.job
+            }).ToList();
+            FilmSoundEngineers.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 4).Select(selected => new FilmsCrew
+            {
+                Crew = selected.Crew,
+                job = selected.job
+            }).ToList();
+            FilmVisualEffects.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 7).Select(selected => new FilmsCrew
+            {
+                Crew = selected.Crew,
+                job = selected.job
+            }).ToList();
+            FilmLighting.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 11).Select(selected => new FilmsCrew
+            {
+                Crew = selected.Crew,
+                job = selected.job
+            }).ToList();
+            FilmCostumesMakeUp.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 6).Select(selected => new FilmsCrew
+            {
+                Crew = selected.Crew,
+                job = selected.job
+            }).ToList();
+            FilmArt.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 3).Select(selected => new FilmsCrew
+            {
+                Crew = selected.Crew,
+                job = selected.job
+            }).ToList();
+            FilmEditing.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 12).Select(selected => new FilmsCrew
+            {
+                Crew = selected.Crew,
+                job = selected.job
+            }).ToList();
+            FilmProduction.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 8).Select(selected => new FilmsCrew
+            {
+                Crew = selected.Crew,
+                job = selected.job
+            }).ToList();
+            FilmCrew.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 5).Select(selected => new FilmsCrew
+            {
+                Crew = selected.Crew,
+                job = selected.job
+            }).ToList();
 
             if (Film.poster is null)
                 FilmPoster.Source = new BitmapImage(new Uri("pack://application:,,,/Source/NoImage.png"));
@@ -116,6 +162,7 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
                 FilmDateEdit.Text = FilmDate.Text;
                 FilmDate.Visibility = Visibility.Collapsed;
                 FilmDateEdit.Visibility = Visibility.Visible;
+                FilmStatusEdit.Visibility = Visibility.Visible;
                 FilmRuntimeEdit.Text = FilmRuntime.Text;
                 FilmRuntime.Visibility = Visibility.Collapsed;
                 FilmRuntimeEdit.Visibility = Visibility.Visible;
@@ -153,6 +200,7 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
                 FilmDate.Text = FilmDateEdit.Text;
                 FilmDate.Visibility = Visibility.Visible;
                 FilmDateEdit.Visibility = Visibility.Collapsed;
+                FilmStatusEdit.Visibility = Visibility.Collapsed;
                 FilmRuntime.Text = FilmRuntimeEdit.Text;
                 FilmRuntime.Visibility = Visibility.Visible;
                 FilmRuntimeEdit.Visibility = Visibility.Collapsed;
@@ -183,6 +231,9 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
             {
                 ChangeEditingMode();
                 isEditing = true;
+                FilmStatusCombobox.ItemsSource = db.FilmStatuses
+                                                .Where(w => w.status_id != Film.FilmStatus.status_id).ToList();
+
                 FilmLanguagesCombobox.ItemsSource = db.Languages.ToList()
                                                 .Where(w => !Film.Languages
                                                     .Any(a => w.language_code == a.language_code));
@@ -281,10 +332,10 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
         private void OpenCrew(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            var dataObject = btn.DataContext as Crew;
+            var dataObject = btn.DataContext as FilmsCrew;
             using (var db = new MyFilmsEntities())
             {
-                CrewInfoPage CrewPage = new CrewInfoPage(db.Crews.Find(dataObject.crew_id));
+                CrewInfoPage CrewPage = new CrewInfoPage(db.Crews.Find(dataObject.Crew.crew_id));
                 NavigationService.Navigate(CrewPage);
 
             }
@@ -359,6 +410,17 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
         }
 
         #region AddButtons
+        private void AddStatus(object sender, RoutedEventArgs e)
+        {
+            if (FilmStatusCombobox.SelectedItem != null)
+            {
+
+                Film.FilmStatus = FilmStatusCombobox.SelectedItem as FilmStatus;
+                FilmStatus.Text = Film.FilmStatus.name;
+                FilmStatusCombobox.ItemsSource = FilmStatusCombobox.ItemsSource = db.FilmStatuses.ToList()
+                                                .Where(w => w.status_id != Film.FilmStatus.status_id);
+            }
+        }
         private void AddLanguage(object sender, RoutedEventArgs e)
         {
             if (FilmLanguagesCombobox.SelectedItem != null)

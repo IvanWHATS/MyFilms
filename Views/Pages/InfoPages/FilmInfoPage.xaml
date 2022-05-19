@@ -247,6 +247,49 @@
                             </StackPanel>
                         </Grid>
 
+                        <!-- Статус фильма -->
+                        <Grid Margin="15,0,0,10" Height="auto">
+                            <TextBlock Text="Статус фильма" FontSize="12" FontWeight="DemiBold" 
+                                           Foreground="{StaticResource RedElementBrush}"
+                                           Width="125" HorizontalAlignment="Left"
+                                />
+                            <Grid Margin="135,1,0,0" Width="Auto" Height="Auto">
+                                <StackPanel>
+                                    <TextBlock x:Name="FilmStatus" FontWeight="DemiBold"
+                                              Foreground="{StaticResource BackgroundBrush}"
+                                               Margin="5,0,0,0"
+                                        />
+                                    <Border Background="Transparent" Height="auto" Width="auto" 
+                                                BorderBrush="{StaticResource RedElementBrush}" 
+                                                CornerRadius="12" BorderThickness="1" Margin="0,5,0,0"
+                                                Visibility="Collapsed" Name="FilmStatusEdit">
+                                        <Grid Height="auto">
+                                            <ComboBox Name="FilmStatusCombobox"
+                                                          Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
+                                                          VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                          materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                          materialDesign:HintAssist.Hint="Статусы" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
+                                                          IsTextSearchEnabled="True" 
+                                                          Width="auto"
+                                                          Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
+                                                <ComboBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
+                                                    </DataTemplate>
+                                                </ComboBox.ItemTemplate>
+                                            </ComboBox>
+                                            <Button HorizontalAlignment="Right" Margin="0,0,30,0"
+                                                        Style="{StaticResource CustomMaterialDesignPaperButton}" Background="Transparent"
+                                                        materialDesign:ButtonAssist.CornerRadius="12" BorderBrush="{x:Null}"
+                                                        Foreground="{StaticResource RedElementBrush}" Click="AddStatus">
+                                                <TextBlock Text="Изменить" Margin="-6,-4,-6,0"/>
+                                            </Button>
+                                        </Grid>
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+
                         <!-- Продолжительность -->
                         <Grid Margin="15,0,0,10">
                             <StackPanel Orientation="Horizontal">
@@ -500,9 +543,16 @@
                                                         Height="auto" Width="auto"
                                                         Click="OpenCrew"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
-                                                    <TextBlock Text="{Binding name}" FontWeight="DemiBold"
+                                                    <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
-                                                                       Margin="-10,-5,-10,-3"/>
+                                                                       Margin="-13,-5,-10,-3">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat=" {0} ({1})">
+                                                                <Binding Path="Crew.name"/>
+                                                                <Binding Path="job"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
                                                 </Button>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
@@ -610,8 +660,7 @@
                                                          materialDesign:HintAssist.Foreground="{StaticResource BackgroundBrush}"
                                                          CaretBrush="{StaticResource OrangeElementBrush}"
                                                          materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" MaxLength="200"
-                                                         TextAlignment="Left" TextWrapping="Wrap"
-                                                         Cursor="Arrow"/>
+                                                         TextAlignment="Left" TextWrapping="Wrap" Cursor="Arrow"/>
                                             </StackPanel>
                                             <Button HorizontalAlignment="Right" Margin="0,0,30,0"
                                                     Style="{StaticResource CustomMaterialDesignPaperButton}" Background="Transparent"
@@ -643,9 +692,16 @@
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                                 Height="auto" Width="auto" Click="OpenCrew"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
-                                                    <TextBlock Text="{Binding name}" FontWeight="DemiBold"
+                                                    <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
-                                                                       Margin="-10,-5,-10,-3"/>
+                                                                       Margin="-13,-5,-10,-3">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat=" {0} ({1})">
+                                                                <Binding Path="Crew.name"/>
+                                                                <Binding Path="job"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
                                                 </Button>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
@@ -703,9 +759,16 @@
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                                 Height="auto" Width="auto" Click="OpenCrew"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
-                                                    <TextBlock Text="{Binding name}" FontWeight="DemiBold"
+                                                    <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
-                                                                       Margin="-10,-5,-10,-3"/>
+                                                                       Margin="-13,-5,-10,-3">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat=" {0} ({1})">
+                                                                <Binding Path="Crew.name"/>
+                                                                <Binding Path="job"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
                                                 </Button>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
@@ -765,9 +828,16 @@
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                                 Height="auto" Width="auto" Click="OpenCrew"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
-                                                    <TextBlock Text="{Binding name}" FontWeight="DemiBold"
+                                                    <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
-                                                                       Margin="-10,-5,-10,-3"/>
+                                                                       Margin="-13,-5,-10,-3">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat=" {0} ({1})">
+                                                                <Binding Path="Crew.name"/>
+                                                                <Binding Path="job"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
                                                 </Button>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
@@ -826,9 +896,16 @@
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                                 Height="auto" Width="auto" Click="OpenCrew"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
-                                                    <TextBlock Text="{Binding name}" FontWeight="DemiBold"
+                                                    <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
-                                                                       Margin="-10,-5,-10,-3"/>
+                                                                       Margin="-13,-5,-10,-3">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat=" {0} ({1})">
+                                                                <Binding Path="Crew.name"/>
+                                                                <Binding Path="job"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
                                                 </Button>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
@@ -887,9 +964,16 @@
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                                 Height="auto" Width="auto" Click="OpenCrew"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
-                                                    <TextBlock Text="{Binding name}" FontWeight="DemiBold"
+                                                    <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
-                                                                       Margin="-10,-5,-10,-3"/>
+                                                                       Margin="-13,-5,-10,-3">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat=" {0} ({1})">
+                                                                <Binding Path="Crew.name"/>
+                                                                <Binding Path="job"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
                                                 </Button>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
@@ -948,9 +1032,16 @@
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                                 Height="auto" Width="auto" Click="OpenCrew"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
-                                                    <TextBlock Text="{Binding name}" FontWeight="DemiBold"
+                                                    <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
-                                                                       Margin="-10,-5,-10,-3"/>
+                                                                       Margin="-13,-5,-10,-3">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat=" {0} ({1})">
+                                                                <Binding Path="Crew.name"/>
+                                                                <Binding Path="job"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
                                                 </Button>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
@@ -1009,9 +1100,16 @@
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                                 Height="auto" Width="auto" Click="OpenCrew"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
-                                                    <TextBlock Text="{Binding name}" FontWeight="DemiBold"
+                                                    <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
-                                                                       Margin="-10,-5,-10,-3"/>
+                                                                       Margin="-13,-5,-10,-3">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat=" {0} ({1})">
+                                                                <Binding Path="Crew.name"/>
+                                                                <Binding Path="job"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
                                                 </Button>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
@@ -1070,9 +1168,16 @@
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                                 Height="auto" Width="auto" Click="OpenCrew"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
-                                                    <TextBlock Text="{Binding name}" FontWeight="DemiBold"
+                                                    <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
-                                                                       Margin="-10,-5,-10,-3"/>
+                                                                       Margin="-13,-5,-10,-3">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat=" {0} ({1})">
+                                                                <Binding Path="Crew.name"/>
+                                                                <Binding Path="job"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
                                                 </Button>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
@@ -1132,9 +1237,16 @@
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                                 Height="auto" Width="auto" Click="OpenCrew"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
-                                                    <TextBlock Text="{Binding name}" FontWeight="DemiBold"
+                                                    <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
-                                                                       Margin="-10,-5,-10,-3"/>
+                                                                       Margin="-13,-5,-10,-3">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat=" {0} ({1})">
+                                                                <Binding Path="Crew.name"/>
+                                                                <Binding Path="job"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
                                                 </Button>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
@@ -1193,9 +1305,16 @@
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                                 Height="auto" Width="auto" Click="OpenCrew"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
-                                                    <TextBlock Text="{Binding name}" FontWeight="DemiBold"
+                                                    <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
-                                                                       Margin="-10,-5,-10,-3"/>
+                                                                       Margin="-13,-5,-10,-3">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat=" {0} ({1})">
+                                                                <Binding Path="Crew.name"/>
+                                                                <Binding Path="job"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
                                                 </Button>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
