@@ -149,7 +149,7 @@ namespace MyFilms_.NET_Framework_.Views
 
         private void AddFilm_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new FilmInfoPage(new Film()));
+            MainFrame.Navigate(new FilmInfoPage());
         }
 
         private void AddCrew_Click(object sender, RoutedEventArgs e)

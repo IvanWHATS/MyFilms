@@ -32,9 +32,9 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
         ToggleButton button1;
         int status;
         MyFilmsEntities db = new MyFilmsEntities();
-        public FilmInfoPage(Film film, decimal? rating)
+        public FilmInfoPage(int film_id, decimal? rating)
         {
-            Film = film;
+            Film = db.Films.Find(film_id);
             
             InitializeComponent();
             if (Authorization.getInstance().User.user_type_id == 1)
@@ -46,19 +46,52 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
             LoadFilmInfo();
         }
 
-        public FilmInfoPage(Film film)
+        public FilmInfoPage()
         {
-            Film = film;
+            Film = db.Films.Add(new Film());
             InitializeComponent();
             if (Authorization.getInstance().User.user_type_id == 1)
             {
                 EditBtn.Visibility = Visibility.Visible;
                 EditBtn.IsEnabled = true;
             }
-            LoadFilmInfo();
+            ChangeEditingMode();
+            isEditing = true;
+            FilmStatusCombobox.ItemsSource = db.FilmStatuses.ToList();
+
+            FilmLanguagesCombobox.ItemsSource = db.Languages.ToList();
+
+            FilmGenresCombobox.ItemsSource = db.Genres.ToList();
+
+            FilmProductionCompaniesCombobox.ItemsSource = db.ProductionCompanies.Take(100).ToList();
+
+            FilmDirectorsCombobox.ItemsSource = GetCrews(200, 2);
+
+            FilmActorsCombobox.ItemsSource = db.Actors.Take(200).ToList();
+
+            FilmScenaristsCombobox.ItemsSource = GetCrews(200, 1);
+
+            FilmCameraMenCombobox.ItemsSource = GetCrews(200, 10);
+
+            FilmSoundEngineersCombobox.ItemsSource = GetCrews(200, 4);
+
+            FilmVisualEffectsCombobox.ItemsSource = GetCrews(200, 7);
+
+            FilmLightingCombobox.ItemsSource = GetCrews(200, 11);
+
+            FilmCostumesMakeUpCombobox.ItemsSource = GetCrews(200, 6);
+
+            FilmArtCombobox.ItemsSource = GetCrews(200, 3);
+
+            FilmEditingCombobox.ItemsSource = GetCrews(200, 12);
+
+            FilmProductionCombobox.ItemsSource = GetCrews(200, 8);
+
+            FilmCrewCombobox.ItemsSource = GetCrews(200, 5);
+            //LoadFilmInfo();
         }
 
-        private void LoadFilmInfo()
+        private void LoadFilmInfo()// Загружает информацию о фильме в соответствующие поля
         {
             FilmTitle.Text = Film.title;
             FilmRuntime.Text = Film.runtime.ToString();
@@ -68,72 +101,23 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
 
             FilmDate.Text = Film.release_date.ToShortDateString();
             FilmStatus.Text = Film.FilmStatus.name;
-            FilmStatus.Text = Film.FilmStatus.name;
             FilmGenres.ItemsSource = Film.Genres.ToList();
             FilmRevenue.Text = Film.revenue.ToString();
             FilmLanguages.ItemsSource = Film.Languages;
             FilmProductionCompanies.ItemsSource = Film.ProductionCompanies.ToList();
             UserFilmStatuses.ItemsSource = db.UserFilmStatuses.ToList();
-            FilmDirectors.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 2).Select(selected => new FilmsCrew 
-            {
-                Crew = selected.Crew,
-                job = selected.job
-            }).ToList();
-            FilmActors.ItemsSource = Film.FilmsActors.Select(selected => new FilmsActor 
-            {
-                character = selected.character,
-                Actor = selected.Actor 
-            }).ToList();
-            FilmScenarists.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 1).Select(selected => new FilmsCrew
-            {
-                Crew = selected.Crew,
-                job = selected.job
-            }).ToList();
-            FilmCameraMen.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 10).Select(selected => new FilmsCrew
-            {
-                Crew = selected.Crew,
-                job = selected.job
-            }).ToList();
-            FilmSoundEngineers.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 4).Select(selected => new FilmsCrew
-            {
-                Crew = selected.Crew,
-                job = selected.job
-            }).ToList();
-            FilmVisualEffects.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 7).Select(selected => new FilmsCrew
-            {
-                Crew = selected.Crew,
-                job = selected.job
-            }).ToList();
-            FilmLighting.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 11).Select(selected => new FilmsCrew
-            {
-                Crew = selected.Crew,
-                job = selected.job
-            }).ToList();
-            FilmCostumesMakeUp.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 6).Select(selected => new FilmsCrew
-            {
-                Crew = selected.Crew,
-                job = selected.job
-            }).ToList();
-            FilmArt.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 3).Select(selected => new FilmsCrew
-            {
-                Crew = selected.Crew,
-                job = selected.job
-            }).ToList();
-            FilmEditing.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 12).Select(selected => new FilmsCrew
-            {
-                Crew = selected.Crew,
-                job = selected.job
-            }).ToList();
-            FilmProduction.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 8).Select(selected => new FilmsCrew
-            {
-                Crew = selected.Crew,
-                job = selected.job
-            }).ToList();
-            FilmCrew.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 5).Select(selected => new FilmsCrew
-            {
-                Crew = selected.Crew,
-                job = selected.job
-            }).ToList();
+            FilmDirectors.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 2).ToList();
+            FilmActors.ItemsSource = Film.FilmsActors.ToList();
+            FilmScenarists.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 1).ToList();
+            FilmCameraMen.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 10).ToList();
+            FilmSoundEngineers.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 4).ToList();
+            FilmVisualEffects.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 7).ToList();
+            FilmLighting.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 11).ToList();
+            FilmCostumesMakeUp.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 6).ToList();
+            FilmArt.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 3).ToList();
+            FilmEditing.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 12).ToList();
+            FilmProduction.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 8).ToList();
+            FilmCrew.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 5).ToList();
 
             if (Film.poster is null)
                 FilmPoster.Source = new BitmapImage(new Uri("pack://application:,,,/Source/NoImage.png"));
@@ -242,63 +226,40 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
                                                 .Where(w => !Film.Genres.ToList()
                                                     .Any(a => w.genre_id == a.genre_id));
 
-                FilmProductionCompaniesCombobox.ItemsSource = db.ProductionCompanies.Take(50).ToList()
+                FilmProductionCompaniesCombobox.ItemsSource = db.ProductionCompanies.Take(100).ToList()
                                                                 .Where(w => !Film.ProductionCompanies.ToList()
                                                                     .Any(a => w.production_company_id == a.production_company_id));
 
-                FilmDirectorsCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                        .Where(w => !Film.FilmsCrews.Where(d => d.department_id == 2).Select(c => c.Crew).ToList()
-                                                            .Any(a => w.crew_id == a.crew_id));
+                FilmDirectorsCombobox.ItemsSource = GetCrews(200, 2);
 
                 FilmActorsCombobox.ItemsSource = db.Actors.Take(200).ToList()
                                                        .Where(w => !Film.FilmsActors.ToList()
                                                            .Any(a => w.actor_id == a.actor_id));
 
-                FilmScenaristsCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                        .Where(w => !Film.FilmsCrews.Where(d => d.department_id == 1).Select(c => c.Crew).ToList()
-                                                            .Any(a => w.crew_id == a.crew_id));
+                FilmScenaristsCombobox.ItemsSource = GetCrews(200, 1);
 
-                FilmCameraMenCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                       .Where(w => !Film.FilmsCrews.Where(d => d.department_id == 10).Select(c => c.Crew).ToList()
-                                                           .Any(a => w.crew_id == a.crew_id));
+                FilmCameraMenCombobox.ItemsSource = GetCrews(200, 10);
 
-                FilmSoundEngineersCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                        .Where(w => !Film.FilmsCrews.Where(d => d.department_id == 4).Select(c => c.Crew).ToList()
-                                                            .Any(a => w.crew_id == a.crew_id));
+                FilmSoundEngineersCombobox.ItemsSource = GetCrews(200, 4);
 
-                FilmVisualEffectsCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                        .Where(w => !Film.FilmsCrews.Where(d => d.department_id == 7).Select(c => c.Crew).ToList()
-                                                            .Any(a => w.crew_id == a.crew_id));
+                FilmVisualEffectsCombobox.ItemsSource = GetCrews(200, 7);
 
-                FilmLightingCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                        .Where(w => !Film.FilmsCrews.Where(d => d.department_id == 11).Select(c => c.Crew).ToList()
-                                                            .Any(a => w.crew_id == a.crew_id));
+                FilmLightingCombobox.ItemsSource = GetCrews(200, 11);
 
-                FilmCostumesMakeUpCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                        .Where(w => !Film.FilmsCrews.Where(d => d.department_id == 6).Select(c => c.Crew).ToList()
-                                                            .Any(a => w.crew_id == a.crew_id));
+                FilmCostumesMakeUpCombobox.ItemsSource = GetCrews(200, 6);
 
-                FilmArtCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                        .Where(w => !Film.FilmsCrews.Where(d => d.department_id == 3).Select(c => c.Crew).ToList()
-                                                            .Any(a => w.crew_id == a.crew_id));
+                FilmArtCombobox.ItemsSource = GetCrews(200, 3);
 
-                FilmEditingCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                        .Where(w => !Film.FilmsCrews.Where(d => d.department_id == 12).Select(c => c.Crew).ToList()
-                                                            .Any(a => w.crew_id == a.crew_id));
+                FilmEditingCombobox.ItemsSource = GetCrews(200, 12);
 
-                FilmProductionCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                        .Where(w => !Film.FilmsCrews.Where(d => d.department_id == 8).Select(c => c.Crew).ToList()
-                                                            .Any(a => w.crew_id == a.crew_id));
+                FilmProductionCombobox.ItemsSource = GetCrews(200, 8);
 
-                FilmCrewCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                        .Where(w => !Film.FilmsCrews.Where(d => d.department_id == 5).Select(c => c.Crew).ToList()
-                                                            .Any(a => w.crew_id == a.crew_id));
+                FilmCrewCombobox.ItemsSource = GetCrews(200, 5);
             }
             else
             {
                 ChangeEditingMode();
                 isEditing = false;
-                
 
                 db.Films.Find(Film.film_id).title = FilmTitle.Text;
                 db.Films.Find(Film.film_id).tagline = FilmTagline.Text;
@@ -306,13 +267,21 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
                 db.Films.Find(Film.film_id).release_date = Convert.ToDateTime(FilmDate.Text);
                 db.Films.Find(Film.film_id).runtime = Convert.ToDecimal(FilmRuntime.Text);
                 db.Films.Find(Film.film_id).revenue = Convert.ToDecimal(FilmRevenue.Text);
+                db.Films.Find(Film.film_id).FilmStatus = Film.FilmStatus;
+                db.Films.Find(Film.film_id).Languages = Film.Languages;
+                db.Films.Find(Film.film_id).Genres = Film.Genres;
+                db.Films.Find(Film.film_id).ProductionCompanies = Film.ProductionCompanies;
+                db.Films.Find(Film.film_id).FilmsActors = Film.FilmsActors;
+                db.Films.Find(Film.film_id).FilmsCrews = Film.FilmsCrews;
 
                 db.SaveChanges();
             }
         }
 
-
-
+        private List<Crew> GetCrews(int top, int department_id)
+        {
+            return db.Crews.Take(top).ToList().Where(w => !Film.FilmsCrews.Where(d => d.department_id == department_id).Select(c => c.Crew).ToList().Any(a => w.crew_id == a.crew_id)).ToList();
+        }
         private void UploadPoster(object sender, MouseButtonEventArgs e)
         {
             if (isEditing)
@@ -329,47 +298,122 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
 
             }
         }
-        private void OpenCrew(object sender, RoutedEventArgs e)
+
+        private void LanguageClick(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            var dataObject = btn.DataContext as FilmsCrew;
-            using (var db = new MyFilmsEntities())
+            var dataObject = btn.DataContext as Language;
+            if (!isEditing)
             {
-                CrewInfoPage CrewPage = new CrewInfoPage(db.Crews.Find(dataObject.Crew.crew_id));
-                NavigationService.Navigate(CrewPage);
 
+            }
+            else
+            {
+                Film.Languages.Remove(dataObject);
+                FilmLanguages.ItemsSource = Film.Languages.ToList();
+                FilmLanguagesCombobox.ItemsSource = db.Languages.ToList()
+                                                .Where(w => !Film.Languages.ToList()
+                                                    .Any(a => w.language_code == a.language_code));
+            }
+
+        }
+
+        private void GenreClick(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            var dataObject = btn.DataContext as Genre;
+            if (!isEditing)
+            {
+
+            }
+            else
+            {
+                Film.Genres.Remove(dataObject);
+                FilmGenres.ItemsSource = Film.Genres.ToList();
+                FilmGenresCombobox.ItemsSource = db.Genres.ToList()
+                                               .Where(w => !Film.Genres.ToList()
+                                                   .Any(a => w.genre_id == a.genre_id));
+            }
+
+        }
+
+        private void CrewClick(object sender, RoutedEventArgs e)
+        {
+            
+            Button btn = sender as Button;
+            var dataObject = btn.DataContext as FilmsCrew;
+            if (!isEditing)
+            {
+                using (var db = new MyFilmsEntities())
+                {
+                    CrewInfoPage CrewPage = new CrewInfoPage(db.Crews.Find(dataObject.Crew.crew_id));
+                    NavigationService.Navigate(CrewPage);
+
+                }
+            }
+            else
+            {
+                int department_id = Convert.ToInt32(btn.Tag);
+                switch (department_id)
+                {
+                    case 1: { DeleteCrew(ref FilmScenarists,dataObject, department_id); break; }
+                    case 2: { DeleteCrew(ref FilmDirectors, dataObject, department_id); break; }
+                    case 3: { DeleteCrew(ref FilmArt, dataObject, department_id); break; }
+                    case 4: { DeleteCrew(ref FilmSoundEngineers, dataObject, department_id); break; }
+                    case 5: { DeleteCrew(ref FilmCrew, dataObject,  department_id); break; }
+                    case 6: { DeleteCrew(ref FilmCostumesMakeUp,dataObject, department_id); break; }
+                    case 7: { DeleteCrew(ref FilmVisualEffects, dataObject, department_id); break; }
+                    case 8: { DeleteCrew(ref FilmProduction, dataObject, department_id); break; }
+                    case 10: { DeleteCrew(ref FilmCameraMen, dataObject, department_id); break; }
+                    case 11: { DeleteCrew(ref FilmLighting, dataObject, department_id); break; }
+                    case 12: { DeleteCrew(ref FilmEditing, dataObject, department_id); break; }
+                }
             }
             
         }
-        private void OpenActor(object sender, RoutedEventArgs e)
+
+        private void ActorClick(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             var dataObject = btn.DataContext as FilmsActor;
-            using (var db = new MyFilmsEntities())
+            if(!isEditing)
             {
-                ActorInfoPage ActorPage = new ActorInfoPage(db.Actors.Find(dataObject.Actor.actor_id));
-                NavigationService.Navigate(ActorPage);
+                using (var db = new MyFilmsEntities())
+                {
 
+                    ActorInfoPage ActorPage = new ActorInfoPage(db.Actors.Find(dataObject.Actor.actor_id));
+                    NavigationService.Navigate(ActorPage);
+                }
+            }
+            else
+            {
+                Film.FilmsActors.Remove(dataObject);
+                FilmActors.ItemsSource = Film.FilmsActors.ToList();
             }
         }
-        private void OpenProductionCompany(object sender, RoutedEventArgs e)
+
+        private void ProductionCompanyClick(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             var dataObject = btn.DataContext as ProductionCompany;
-            using (var db = new MyFilmsEntities())
+            if (!isEditing) 
             {
-                ProductionCompanyInfoPage ProductionCompanyPage = new ProductionCompanyInfoPage(db.ProductionCompanies.Find(dataObject.production_company_id));
-                NavigationService.Navigate(ProductionCompanyPage);
+                using (var db = new MyFilmsEntities())
+                {
+                    ProductionCompanyInfoPage ProductionCompanyPage = new ProductionCompanyInfoPage(db.ProductionCompanies.Find(dataObject.production_company_id));
+                    NavigationService.Navigate(ProductionCompanyPage);
 
+                }
             }
-        }
+            else 
+            {
+                Film.ProductionCompanies.Remove(dataObject);
+                FilmProductionCompanies.ItemsSource = Film.ProductionCompanies.ToList();
+                FilmProductionCompaniesCombobox.ItemsSource = db.ProductionCompanies.Take(100).ToList()
+                                                                .Where(w => !Film.ProductionCompanies.ToList()
+                                                                    .Any(a => w.production_company_id == a.production_company_id));
+            }
 
-        private void FilmStatus_Checked(object sender, RoutedEventArgs e)
-        {
-            var btn = sender as ToggleButton;
-            if (button1 != null) button1.IsChecked = false;
-            button1 = btn;
-            status = (btn.DataContext as UserFilmStatus).status_id;
         }
 
 
@@ -407,6 +451,14 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
                     }
                 }
             }
+        }
+
+
+        private void DeleteCrew(ref ItemsControl itemsControl, FilmsCrew filmsCrew, int department_id)
+        {
+            Film.FilmsCrews.Remove(filmsCrew);
+            itemsControl.ItemsSource = Film.FilmsCrews
+                    .Where(d => d.department_id == department_id).ToList();
         }
 
         #region AddButtons
@@ -454,28 +506,56 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
 
                 Film.ProductionCompanies.Add(FilmProductionCompaniesCombobox.SelectedItem as ProductionCompany);
                 FilmProductionCompanies.ItemsSource = Film.ProductionCompanies.ToList();
-                FilmProductionCompaniesCombobox.ItemsSource = db.ProductionCompanies.ToList()
+                FilmProductionCompaniesCombobox.ItemsSource = db.ProductionCompanies.Take(100).ToList()
                                                 .Where(w => !Film.ProductionCompanies.ToList()
                                                     .Any(a => w.production_company_id == a.production_company_id));
             }
         }
 
-        private void AddDirector(object sender, RoutedEventArgs e)
+        private void AddCrew(object sender, RoutedEventArgs e)
         {
-            if (FilmDirectorsCombobox.SelectedItem != null)
-            {
-
-                Film.FilmsCrews.Add(new FilmsCrew
+           
+            
+                var btn = sender as Button;
+                int department_id = Convert.ToInt32(btn.Tag);
+                
+                switch (department_id)
                 {
-                    Crew = FilmDirectorsCombobox.SelectedItem as Crew,
-                    Film = Film,
-                    department_id = 2
-                });
-                FilmDirectors.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 2).Select(c => c.Crew).ToList();
-                FilmDirectorsCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                .Where(w => !Film.FilmsCrews.Where(d => d.department_id == 2).Select(c => c.Crew).ToList()
-                                                    .Any(a => w.crew_id == a.crew_id));
+                    case 1: { AddCrew(ref FilmScenaristsCombobox, ref ScenaristJob, ref FilmScenarists, department_id); break; }
+                    case 2: { AddCrew(ref FilmDirectorsCombobox, ref DirectorJob, ref FilmDirectors, department_id); break; }
+                    case 3: { AddCrew(ref FilmArtCombobox, ref FilmArtCrewJob, ref FilmArt, department_id); break; }
+                    case 4: { AddCrew(ref FilmSoundEngineersCombobox, ref SoundEngineerJob, ref FilmSoundEngineers, department_id); break; }
+                    case 5: { AddCrew(ref FilmCrewCombobox, ref CrewJob, ref FilmCrew, department_id); break; }
+                    case 6: { AddCrew(ref FilmCostumesMakeUpCombobox, ref CostumesMakeUpCrewJob, ref FilmCostumesMakeUp, department_id); break; }
+                    case 7: { AddCrew(ref FilmVisualEffectsCombobox, ref VisualEffectsCrewJob, ref FilmVisualEffects, department_id); break; }
+                    case 8: { AddCrew(ref FilmProductionCombobox, ref ProductionCrewJob, ref FilmProduction, department_id); break; }
+                    case 10: { AddCrew(ref FilmCameraMenCombobox, ref CameraManJob, ref FilmCameraMen, department_id); break; }
+                    case 11: { AddCrew(ref FilmLightingCombobox, ref LightingCrewJob, ref FilmLighting, department_id); break; }
+                    case 12: { AddCrew(ref FilmEditingCombobox, ref EditingCrewJob, ref FilmEditing, department_id); break; }
+                }
+            
+        }
+
+        private void AddCrew(ref ComboBox comboBox, ref TextBox textBox, ref ItemsControl itemsControl, int department_id)
+        {
+            if (comboBox.SelectedItem != null && !string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                var crew = new FilmsCrew
+                {
+                Crew = comboBox.SelectedItem as Crew,
+                Film = Film,
+                Department = db.Departments.Find(department_id),
+                crew_id = (comboBox.SelectedItem as Crew).crew_id,
+                department_id = department_id,
+                job = textBox.Text
+                };
+                if (Film.FilmsCrews.Where(w => w.crew_id == crew.crew_id && w.job == crew.job).ToList().Count == 0)
+                    Film.FilmsCrews.Add(crew);
+                itemsControl.ItemsSource = Film.FilmsCrews
+                    .Where(d => d.department_id == department_id).ToList();
+
             }
+
         }
 
         private void AddActor(object sender, RoutedEventArgs e)
@@ -483,12 +563,14 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
             if (FilmActorsCombobox.SelectedItem != null && !string.IsNullOrWhiteSpace(ActorCharacter.Text))
             {
 
-                Film.FilmsActors.Add(new FilmsActor 
+                var actor = new FilmsActor 
                 { 
                     Actor = FilmActorsCombobox.SelectedItem as Actor,
                     character = ActorCharacter.Text,
                     Film = Film
-                });
+                };
+                if (Film.FilmsActors.Where(w => w.actor_id == actor.actor_id && w.character == actor.character).ToList().Count == 0)
+                    Film.FilmsActors.Add(actor);
                 FilmActors.ItemsSource = Film.FilmsActors.ToList();
                 FilmActorsCombobox.ItemsSource = db.Actors.Take(200).ToList()
                                                 .Where(w => !Film.FilmsActors.ToList()
@@ -496,80 +578,15 @@ namespace MyFilms_.NET_Framework_.Views.Pages.InfoPages
             }
         }
 
-        private void AddScenarist(object sender, RoutedEventArgs e)
-        {
-            if (FilmScenaristsCombobox.SelectedItem != null)
-            {
-
-                Film.FilmsCrews.Add(new FilmsCrew
-                {
-                    Crew = FilmScenaristsCombobox.SelectedItem as Crew,
-                    Film = Film,
-                    department_id = 1
-                });
-                FilmDirectors.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 1).Select(c => c.Crew).ToList();
-                FilmScenaristsCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                .Where(w => !Film.FilmsCrews.ToList()
-                                                    .Any(a => w.crew_id == a.crew_id));
-            }
-        }
-
-        private void AddCameraMen(object sender, RoutedEventArgs e)
-        {
-            if (FilmCameraMenCombobox.SelectedItem != null)
-            {
-
-                Film.FilmsCrews.Add(new FilmsCrew
-                {
-                    Crew = FilmCameraMenCombobox.SelectedItem as Crew,
-                    Film = Film,
-                    department_id = 10
-                });
-                FilmDirectors.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 10).Select(c => c.Crew).ToList();
-                FilmCameraMenCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                .Where(w => !Film.FilmsCrews.ToList()
-                                                    .Any(a => w.crew_id == a.crew_id));
-            }
-        }
-
-        private void AddSoundEngineer(object sender, RoutedEventArgs e)
-        {
-            if (FilmSoundEngineersCombobox.SelectedItem != null)
-            {
-
-                Film.FilmsCrews.Add(new FilmsCrew
-                {
-                    Crew = FilmSoundEngineersCombobox.SelectedItem as Crew,
-                    Film = Film,
-                    department_id = 4
-                });
-                FilmDirectors.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 4).Select(c => c.Crew).ToList();
-                FilmSoundEngineersCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                .Where(w => !Film.FilmsCrews.ToList()
-                                                    .Any(a => w.crew_id == a.crew_id));
-            }
-        }
-
-        private void AddVisualEffectsCrew(object sender, RoutedEventArgs e)
-        {
-            if (FilmVisualEffectsCombobox.SelectedItem != null)
-            {
-
-                Film.FilmsCrews.Add(new FilmsCrew
-                {
-                    Crew = FilmVisualEffectsCombobox.SelectedItem as Crew,
-                    Film = Film,
-                    department_id = 4
-                });
-                FilmDirectors.ItemsSource = Film.FilmsCrews.Where(d => d.department_id == 7).Select(c => c.Crew).ToList();
-                FilmVisualEffectsCombobox.ItemsSource = db.Crews.Take(200).ToList()
-                                                .Where(w => !Film.FilmsCrews.ToList()
-                                                    .Any(a => w.crew_id == a.crew_id));
-            }
-        }
-
 
         #endregion
+        private void FilmStatus_Checked(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as ToggleButton;
+            if (button1 != null) button1.IsChecked = false;
+            button1 = btn;
+            status = (btn.DataContext as UserFilmStatus).status_id;
+        }
 
     }
 }

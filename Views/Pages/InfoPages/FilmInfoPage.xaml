@@ -63,7 +63,7 @@
                     Height="250" Width="200" Background="{StaticResource BackgroundBrush}"
                     CornerRadius="12">
 
-                    <Image Margin="5" Stretch="UniformToFill" Name="FilmPoster" MouseLeftButtonDown="UploadPoster">
+                    <Image Margin="5" Stretch="UniformToFill" Name="FilmPoster" MouseLeftButtonDown="UploadPoster" MinHeight="240" MinWidth="190">
                         <Image.Clip>
                             <RectangleGeometry RadiusX="12" RadiusY="12" Rect="0,0,190,240"/>
                         </Image.Clip>
@@ -235,7 +235,7 @@
                                     />
                                     <TextBox x:Name="FilmDateEdit"  FontWeight="DemiBold"
                                              Foreground="{StaticResource BackgroundBrush}"
-                                             Visibility="Collapsed"
+                                             Visibility="Collapsed" MinWidth="100"
                                              SelectionBrush="{StaticResource RedElementBrush}"
                                              materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
                                              materialDesign:HintAssist.Foreground="{StaticResource BackgroundBrush}"
@@ -304,7 +304,7 @@
                                     />
                                     <TextBox x:Name="FilmRuntimeEdit" FontWeight="DemiBold"
                                              Foreground="{StaticResource BackgroundBrush}"
-                                             Visibility="Collapsed"
+                                             Visibility="Collapsed" MinWidth="100"
                                              SelectionBrush="{StaticResource RedElementBrush}"
                                              materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
                                              materialDesign:HintAssist.Foreground="{StaticResource BackgroundBrush}"
@@ -329,7 +329,7 @@
                                             <DataTemplate>
                                                 <Button Background="Transparent"
                                                                 BorderThickness="0"
-                                                                Margin="0,2,2,0"
+                                                                Margin="0,2,2,0" Click="LanguageClick"
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                                 Height="auto" Width="auto"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
@@ -389,13 +389,13 @@
                                             <DataTemplate>
                                                 <Button Background="Transparent"
                                                                 BorderThickness="0"
-                                                                Margin="0,2,2,0"
+                                                                Margin="0,2,2,0" Click="GenreClick"
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                                 Height="auto" Width="auto"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
                                                     <TextBlock Text="{Binding name}" FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
-                                                                       Margin="-10,-5,-10,-3"/>
+                                                                       Margin="-10,-5,-10,-3" />
                                                 </Button>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
@@ -452,7 +452,7 @@
                                                                 Margin="0,2,2,0" 
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                                 Height="auto" Width="auto"
-                                                                Style="{StaticResource CustomMaterialDesignPaperButton}" Click="OpenProductionCompany">
+                                                                Style="{StaticResource CustomMaterialDesignPaperButton}" Click="ProductionCompanyClick">
                                                     <TextBlock Text="{Binding name}" FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
                                                                        Margin="-10,-5,-10,-3"/>
@@ -511,7 +511,7 @@
                                         />
                                         <TextBox x:Name="FilmRevenueEdit" FontWeight="DemiBold"
                                                  Foreground="{StaticResource BackgroundBrush}"
-                                                 Visibility="Collapsed"
+                                                 Visibility="Collapsed" MinWidth="100"
                                                  SelectionBrush="{StaticResource RedElementBrush}"
                                                  materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
                                                  materialDesign:HintAssist.Foreground="{StaticResource BackgroundBrush}"
@@ -538,10 +538,10 @@
                                             <DataTemplate>
                                                 <Button Background="Transparent"
                                                         BorderThickness="0"
-                                                        Margin="0,2,2,0"        
+                                                        Margin="0,2,2,0" Tag="2"
                                                         materialDesign:ButtonAssist.CornerRadius="5"
                                                         Height="auto" Width="auto"
-                                                        Click="OpenCrew"
+                                                        Click="CrewClick"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
                                                     <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
@@ -567,24 +567,36 @@
                                             CornerRadius="12" BorderThickness="1" Margin="0,5,0,0"
                                             Visibility="Collapsed" Name="FilmDirectorsEdit">
                                         <Grid Height="auto">
-                                            <ComboBox Name="FilmDirectorsCombobox"
-                                                      Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
-                                                      VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                      materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
-                                                      materialDesign:HintAssist.Hint="Режисёр" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
-                                                      IsTextSearchEnabled="True" 
-                                                      Width="auto"
-                                                      Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
-                                                <ComboBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
-                                                    </DataTemplate>
-                                                </ComboBox.ItemTemplate>
-                                            </ComboBox>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Name="FilmDirectorsCombobox"
+                                                          Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
+                                                          VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                          materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                          materialDesign:HintAssist.Hint="Режисёр" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
+                                                          IsTextSearchEnabled="True" 
+                                                          Width="auto"
+                                                          Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                                <TextBox Name="DirectorJob"
+                                                         HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                         MaxWidth="200" Margin="10,0,0,0" materialDesign:HintAssist.Hint="Должность"
+                                                         Foreground="{StaticResource BackgroundBrush}"
+                                                         SelectionBrush="{StaticResource RedElementBrush}"
+                                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                         materialDesign:HintAssist.Foreground="{StaticResource BackgroundBrush}"
+                                                         CaretBrush="{StaticResource OrangeElementBrush}"
+                                                         materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" MaxLength="200"
+                                                         TextAlignment="Left" TextWrapping="Wrap" Cursor="Arrow"/>
+                                            </StackPanel>
                                             <Button HorizontalAlignment="Right" Margin="0,0,30,0"
                                                     Style="{StaticResource CustomMaterialDesignPaperButton}" Background="Transparent"
                                                     materialDesign:ButtonAssist.CornerRadius="12" BorderBrush="{x:Null}"
-                                                    Foreground="{StaticResource RedElementBrush}" Click="AddDirector" >
+                                                    Foreground="{StaticResource RedElementBrush}" Click="AddCrew" Tag="2">
                                                 <TextBlock Text="Добавить" Margin="-6,-4,-6,0"/>
                                             </Button>
                                         </Grid>
@@ -607,7 +619,7 @@
                                             <DataTemplate>
                                                 <Button Background="Transparent"
                                                                 BorderThickness="0"
-                                                                Margin="0,2,2,0" Click="OpenActor"
+                                                                Margin="0,2,2,0" Click="ActorClick"
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                                 Height="auto" Width="auto"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
@@ -688,9 +700,9 @@
                                             <DataTemplate>
                                                 <Button Background="Transparent"
                                                                 BorderThickness="0"
-                                                                Margin="0,2,2,0"
+                                                                Margin="0,2,2,0" Tag="1"
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
-                                                                Height="auto" Width="auto" Click="OpenCrew"
+                                                                Height="auto" Width="auto" Click="CrewClick"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
                                                     <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
@@ -716,24 +728,36 @@
                                             CornerRadius="12" BorderThickness="1" Margin="0,5,0,0"
                                             Visibility="Collapsed" Name="FilmScenaristsEdit">
                                         <Grid Height="auto">
-                                            <ComboBox Name="FilmScenaristsCombobox"
-                                                      Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
-                                                      VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                      materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
-                                                      materialDesign:HintAssist.Hint="Сценарист" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
-                                                      IsTextSearchEnabled="True" 
-                                                      Width="auto"
-                                                      Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
-                                                <ComboBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
-                                                    </DataTemplate>
-                                                </ComboBox.ItemTemplate>
-                                            </ComboBox>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Name="FilmScenaristsCombobox"
+                                                          Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
+                                                          VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                          materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                          materialDesign:HintAssist.Hint="Сценарист" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
+                                                          IsTextSearchEnabled="True" 
+                                                          Width="auto"
+                                                          Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                                <TextBox Name="ScenaristJob"
+                                                         HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                         MaxWidth="200" Margin="10,0,0,0" materialDesign:HintAssist.Hint="Должность"
+                                                         Foreground="{StaticResource BackgroundBrush}"
+                                                         SelectionBrush="{StaticResource RedElementBrush}"
+                                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                         materialDesign:HintAssist.Foreground="{StaticResource BackgroundBrush}"
+                                                         CaretBrush="{StaticResource OrangeElementBrush}"
+                                                         materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" MaxLength="200"
+                                                         TextAlignment="Left" TextWrapping="Wrap" Cursor="Arrow"/>
+                                            </StackPanel>
                                             <Button HorizontalAlignment="Right" Margin="0,0,30,0"
                                                     Style="{StaticResource CustomMaterialDesignPaperButton}" Background="Transparent"
                                                     materialDesign:ButtonAssist.CornerRadius="12" BorderBrush="{x:Null}"
-                                                    Foreground="{StaticResource RedElementBrush}" Click="AddScenarist" >
+                                                    Foreground="{StaticResource RedElementBrush}" Click="AddCrew" Tag="1">
                                                 <TextBlock Text="Добавить" Margin="-6,-4,-6,0"/>
                                             </Button>
                                         </Grid>
@@ -755,9 +779,9 @@
                                             <DataTemplate>
                                                 <Button Background="Transparent"
                                                                 BorderThickness="0"
-                                                                Margin="0,2,2,0"
+                                                                Margin="0,2,2,0" Tag="10"
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
-                                                                Height="auto" Width="auto" Click="OpenCrew"
+                                                                Height="auto" Width="auto" Click="CrewClick"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
                                                     <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
@@ -783,24 +807,36 @@
                                             CornerRadius="12" BorderThickness="1" Margin="0,5,0,0"
                                             Visibility="Collapsed" Name="FilmCameraMenEdit">
                                         <Grid Height="auto">
-                                            <ComboBox Name="FilmCameraMenCombobox"
-                                                      Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
-                                                      VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                      materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
-                                                      materialDesign:HintAssist.Hint="Оператор" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
-                                                      IsTextSearchEnabled="True" 
-                                                      Width="auto"
-                                                      Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
-                                                <ComboBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
-                                                    </DataTemplate>
-                                                </ComboBox.ItemTemplate>
-                                            </ComboBox>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Name="FilmCameraMenCombobox"
+                                                          Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
+                                                          VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                          materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                          materialDesign:HintAssist.Hint="Оператор" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
+                                                          IsTextSearchEnabled="True" 
+                                                          Width="auto"
+                                                          Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                                <TextBox Name="CameraManJob"
+                                                         HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                         MaxWidth="200" Margin="10,0,0,0" materialDesign:HintAssist.Hint="Должность"
+                                                         Foreground="{StaticResource BackgroundBrush}"
+                                                         SelectionBrush="{StaticResource RedElementBrush}"
+                                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                         materialDesign:HintAssist.Foreground="{StaticResource BackgroundBrush}"
+                                                         CaretBrush="{StaticResource OrangeElementBrush}"
+                                                         materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" MaxLength="200"
+                                                         TextAlignment="Left" TextWrapping="Wrap" Cursor="Arrow"/>
+                                            </StackPanel>
                                             <Button HorizontalAlignment="Right" Margin="0,0,30,0"
                                                     Style="{StaticResource CustomMaterialDesignPaperButton}" Background="Transparent"
                                                     materialDesign:ButtonAssist.CornerRadius="12" BorderBrush="{x:Null}"
-                                                    Foreground="{StaticResource RedElementBrush}" Click="AddCameraMen">
+                                                    Foreground="{StaticResource RedElementBrush}" Click="AddCrew" Tag="10">
                                                 <TextBlock Text="Добавить" Margin="-6,-4,-6,0"/>
                                             </Button>
                                         </Grid>
@@ -824,9 +860,9 @@
                                             <DataTemplate>
                                                 <Button Background="Transparent"
                                                                 BorderThickness="0"
-                                                                Margin="0,2,2,0"
+                                                                Margin="0,2,2,0" Tag="4"
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
-                                                                Height="auto" Width="auto" Click="OpenCrew"
+                                                                Height="auto" Width="auto" Click="CrewClick"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
                                                     <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
@@ -852,24 +888,36 @@
                                             CornerRadius="12" BorderThickness="1" Margin="0,5,0,0"
                                             Visibility="Collapsed" Name="FilmSoundEngineersEdit">
                                         <Grid Height="auto">
-                                            <ComboBox Name="FilmSoundEngineersCombobox"
-                                                      Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
-                                                      VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                      materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
-                                                      materialDesign:HintAssist.Hint="Звук" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
-                                                      IsTextSearchEnabled="True" 
-                                                      Width="auto"
-                                                      Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
-                                                <ComboBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
-                                                    </DataTemplate>
-                                                </ComboBox.ItemTemplate>
-                                            </ComboBox>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Name="FilmSoundEngineersCombobox"
+                                                          Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
+                                                          VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                          materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                          materialDesign:HintAssist.Hint="Звук" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
+                                                          IsTextSearchEnabled="True" 
+                                                          Width="auto"
+                                                          Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                                <TextBox Name="SoundEngineerJob"
+                                                         HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                         MaxWidth="200" Margin="10,0,0,0" materialDesign:HintAssist.Hint="Должность"
+                                                         Foreground="{StaticResource BackgroundBrush}"
+                                                         SelectionBrush="{StaticResource RedElementBrush}"
+                                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                         materialDesign:HintAssist.Foreground="{StaticResource BackgroundBrush}"
+                                                         CaretBrush="{StaticResource OrangeElementBrush}"
+                                                         materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" MaxLength="200"
+                                                         TextAlignment="Left" TextWrapping="Wrap" Cursor="Arrow"/>
+                                            </StackPanel>
                                             <Button HorizontalAlignment="Right" Margin="0,0,30,0"
                                                     Style="{StaticResource CustomMaterialDesignPaperButton}" Background="Transparent"
                                                     materialDesign:ButtonAssist.CornerRadius="12" BorderBrush="{x:Null}"
-                                                    Foreground="{StaticResource RedElementBrush}" Click="AddSoundEngineer">
+                                                    Foreground="{StaticResource RedElementBrush}" Click="AddCrew" Tag="4">
                                                 <TextBlock Text="Добавить" Margin="-6,-4,-6,0"/>
                                             </Button>
                                         </Grid>
@@ -892,9 +940,9 @@
                                             <DataTemplate>
                                                 <Button Background="Transparent"
                                                                 BorderThickness="0"
-                                                                Margin="0,2,2,0"
+                                                                Margin="0,2,2,0" Tag="7"
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
-                                                                Height="auto" Width="auto" Click="OpenCrew"
+                                                                Height="auto" Width="auto" Click="CrewClick"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
                                                     <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
@@ -920,24 +968,36 @@
                                             CornerRadius="12" BorderThickness="1" Margin="0,5,0,0"
                                             Visibility="Collapsed" Name="FilmVisualEffectsEdit">
                                         <Grid Height="auto">
-                                            <ComboBox Name="FilmVisualEffectsCombobox"
-                                                      Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
-                                                      VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                      materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
-                                                      materialDesign:HintAssist.Hint="Визуальные эффекты" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
-                                                      IsTextSearchEnabled="True" 
-                                                      Width="auto"
-                                                      Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
-                                                <ComboBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
-                                                    </DataTemplate>
-                                                </ComboBox.ItemTemplate>
-                                            </ComboBox>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Name="FilmVisualEffectsCombobox"
+                                                          Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
+                                                          VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                          materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                          materialDesign:HintAssist.Hint="Визуальные эффекты" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
+                                                          IsTextSearchEnabled="True" 
+                                                          Width="auto"
+                                                          Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                                <TextBox Name="VisualEffectsCrewJob"
+                                                         HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                         MaxWidth="200" Margin="10,0,0,0" materialDesign:HintAssist.Hint="Должность"
+                                                         Foreground="{StaticResource BackgroundBrush}"
+                                                         SelectionBrush="{StaticResource RedElementBrush}"
+                                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                         materialDesign:HintAssist.Foreground="{StaticResource BackgroundBrush}"
+                                                         CaretBrush="{StaticResource OrangeElementBrush}"
+                                                         materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" MaxLength="200"
+                                                         TextAlignment="Left" TextWrapping="Wrap" Cursor="Arrow"/>
+                                            </StackPanel>
                                             <Button HorizontalAlignment="Right" Margin="0,0,30,0"
                                                     Style="{StaticResource CustomMaterialDesignPaperButton}" Background="Transparent"
                                                     materialDesign:ButtonAssist.CornerRadius="12" BorderBrush="{x:Null}"
-                                                    Foreground="{StaticResource RedElementBrush}" Click="AddVisualEffectsCrew" >
+                                                    Foreground="{StaticResource RedElementBrush}" Click="AddCrew" Tag="7">
                                                 <TextBlock Text="Добавить" Margin="-6,-4,-6,0"/>
                                             </Button>
                                         </Grid>
@@ -960,9 +1020,9 @@
                                             <DataTemplate>
                                                 <Button Background="Transparent"
                                                                 BorderThickness="0"
-                                                                Margin="0,2,2,0"
+                                                                Margin="0,2,2,0" Tag="11"
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
-                                                                Height="auto" Width="auto" Click="OpenCrew"
+                                                                Height="auto" Width="auto" Click="CrewClick"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
                                                     <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
@@ -988,24 +1048,36 @@
                                             CornerRadius="12" BorderThickness="1" Margin="0,5,0,0"
                                             Visibility="Collapsed" Name="FilmLightingEdit">
                                         <Grid Height="auto">
-                                            <ComboBox Name="FilmLightingCombobox"
-                                                      Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
-                                                      VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                      materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
-                                                      materialDesign:HintAssist.Hint="Освещение" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
-                                                      IsTextSearchEnabled="True" 
-                                                      Width="auto"
-                                                      Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
-                                                <ComboBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
-                                                    </DataTemplate>
-                                                </ComboBox.ItemTemplate>
-                                            </ComboBox>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Name="FilmLightingCombobox"
+                                                          Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
+                                                          VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                          materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                          materialDesign:HintAssist.Hint="Освещение" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
+                                                          IsTextSearchEnabled="True" 
+                                                          Width="auto"
+                                                          Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                                <TextBox Name="LightingCrewJob"
+                                                         HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                         MaxWidth="200" Margin="10,0,0,0" materialDesign:HintAssist.Hint="Должность"
+                                                         Foreground="{StaticResource BackgroundBrush}"
+                                                         SelectionBrush="{StaticResource RedElementBrush}"
+                                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                         materialDesign:HintAssist.Foreground="{StaticResource BackgroundBrush}"
+                                                         CaretBrush="{StaticResource OrangeElementBrush}"
+                                                         materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" MaxLength="200"
+                                                         TextAlignment="Left" TextWrapping="Wrap" Cursor="Arrow"/>
+                                            </StackPanel>
                                             <Button HorizontalAlignment="Right" Margin="0,0,30,0"
                                                     Style="{StaticResource CustomMaterialDesignPaperButton}" Background="Transparent"
                                                     materialDesign:ButtonAssist.CornerRadius="12" BorderBrush="{x:Null}"
-                                                    Foreground="{StaticResource RedElementBrush}">
+                                                    Foreground="{StaticResource RedElementBrush}" Click="AddCrew" Tag="11">
                                                 <TextBlock Text="Добавить" Margin="-6,-4,-6,0"/>
                                             </Button>
                                         </Grid>
@@ -1028,9 +1100,9 @@
                                             <DataTemplate>
                                                 <Button Background="Transparent"
                                                                 BorderThickness="0"
-                                                                Margin="0,2,2,0"
+                                                                Margin="0,2,2,0" Tag="6"
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
-                                                                Height="auto" Width="auto" Click="OpenCrew"
+                                                                Height="auto" Width="auto" Click="CrewClick"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
                                                     <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
@@ -1056,24 +1128,36 @@
                                             CornerRadius="12" BorderThickness="1" Margin="0,5,0,0"
                                             Visibility="Collapsed" Name="FilmCostumesMakeUpEdit">
                                         <Grid Height="auto">
-                                            <ComboBox Name="FilmCostumesMakeUpCombobox"
-                                                      Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
-                                                      VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                      materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
-                                                      materialDesign:HintAssist.Hint="Костюмы и гримм" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
-                                                      IsTextSearchEnabled="True" 
-                                                      Width="auto"
-                                                      Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
-                                                <ComboBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
-                                                    </DataTemplate>
-                                                </ComboBox.ItemTemplate>
-                                            </ComboBox>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Name="FilmCostumesMakeUpCombobox"
+                                                          Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
+                                                          VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                          materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                          materialDesign:HintAssist.Hint="Костюмы и гримм" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
+                                                          IsTextSearchEnabled="True" 
+                                                          Width="auto"
+                                                          Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                                <TextBox Name="CostumesMakeUpCrewJob"
+                                                         HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                         MaxWidth="200" Margin="10,0,0,0" materialDesign:HintAssist.Hint="Должность"
+                                                         Foreground="{StaticResource BackgroundBrush}"
+                                                         SelectionBrush="{StaticResource RedElementBrush}"
+                                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                         materialDesign:HintAssist.Foreground="{StaticResource BackgroundBrush}"
+                                                         CaretBrush="{StaticResource OrangeElementBrush}"
+                                                         materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" MaxLength="200"
+                                                         TextAlignment="Left" TextWrapping="Wrap" Cursor="Arrow"/>
+                                            </StackPanel>
                                             <Button HorizontalAlignment="Right" Margin="0,0,30,0"
                                                     Style="{StaticResource CustomMaterialDesignPaperButton}" Background="Transparent"
                                                     materialDesign:ButtonAssist.CornerRadius="12" BorderBrush="{x:Null}"
-                                                    Foreground="{StaticResource RedElementBrush}">
+                                                    Foreground="{StaticResource RedElementBrush}" Click="AddCrew" Tag="6">
                                                 <TextBlock Text="Добавить" Margin="-6,-4,-6,0"/>
                                             </Button>
                                         </Grid>
@@ -1096,9 +1180,9 @@
                                             <DataTemplate>
                                                 <Button Background="Transparent"
                                                                 BorderThickness="0"
-                                                                Margin="0,2,2,0"
+                                                                Margin="0,2,2,0" Tag="3"
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
-                                                                Height="auto" Width="auto" Click="OpenCrew"
+                                                                Height="auto" Width="auto" Click="CrewClick"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
                                                     <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
@@ -1124,24 +1208,36 @@
                                             CornerRadius="12" BorderThickness="1" Margin="0,5,0,0"
                                             Visibility="Collapsed" Name="FilmArtEdit">
                                         <Grid Height="auto">
-                                            <ComboBox Name="FilmArtCombobox"
-                                                      Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
-                                                      VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                      materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
-                                                      materialDesign:HintAssist.Hint="Дизайн" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
-                                                      IsTextSearchEnabled="True" 
-                                                      Width="auto"
-                                                      Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
-                                                <ComboBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
-                                                    </DataTemplate>
-                                                </ComboBox.ItemTemplate>
-                                            </ComboBox>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Name="FilmArtCombobox"
+                                                          Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
+                                                          VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                          materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                          materialDesign:HintAssist.Hint="Дизайн" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
+                                                          IsTextSearchEnabled="True" 
+                                                          Width="auto"
+                                                          Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                                <TextBox Name="FilmArtCrewJob"
+                                                         HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                         MaxWidth="200" Margin="10,0,0,0" materialDesign:HintAssist.Hint="Должность"
+                                                         Foreground="{StaticResource BackgroundBrush}"
+                                                         SelectionBrush="{StaticResource RedElementBrush}"
+                                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                         materialDesign:HintAssist.Foreground="{StaticResource BackgroundBrush}"
+                                                         CaretBrush="{StaticResource OrangeElementBrush}"
+                                                         materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" MaxLength="200"
+                                                         TextAlignment="Left" TextWrapping="Wrap" Cursor="Arrow"/>
+                                            </StackPanel>
                                             <Button HorizontalAlignment="Right" Margin="0,0,30,0"
                                                     Style="{StaticResource CustomMaterialDesignPaperButton}" Background="Transparent"
                                                     materialDesign:ButtonAssist.CornerRadius="12" BorderBrush="{x:Null}"
-                                                    Foreground="{StaticResource RedElementBrush}">
+                                                    Foreground="{StaticResource RedElementBrush}" Click="AddCrew" Tag="3">
                                                 <TextBlock Text="Добавить" Margin="-6,-4,-6,0"/>
                                             </Button>
                                         </Grid>
@@ -1164,9 +1260,9 @@
                                             <DataTemplate>
                                                 <Button Background="Transparent"
                                                                 BorderThickness="0"
-                                                                Margin="0,2,2,0"
+                                                                Margin="0,2,2,0" Tag="12"
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
-                                                                Height="auto" Width="auto" Click="OpenCrew"
+                                                                Height="auto" Width="auto" Click="CrewClick"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
                                                     <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
@@ -1193,24 +1289,36 @@
                                             CornerRadius="12" BorderThickness="1" Margin="0,5,0,0"
                                             Visibility="Collapsed" Name="FilmEditingEdit">
                                         <Grid Height="auto">
-                                            <ComboBox Name="FilmEditingCombobox"
-                                                      Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
-                                                      VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                      materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
-                                                      materialDesign:HintAssist.Hint="Монтаж" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
-                                                      IsTextSearchEnabled="True" 
-                                                      Width="auto"
-                                                      Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
-                                                <ComboBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
-                                                    </DataTemplate>
-                                                </ComboBox.ItemTemplate>
-                                            </ComboBox>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Name="FilmEditingCombobox"
+                                                          Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
+                                                          VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                          materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                          materialDesign:HintAssist.Hint="Монтаж" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
+                                                          IsTextSearchEnabled="True" 
+                                                          Width="auto"
+                                                          Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                                <TextBox Name="EditingCrewJob"
+                                                         HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                         MaxWidth="200" Margin="10,0,0,0" materialDesign:HintAssist.Hint="Должность"
+                                                         Foreground="{StaticResource BackgroundBrush}"
+                                                         SelectionBrush="{StaticResource RedElementBrush}"
+                                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                         materialDesign:HintAssist.Foreground="{StaticResource BackgroundBrush}"
+                                                         CaretBrush="{StaticResource OrangeElementBrush}"
+                                                         materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" MaxLength="200"
+                                                         TextAlignment="Left" TextWrapping="Wrap" Cursor="Arrow"/>
+                                            </StackPanel>
                                             <Button HorizontalAlignment="Right" Margin="0,0,30,0"
                                                     Style="{StaticResource CustomMaterialDesignPaperButton}" Background="Transparent"
                                                     materialDesign:ButtonAssist.CornerRadius="12" BorderBrush="{x:Null}"
-                                                    Foreground="{StaticResource RedElementBrush}">
+                                                    Foreground="{StaticResource RedElementBrush}" Click="AddCrew" Tag="12">
                                                 <TextBlock Text="Добавить" Margin="-6,-4,-6,0"/>
                                             </Button>
                                         </Grid>
@@ -1233,9 +1341,9 @@
                                             <DataTemplate>
                                                 <Button Background="Transparent"
                                                                 BorderThickness="0"
-                                                                Margin="0,2,2,0"
+                                                                Margin="0,2,2,0" Tag="8"
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
-                                                                Height="auto" Width="auto" Click="OpenCrew"
+                                                                Height="auto" Width="auto" Click="CrewClick"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
                                                     <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
@@ -1261,24 +1369,36 @@
                                             CornerRadius="12" BorderThickness="1" Margin="0,5,0,0"
                                             Visibility="Collapsed" Name="FilmProductionEdit">
                                         <Grid Height="auto">
-                                            <ComboBox Name="FilmProductionCombobox"
-                                                      Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
-                                                      VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                      materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
-                                                      materialDesign:HintAssist.Hint="Продакшн" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
-                                                      IsTextSearchEnabled="True" 
-                                                      Width="auto"
-                                                      Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
-                                                <ComboBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
-                                                    </DataTemplate>
-                                                </ComboBox.ItemTemplate>
-                                            </ComboBox>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Name="FilmProductionCombobox"
+                                                          Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
+                                                          VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                          materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                          materialDesign:HintAssist.Hint="Продакшн" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
+                                                          IsTextSearchEnabled="True" 
+                                                          Width="auto"
+                                                          Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                                <TextBox Name="ProductionCrewJob"
+                                                         HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                         MaxWidth="200" Margin="10,0,0,0" materialDesign:HintAssist.Hint="Должность"
+                                                         Foreground="{StaticResource BackgroundBrush}"
+                                                         SelectionBrush="{StaticResource RedElementBrush}"
+                                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                         materialDesign:HintAssist.Foreground="{StaticResource BackgroundBrush}"
+                                                         CaretBrush="{StaticResource OrangeElementBrush}"
+                                                         materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" MaxLength="200"
+                                                         TextAlignment="Left" TextWrapping="Wrap" Cursor="Arrow"/>
+                                            </StackPanel>
                                             <Button HorizontalAlignment="Right" Margin="0,0,30,0"
                                                     Style="{StaticResource CustomMaterialDesignPaperButton}" Background="Transparent"
                                                     materialDesign:ButtonAssist.CornerRadius="12" BorderBrush="{x:Null}"
-                                                    Foreground="{StaticResource RedElementBrush}">
+                                                    Foreground="{StaticResource RedElementBrush}" Click="AddCrew" Tag="8">
                                                 <TextBlock Text="Добавить" Margin="-6,-4,-6,0"/>
                                             </Button>
                                         </Grid>
@@ -1301,9 +1421,9 @@
                                             <DataTemplate>
                                                 <Button Background="Transparent"
                                                                 BorderThickness="0"
-                                                                Margin="0,2,2,0"
+                                                                Margin="0,2,2,0" Tag="12"
                                                                 materialDesign:ButtonAssist.CornerRadius="5"
-                                                                Height="auto" Width="auto" Click="OpenCrew"
+                                                                Height="auto" Width="auto" Click="CrewClick"
                                                                 Style="{StaticResource CustomMaterialDesignPaperButton}">
                                                     <TextBlock FontWeight="DemiBold"
                                                                        Foreground="{StaticResource BackgroundBrush}" FontSize="12"
@@ -1329,24 +1449,36 @@
                                             CornerRadius="12" BorderThickness="1" Margin="0,5,0,0"
                                             Visibility="Collapsed" Name="FilmCrewEdit">
                                         <Grid Height="auto">
-                                            <ComboBox Name="FilmCrewCombobox"
-                                                      Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
-                                                      VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                      materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
-                                                      materialDesign:HintAssist.Hint="Остальная команда" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
-                                                      IsTextSearchEnabled="True" 
-                                                      Width="auto"
-                                                      Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
-                                                <ComboBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
-                                                    </DataTemplate>
-                                                </ComboBox.ItemTemplate>
-                                            </ComboBox>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Name="FilmCrewCombobox"
+                                                          Style="{StaticResource MaterialDesignComboBox}" Margin="30,4,0,4"
+                                                          VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                          materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                          materialDesign:HintAssist.Hint="Остальная команда" materialDesign:HintAssist.Foreground="{StaticResource RedElementBrush}"
+                                                          IsTextSearchEnabled="True" 
+                                                          Width="auto"
+                                                          Foreground="{StaticResource BackgroundBrush}" FontWeight="DemiBold">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding name}" Foreground="{StaticResource OrangeElementBrush}"/>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                                <TextBox Name="CrewJob"
+                                                         HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                         MaxWidth="200" Margin="10,0,0,0" materialDesign:HintAssist.Hint="Должность"
+                                                         Foreground="{StaticResource BackgroundBrush}"
+                                                         SelectionBrush="{StaticResource RedElementBrush}"
+                                                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BackgroundBrush}"
+                                                         materialDesign:HintAssist.Foreground="{StaticResource BackgroundBrush}"
+                                                         CaretBrush="{StaticResource OrangeElementBrush}"
+                                                         materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" MaxLength="200"
+                                                         TextAlignment="Left" TextWrapping="Wrap" Cursor="Arrow"/>
+                                            </StackPanel>
                                             <Button HorizontalAlignment="Right" Margin="0,0,30,0"
                                                     Style="{StaticResource CustomMaterialDesignPaperButton}" Background="Transparent"
                                                     materialDesign:ButtonAssist.CornerRadius="12" BorderBrush="{x:Null}"
-                                                    Foreground="{StaticResource RedElementBrush}">
+                                                    Foreground="{StaticResource RedElementBrush}" Click="AddCrew" Tag="12">
                                                 <TextBlock Text="Добавить" Margin="-6,-4,-6,0"/>
                                             </Button>
                                         </Grid>

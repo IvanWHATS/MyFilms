@@ -57,7 +57,7 @@ namespace MyFilms_.NET_Framework_.Views.Pages.MainPages
             var dataObject = btn.DataContext as FilmsAVGRating;
             using (var db = new MyFilmsEntities())
             {
-                FilmInfoPage FilmPage = new FilmInfoPage(db.Films.Find(dataObject.film_id), dataObject.avg_rating);
+                FilmInfoPage FilmPage = new FilmInfoPage(dataObject.film_id, dataObject.avg_rating);
                 NavigationService.Navigate(FilmPage);
             }
         }
